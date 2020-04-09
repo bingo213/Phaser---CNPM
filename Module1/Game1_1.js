@@ -45,6 +45,13 @@ class Game1_1 extends Phaser.Scene {
       drawStroke(){
         this.setStrokeStyle(4, 0xff0000);
       }
+      color(){
+        if(color === 0xffffff)
+           this.fillColor = 0xffffff;
+        if(this.isFill() === false){
+          this.fillColor = color;
+        }
+      }
       check(){
         if(this.isFill() === false) countFill++;
         else {
@@ -75,6 +82,13 @@ class Game1_1 extends Phaser.Scene {
       }
       drawStroke(){
         this.setStrokeStyle(4, 0xff0000);
+      }
+      color(){
+        if(color === 0xffffff)
+           this.fillColor = 0xffffff;
+        if(this.isFill() === false){
+          this.fillColor = color;
+        }
       }
       check(){
         if(this.isFill() === false) countFill++;
@@ -107,6 +121,13 @@ class Game1_1 extends Phaser.Scene {
       }
       drawStroke(){
         this.setStrokeStyle(4, 0xff0000);
+      }
+      color(){
+        if(color === 0xffffff)
+           this.fillColor = 0xffffff;
+        if(this.isFill() === false){
+          this.fillColor = color;
+        }
       }
       check(){
         if(this.isFill() === false) countFill++;
@@ -169,24 +190,24 @@ class Game1_1 extends Phaser.Scene {
    var t8 = new Tri(this, 415,510, 0,200,100,200,45,0);
    t8.setAngle(155);
 
-   c1.setInteractive().on('pointerup',()=>c1.fillColor = color);
-   c2.setInteractive().on('pointerup',()=>c2.fillColor = color);
-   c3.setInteractive().on('pointerup',()=>c3.fillColor = color);
-   c4.setInteractive().on('pointerup',()=>c4.fillColor = color);
-   c5.setInteractive().on('pointerup',()=>c5.fillColor = color);
-   r1.setInteractive().on('pointerup',()=>r1.fillColor = color);
-   r2.setInteractive().on('pointerup',()=>r2.fillColor = color);
-   r3.setInteractive().on('pointerup',()=>r3.fillColor = color);
-   r4.setInteractive().on('pointerup',()=>r4.fillColor = color);
-   r5.setInteractive().on('pointerup',()=>r5.fillColor = color);
-   t1.setInteractive().on('pointerup',()=>t1.fillColor = color);
-   t2.setInteractive().on('pointerup',()=>t2.fillColor = color);
-   t3.setInteractive().on('pointerup',()=>t3.fillColor = color);
-   t4.setInteractive().on('pointerup',()=>t4.fillColor = color);
-   t5.setInteractive().on('pointerup',()=>t5.fillColor = color);
-   t6.setInteractive().on('pointerup',()=>t6.fillColor = color);
-   t7.setInteractive().on('pointerup',()=>t7.fillColor = color);
-   t8.setInteractive().on('pointerup',()=>t8.fillColor = color);
+   c1.setInteractive().on('pointerup',()=>c1.color());
+   c2.setInteractive().on('pointerup',()=>c2.color());
+   c3.setInteractive().on('pointerup',()=>c3.color());
+   c4.setInteractive().on('pointerup',()=>c4.color());
+   c5.setInteractive().on('pointerup',()=>c5.color());
+   r1.setInteractive().on('pointerup',()=>r1.color());
+   r2.setInteractive().on('pointerup',()=>r2.color());
+   r3.setInteractive().on('pointerup',()=>r3.color());
+   r4.setInteractive().on('pointerup',()=>r4.color());
+   r5.setInteractive().on('pointerup',()=>r5.color());
+   t1.setInteractive().on('pointerup',()=>t1.color());
+   t2.setInteractive().on('pointerup',()=>t2.color());
+   t3.setInteractive().on('pointerup',()=>t3.color());
+   t4.setInteractive().on('pointerup',()=>t4.color());
+   t5.setInteractive().on('pointerup',()=>t5.color());
+   t6.setInteractive().on('pointerup',()=>t6.color());
+   t7.setInteractive().on('pointerup',()=>t7.color());
+   t8.setInteractive().on('pointerup',()=>t8.color());
 
 
    var button = new Phaser.Geom.Circle(46,45,50);
