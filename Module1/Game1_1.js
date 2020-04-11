@@ -19,7 +19,12 @@ class Game1_1 extends Phaser.Scene {
     this.countFill = 0;        //Đếm số lượng hình chưa được tô màu
     this.countFailCorlor = 0;  //Đếm số lượng hình tô sai màu
 
-    var color = 0xffffff;    
+    this.greenColor = 0x66cc66;
+    this.pinkColor = 0xff6699;
+    this.yellowColor = 0xffb300;
+
+    var color = 0xffffff;
+
 
     const gameScene = this.scene.get('Game1_1');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
 
@@ -150,7 +155,7 @@ class Game1_1 extends Phaser.Scene {
    green.on('pointerout', function(){
      green.clearTint();
    });
-   green.on('pointerup',()=> color = 0x66cc66 );
+   green.on('pointerup',()=> color = gameScene.greenColor);
 
    //Cọ hồng
    pink.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -160,7 +165,7 @@ class Game1_1 extends Phaser.Scene {
    pink.on('pointerout', function(){
      pink.clearTint();
    });
-   pink.on('pointerup',()=> color = 0xff6699);
+   pink.on('pointerup',()=> color = gameScene.pinkColor);
 
    //Cọ vàng
    yellow.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -170,7 +175,7 @@ class Game1_1 extends Phaser.Scene {
    yellow.on('pointerout', function(){
      yellow.clearTint();
    });
-   yellow.on('pointerup',()=> color = 0xffb300);
+   yellow.on('pointerup',()=> color = gameScene.yellowColor);
 
    //Tẩy cũng có hiệu ứng khi di chuột qua, khi nhấn chuột vào tẩy thì màu (biến color) được set là màu trắng
   erase.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -224,14 +229,28 @@ class Game1_1 extends Phaser.Scene {
  }
 
 //Kiểm tra xem hình đã tô màu chưa, tô màu đã đúng chưa
- check(shape){
-         if(shape.isFill() === false) this.countFill++;
-         else {
-           if(shape.isTrueColor() === false){
-                 shape.drawStroke();
-                 this.countFailCorlor++;
-               }
-         }
-       }
+check(shape){
+        if(shape.isFill() === false) this.countFill++;
+        else {
+          if(this.isTrueColor(shape) === false){
+                shape.drawStroke();
+                this.countFailCorlor++;
+              }
+        }
+      }
+ isTrueColor(shape){
+   if(shape instanceof Rect){
+     if(shape.fillColor === this.greenColor) return true;
+     else return false;
+   }
+   if(shape instanceof Cir){
+     if(shape.fillColor === this.yellowColor) return true;
+     else return false;
+   }
+   if(shape instanceof Tri){
+     if(shape.fillColor === this.pinkColor) return true;
+     else return false;
+   }
+ }
 
 }
