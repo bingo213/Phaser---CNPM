@@ -16,142 +16,12 @@ class Game1_1 extends Phaser.Scene {
   }
 
   create(){
-    var colorGreen = 0x66cc66;
-    var colorPink = 0xff6699;
-    var colorYellow = 0xffb300;
-    var color = 0xffffff;
+    this.countFill = 0;        //Đếm số lượng hình chưa được tô màu
+    this.countFailCorlor = 0;  //Đếm số lượng hình tô sai màu
 
-    var countFill = 0;        //Đếm số lượng hình chưa được tô màu
-    var countFailCorlor = 0;  //Đếm số lượng hình tô sai màu
+    var color = 0xffffff;    
 
     const gameScene = this.scene.get('Game1_1');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
-
-    //Custom class Rect để quản lý các đối tượng hình chữ nhật, hình vuông
-    class Rect extends Phaser.GameObjects.Rectangle {
-      constructor(scene, x, y, width, height) {
-        super(scene, x, y, width, height, 0xffffff);
-        this.lineStyle = super.setStrokeStyle(2,0x000000);
-        scene.add.existing(this);
-      }
-
-      //Kiểm tra xem hình đã được tô màu hay chưa
-      isFill(){
-        if(this.fillColor === 0xffffff)
-            return false;
-        return true;
-      }
-
-      //Kiểm tra xem đã tô đúng màu hay chưa
-      isTrueColor(){
-        if(this.fillColor === colorGreen) return true;
-        else {
-          return false;
-        }
-      }
-
-      //Vẽ đường viền (trong trường hợp tô sai)
-      drawStroke(){
-        this.setStrokeStyle(4, 0xff0000);
-      }
-
-      //Tô màu vào hình
-      color(){
-        if(color === 0xffffff)        //Nếu màu trắng thì tô => đây là để sử dụng tẩy
-           this.fillColor = 0xffffff;
-        if(this.isFill() === false)   //Nếu hình chưa được tô (màu trắng) thì tô màu vào => không tô màu khác khi hình đã được tô
-          this.fillColor = color;
-      }
-
-      //Kiểm tra xem đã tô màu chưa, nếu tô thì tô đúng chưa
-      check(){
-        if(this.isFill() === false) countFill++;
-        else {
-          if(this.isTrueColor() === false){
-                this.drawStroke();
-                countFailCorlor++;
-              }
-        }
-      }
-    }
-
-    //Custom class Cir để quản lý các đối tượng hình tròn. Các hàm isFill(), isTrueColor(), drawStroke(), color(), check() giống class Rect ở trên
-    class Cir extends Phaser.GameObjects.Ellipse {
-      constructor(scene, x, y, radius) {
-        super(scene, x, y, radius*2, radius*2, 0xffffff);
-        super.setStrokeStyle(2,0x000000);
-        scene.add.existing(this);
-      }
-      isFill(){
-        if(this.fillColor === 0xffffff)
-            return false;
-        return true;
-      }
-      isTrueColor(){
-        if(this.fillColor === colorYellow) return true;
-        else {
-          return false;
-        }
-      }
-      drawStroke(){
-        this.setStrokeStyle(4, 0xff0000);
-      }
-      color(){
-        if(color === 0xffffff)
-           this.fillColor = 0xffffff;
-        if(this.isFill() === false){
-          this.fillColor = color;
-        }
-      }
-      check(){
-        if(this.isFill() === false) countFill++;
-        else {
-          if(this.isTrueColor() === false){
-                this.drawStroke();
-                countFailCorlor++;
-              }
-        }
-      }
-    }
-
-    //Custom class Tri để quản lý các đối tượng hình tam giác. Các hàm isFill(), isTrueColor(), drawStroke(), color(), check() giống class Rect ở trên
-    class Tri extends Phaser.GameObjects.Triangle {
-      constructor(scene, x, y, x1, y1, x2, y2, x3, y3) {
-        super(scene, x, y, x1, y1, x2, y2, x3, y3, 0xffffff);
-        super.setStrokeStyle(2,0x000000);
-        this.trueColor = false;
-        scene.add.existing(this);
-      }
-      isFill(){
-        if(this.fillColor === 0xffffff)
-            return false;
-        return true;
-      }
-      isTrueColor(){
-        if(this.fillColor === colorPink) return true;
-        else {
-          return false;
-        }
-      }
-      drawStroke(){
-        this.setStrokeStyle(4, 0xff0000);
-      }
-      color(){
-        if(color === 0xffffff)
-           this.fillColor = 0xffffff;
-        if(this.isFill() === false){
-          this.fillColor = color;
-        }
-      }
-      check(){
-        if(this.isFill() === false) countFill++;
-        else {
-          if(this.isTrueColor() === false){
-                this.drawStroke();
-                countFailCorlor++;
-              }
-        }
-      }
-    }
 
     this.add.image(config.width/2, config.height/2,"bgcolor"); //background (hình nền)
 
@@ -250,24 +120,24 @@ class Game1_1 extends Phaser.Scene {
    t8.setAngle(155);
 
    //Khi nhấn chuột vào thì tô màu vừa chọn vào hình
-   c1.setInteractive().on('pointerup',()=>c1.color());
-   c2.setInteractive().on('pointerup',()=>c2.color());
-   c3.setInteractive().on('pointerup',()=>c3.color());
-   c4.setInteractive().on('pointerup',()=>c4.color());
-   c5.setInteractive().on('pointerup',()=>c5.color());
-   r1.setInteractive().on('pointerup',()=>r1.color());
-   r2.setInteractive().on('pointerup',()=>r2.color());
-   r3.setInteractive().on('pointerup',()=>r3.color());
-   r4.setInteractive().on('pointerup',()=>r4.color());
-   r5.setInteractive().on('pointerup',()=>r5.color());
-   t1.setInteractive().on('pointerup',()=>t1.color());
-   t2.setInteractive().on('pointerup',()=>t2.color());
-   t3.setInteractive().on('pointerup',()=>t3.color());
-   t4.setInteractive().on('pointerup',()=>t4.color());
-   t5.setInteractive().on('pointerup',()=>t5.color());
-   t6.setInteractive().on('pointerup',()=>t6.color());
-   t7.setInteractive().on('pointerup',()=>t7.color());
-   t8.setInteractive().on('pointerup',()=>t8.color());
+   c1.setInteractive().on('pointerup',()=>c1.color(color));
+   c2.setInteractive().on('pointerup',()=>c2.color(color));
+   c3.setInteractive().on('pointerup',()=>c3.color(color));
+   c4.setInteractive().on('pointerup',()=>c4.color(color));
+   c5.setInteractive().on('pointerup',()=>c5.color(color));
+   r1.setInteractive().on('pointerup',()=>r1.color(color));
+   r2.setInteractive().on('pointerup',()=>r2.color(color));
+   r3.setInteractive().on('pointerup',()=>r3.color(color));
+   r4.setInteractive().on('pointerup',()=>r4.color(color));
+   r5.setInteractive().on('pointerup',()=>r5.color(color));
+   t1.setInteractive().on('pointerup',()=>t1.color(color));
+   t2.setInteractive().on('pointerup',()=>t2.color(color));
+   t3.setInteractive().on('pointerup',()=>t3.color(color));
+   t4.setInteractive().on('pointerup',()=>t4.color(color));
+   t5.setInteractive().on('pointerup',()=>t5.color(color));
+   t6.setInteractive().on('pointerup',()=>t6.color(color));
+   t7.setInteractive().on('pointerup',()=>t7.color(color));
+   t8.setInteractive().on('pointerup',()=>t8.color(color));
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
    //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -280,7 +150,7 @@ class Game1_1 extends Phaser.Scene {
    green.on('pointerout', function(){
      green.clearTint();
    });
-   green.on('pointerup',()=> color = colorGreen );
+   green.on('pointerup',()=> color = 0x66cc66 );
 
    //Cọ hồng
    pink.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -290,7 +160,7 @@ class Game1_1 extends Phaser.Scene {
    pink.on('pointerout', function(){
      pink.clearTint();
    });
-   pink.on('pointerup',()=> color = colorPink);
+   pink.on('pointerup',()=> color = 0xff6699);
 
    //Cọ vàng
    yellow.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -300,7 +170,7 @@ class Game1_1 extends Phaser.Scene {
    yellow.on('pointerout', function(){
      yellow.clearTint();
    });
-   yellow.on('pointerup',()=> color = colorYellow);
+   yellow.on('pointerup',()=> color = 0xffb300);
 
    //Tẩy cũng có hiệu ứng khi di chuột qua, khi nhấn chuột vào tẩy thì màu (biến color) được set là màu trắng
   erase.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -321,36 +191,47 @@ class Game1_1 extends Phaser.Scene {
       done.clearTint();
     });
     done.on('pointerup',function(){   //Khi nhấn chuột thì kiểm tra các hình đã được tô chưa, nếu tô thì tô đúng chưa
-      c1.check();
-      c2.check();
-      c3.check();
-      c4.check();
-      c5.check();
+      gameScene.check(r1);
+      gameScene.check(r2);
+      gameScene.check(r3);
+      gameScene.check(r4);
+      gameScene.check(r5);
 
-      r1.check();
-      r2.check();
-      r3.check();
-      r4.check();
-      r5.check();
+      gameScene.check(c1);
+      gameScene.check(c2);
+      gameScene.check(c3);
+      gameScene.check(c4);
+      gameScene.check(c5);
 
-      t1.check();
-      t2.check();
-      t3.check();
-      t4.check();
-      t5.check();
-      t6.check();
-      t7.check();
-      t8.check();
+      gameScene.check(t1);
+      gameScene.check(t2);
+      gameScene.check(t3);
+      gameScene.check(t4);
+      gameScene.check(t5);
+      gameScene.check(t6);
+      gameScene.check(t7);
+      gameScene.check(t8);
 
-      if(countFailCorlor > 0)    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 3s sau đó restart lại chính màn chơi này
+      if(gameScene.countFailCorlor > 0)    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 3s sau đó restart lại chính màn chơi này
            setTimeout(()=>gameScene.scene.restart(),3000);
 
-        else if(countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", dừng màn hình 3s sau đó restart lại chính màn chơi này
+        else if(gameScene.countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", dừng màn hình 3s sau đó restart lại chính màn chơi này
           notification.visible = true;
           setTimeout(()=>gameScene.scene.restart(),3000);
         }
         else gameScene.scene.start("Game1_2");   //Nếu làm đúng thì chuyển sang game tiếp theo (Game1_2)
-      });
+       });
  }
+
+//Kiểm tra xem hình đã tô màu chưa, tô màu đã đúng chưa
+ check(shape){
+         if(shape.isFill() === false) this.countFill++;
+         else {
+           if(shape.isTrueColor() === false){
+                 shape.drawStroke();
+                 this.countFailCorlor++;
+               }
+         }
+       }
 
 }
