@@ -11,12 +11,6 @@ class Cir extends Phaser.GameObjects.Ellipse {
         return true;
        }
 
-  isTrueColor(){
-        if(this.fillColor === 0xffb300) return true;
-        else
-          return false;
-       }
-
   drawStroke(){
         this.setStrokeStyle(4, 0xff0000);
        }

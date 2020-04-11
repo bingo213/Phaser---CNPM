@@ -12,12 +12,6 @@ class Tri extends Phaser.GameObjects.Triangle {
         return true;
        }
 
-  isTrueColor(){
-        if(this.fillColor === 0xff6699) return true;
-        else
-          return false;
-       }
-
   drawStroke(){
         this.setStrokeStyle(4, 0xff0000);
        }
