@@ -3,7 +3,7 @@ var config = {
   width: 1440,
   height: 800,
   backgroundColor: 0xffffff,
-  scene: [StartScene, Game1_1],
+  scene: [StartScene, Game1_1, Game1_2],
   pixelArt: true
 };
 
