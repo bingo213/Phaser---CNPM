@@ -9,6 +9,10 @@ class Game1_3 extends Phaser.Scene {
     this.load.image("green","assets/green.png");
     this.load.image("purple","assets/purple.png");
     this.load.image("orange","assets/orange.png");
+    this.load.image("next","assets/next.png");
+    this.load.image("bg","assets/bgr.png");
+    this.load.image("window1","assets/window_1.png");
+    this.load.image("window","assets/window.png");
   }
 
   create(){
@@ -19,6 +23,12 @@ class Game1_3 extends Phaser.Scene {
 
     const gameScene = this.scene.get('Game1_3');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
     this.add.image(config.width/2, config.height/2,"initscene3");
+
+    var bg = this.add.image(config.width/2, config.height/2,"bg"); //Bckground hiện lên khi hoàn thành game
+    bg.visible = false;
+    var next = this.add.image(701,580,"next"); //Nút NEXT (ban đầu không nhìn thấy)
+    next.visible = false;
+
     var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
        fontFamily: "Roboto Condensed",
        fontSize: 20,
@@ -42,7 +52,7 @@ class Game1_3 extends Phaser.Scene {
 
      var done = this.add.image(701,660,"done");   //Nút done
      var erase = this.add.image(230,580,"erase"); //Tẩy và chữ Erase bên phải tẩy
-     this.add.text(270, 560, 'Erase', {
+     var eraseText = this.add.text(270, 560, 'Erase', {
        fontFamily: "Roboto Condensed",
        fontSize: 35,
        color: "#000",
@@ -80,27 +90,36 @@ class Game1_3 extends Phaser.Scene {
      var c6 = new Cir(this,1034,512,35);
      var c7 = new Cir(this,1186,512,35);
 
+     //Cửa sổ - Hình ảnh phụ
+     var window1 = this.add.image(r3.x, r3.y -30, "window1");
+     window1.visible = false;
+     var window2 = this.add.image(r4.x,r4.y - 20,"window");
+     window2.visible = false;
+     var window3 = this.add.image(r6.x,r6.y - 20,"window");
+     window3.visible = false;
+
+     this.countColor = 0;
      //Khi nhấn chuột vào thì tô màu vừa chọn vào hình
-     c1.setInteractive().on('pointerup',()=>c1.color(color));
-     c2.setInteractive().on('pointerup',()=>c2.color(color));
-     c3.setInteractive().on('pointerup',()=>c3.color(color));
-     c4.setInteractive().on('pointerup',()=>c4.color(color));
-     c5.setInteractive().on('pointerup',()=>c5.color(color));
-     c6.setInteractive().on('pointerup',()=>c6.color(color));
-     c7.setInteractive().on('pointerup',()=>c7.color(color));
+     c1.setInteractive().on('pointerup',()=>{c1.color(color); gameScene.countColor++;});
+     c2.setInteractive().on('pointerup',()=>{c2.color(color); gameScene.countColor++;});
+     c3.setInteractive().on('pointerup',()=>{c3.color(color); gameScene.countColor++;});
+     c4.setInteractive().on('pointerup',()=>{c4.color(color); gameScene.countColor++;});
+     c5.setInteractive().on('pointerup',()=>{c5.color(color); gameScene.countColor++;});
+     c6.setInteractive().on('pointerup',()=>{c6.color(color); gameScene.countColor++;});
+     c7.setInteractive().on('pointerup',()=>{c7.color(color); gameScene.countColor++;});
 
-     r1.setInteractive().on('pointerup',()=>r1.color(color));
-     r2.setInteractive().on('pointerup',()=>r2.color(color));
-     r3.setInteractive().on('pointerup',()=>r3.color(color));
-     r4.setInteractive().on('pointerup',()=>r4.color(color));
-     r5.setInteractive().on('pointerup',()=>r5.color(color));
-     r6.setInteractive().on('pointerup',()=>r6.color(color));
-     r7.setInteractive().on('pointerup',()=>r7.color(color));
+     r1.setInteractive().on('pointerup',()=>{r1.color(color); gameScene.countColor++;});
+     r2.setInteractive().on('pointerup',()=>{r2.color(color); gameScene.countColor++;});
+     r3.setInteractive().on('pointerup',()=>{r3.color(color); gameScene.countColor++;});
+     r4.setInteractive().on('pointerup',()=>{r4.color(color); gameScene.countColor++;});
+     r5.setInteractive().on('pointerup',()=>{r5.color(color); gameScene.countColor++;});
+     r6.setInteractive().on('pointerup',()=>{r6.color(color); gameScene.countColor++;});
+     r7.setInteractive().on('pointerup',()=>{r7.color(color); gameScene.countColor++;});
 
-     t1.setInteractive().on('pointerup',()=>t1.color(color));
-     t2.setInteractive().on('pointerup',()=>t2.color(color));
-     t3.setInteractive().on('pointerup',()=>t3.color(color));
-     t4.setInteractive().on('pointerup',()=>t4.color(color));
+     t1.setInteractive().on('pointerup',()=>{t1.color(color); gameScene.countColor++;});
+     t2.setInteractive().on('pointerup',()=>{t2.color(color); gameScene.countColor++;});
+     t3.setInteractive().on('pointerup',()=>{t3.color(color); gameScene.countColor++;});
+     t4.setInteractive().on('pointerup',()=>{t4.color(color); gameScene.countColor++;});
 
      //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
      //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -153,6 +172,26 @@ class Game1_3 extends Phaser.Scene {
       done.on('pointerout', function(){
         done.clearTint();
       });
-      done.on('pointerup',()=>gameScene.scene.start("RateScene"));
+      done.on('pointerup',function(){
+        console.log(gameScene.countColor);
+        if(gameScene.countColor > 0){
+        this.visible = false;
+        green.visible = false;
+        purple.visible = false;
+        orange.visible = false;
+        erase.visible = false;
+        eraseText.visible = false;
+        bg.visible = true;
+        window1.visible = true;
+        window2.visible = true;
+        window3.visible = true;
+        next.visible = true;
+        next.setInteractive().on('pointerup',()=>gameScene.scene.start("Game1_3"));
+      }
+      });
   }
+
+  // countColor(){
+  //   if()
+  // }
 }

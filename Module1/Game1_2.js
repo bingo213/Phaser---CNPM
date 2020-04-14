@@ -15,7 +15,7 @@ class Game1_2 extends Phaser.Scene {
     this.load.image("carrot","assets/carrot.png");
     this.load.image("snowman","assets/snowman.png");
     this.load.image("bow","assets/bow.png");
-    this.load.image("snow","assets/snow.png");
+    this.load.image("snow_background","assets/snow background.png");
   }
 
   create(){
@@ -30,11 +30,15 @@ class Game1_2 extends Phaser.Scene {
     const gameScene = this.scene.get('Game1_2');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
 
    this.add.image(config.width/2, config.height/2,"initscene2");
+
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
       color: "#1a65ac",
     });
+
+    var snow_background = this.add.image(config.width/2,config.height/2 - 8,"snow_background"); //Nền tuyết, sau khi hoàn thành và nhấ nút DONE thì mới xuất hiện
+    snow_background.visible = false;
 
     var shape = new Phaser.Geom.Circle(10,0,40);
     backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
@@ -138,22 +142,14 @@ class Game1_2 extends Phaser.Scene {
    t8.setInteractive().on('pointerup',()=>t8.color(color));
    t9.setInteractive().on('pointerup',()=>t9.color(color));
 
+   //Hình phụ, xuất hiện khi làm đúng yêu cầu và nhấn nút DONE
    var snowman = this.add.image(505,300,"snowman"); //Mũ, khăn len, mắt, tay của người tuyết
    snowman.visible = false;
    var carrot = this.add.image(530,290,"carrot"); //Mũi người tuyết
    carrot.visible = false;
    var bow = this.add.image(r1.x,r1.y - 40,"bow"); //Nơ của hộp quà
    bow.visible = false;
-   var snow1 = this.add.image(200,250,"snow"); //Bông tuyết
-   snow1.visible = false;
-   var snow2 = this.add.image(500,180,"snow");
-   snow2.visible = false;
-   var snow3 = this.add.image(770,300,"snow");
-   snow3.visible = false;
-   var snow4 = this.add.image(1000,500,"snow");
-   snow4.visible = false
-   var snow5 = this.add.image(1200,400,"snow");
-   snow5.visible = false;
+
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
    //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -263,11 +259,7 @@ class Game1_2 extends Phaser.Scene {
           circleText.visible = false;
           squareText.visible = false;
           snowman.visible = true;
-          snow1.visible = true;
-          snow2.visible = true;
-          snow3.visible = true;
-          snow4.visible = true;
-          snow5.visible = true;
+          snow_background.visible = true;
           bow.visible = true;
           next.visible = true;
           next.setInteractive().on('pointerup',()=>gameScene.scene.start("Game1_3"));
