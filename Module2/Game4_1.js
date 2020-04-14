@@ -2,10 +2,24 @@ class Game4_1 extends Phaser.Scene {
   constructor() {
     super("Game4_1");
   }
-
+  
     preload()
     {
-		this.load.image("","");
+		this.load.image("t1","assets/triangle1.png");
+		this.load.image("t2","assets/triangle2.png");
+		this.load.image("t3","assets/triangle3.png");
+		this.load.image("t4","assets/triangle4.png");
+		this.load.image("t5","assets/triangle5.png");
+		this.load.image("c1","assets/circle1.png");
+		this.load.image("c2","assets/circle2.png");
+		this.load.image("c3","assets/circle3.png");
+		this.load.image("c4","assets/circle4.png");
+		this.load.image("c5","assets/circle5.png");
+		this.load.image("r1","assets/rectangle1.png");
+		this.load.image("r2","assets/rectangle2.png");
+		this.load.image("r3","assets/rectangle3.png");
+		this.load.image("r4","assets/rectangle4.png");
+		this.load.image("r5","assets/rectangle5.png");
 		this.load.image("bg1","assets/initscene1.png");
     	this.load.image("eat1","assets/voi cam 2.png");
 		this.load.image("eat2","assets/voi tim 2.png");
@@ -22,7 +36,7 @@ class Game4_1 extends Phaser.Scene {
 			color: "#1a65ac",
 		});
 		var shape = new Phaser.Geom.Circle(10,0,40);
-		backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
+		backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);	
 		backButton.on('pointerover', function(){   //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
 			backButton.setTint(0x00ff00);
 		});
@@ -35,8 +49,9 @@ class Game4_1 extends Phaser.Scene {
 			fontSize:50,
 			color:"#1a65ac",
 		});
-
-
+		
+		
     }
     update() {}
 }
+
