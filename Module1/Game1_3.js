@@ -186,12 +186,9 @@ class Game1_3 extends Phaser.Scene {
         window2.visible = true;
         window3.visible = true;
         next.visible = true;
-        next.setInteractive().on('pointerup',()=>gameScene.scene.start("Game1_3"));
+        next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene3"));
       }
       });
   }
 
-  // countColor(){
-  //   if()
-  // }
 }

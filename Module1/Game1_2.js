@@ -262,7 +262,7 @@ class Game1_2 extends Phaser.Scene {
           snow_background.visible = true;
           bow.visible = true;
           next.visible = true;
-          next.setInteractive().on('pointerup',()=>gameScene.scene.start("Game1_3"));
+          next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene2"));
         }
 
         //Set lại giá trị biến đếm số hình chưa tô và biến đếm số lượng hình tô sai màu

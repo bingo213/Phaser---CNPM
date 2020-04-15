@@ -265,7 +265,7 @@ class Game1_1 extends Phaser.Scene {
           beard.visible = true;
           tree.visible = true;
           next.visible = true;
-          next.setInteractive().on('pointerup',()=>gameScene.scene.start("Game1_2"));
+          next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene1"));
         }
 
         //Set lại giá trị biến đếm số hình chưa tô và biến đếm số lượng hình tô sai màu
