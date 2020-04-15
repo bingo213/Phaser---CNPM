@@ -5,7 +5,7 @@ class Game1_1 extends Phaser.Scene {
 
   preload(){
     //Load ảnh
-    this.load.image("initscene","assets/initscene1.png");
+    this.load.image("initscene1","assets/initscene1.png");
     this.load.image("green","assets/green.png");
     this.load.image("pink","assets/pink.png");
     this.load.image("yellow","assets/yellow.png");
@@ -33,7 +33,7 @@ class Game1_1 extends Phaser.Scene {
     const gameScene = this.scene.get('Game1_1');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
 
     //Background (khung hình chữ nhật, state bar)
-   this.add.image(config.width/2, config.height/2,"initscene");
+   this.add.image(config.width/2, config.height/2,"initscene1");
 
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
