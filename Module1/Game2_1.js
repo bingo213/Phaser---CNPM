@@ -15,6 +15,7 @@ class Game2_1 extends Phaser.Scene {
     this.load.image("erase","assets/erase.png");
     this.load.image("next","assets/next.png");
     this.load.image("notification2","assets/notification2.png");
+    this.load.image("background2_1","assets/background2_1.png");
   }
   create(){
     this.countFill = 0;        //Đếm số lượng hình chưa được tô màu
@@ -32,6 +33,8 @@ class Game2_1 extends Phaser.Scene {
 
     //Background (khung hình chữ nhật, state bar)
    this.add.image(config.width/2, config.height/2,"initscene4");
+   var background = this.add.image(config.width/2, config.height/2,"background2_1");//Hình phụ, chỉ khi hoàn thành yêu cầu mới có thể nhìn thấy
+   background.visible = false;
 
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
@@ -271,6 +274,7 @@ class Game2_1 extends Phaser.Scene {
            brown.visible = false;
            erase.visible = false;
            eraseText.visible = false;
+           background.visible = true;
            next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene4"));
          }
        }
