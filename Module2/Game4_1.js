@@ -26,33 +26,47 @@ class Game4_1 extends Phaser.Scene {
 		this.load.image("sleep1","assets/voi cam sleep.png");
 		this.load.image("sleep2","assets/voi tim sleep.png");
 		this.load.image("ha1","assets/voi ha mieng.png");
-		
+		this.load.image("ha2","assets/voi tim ha mieng.png");
+		this.load.image("do1","assets/voi do.png");
     }
     create() {
-		var x=0;
+		const gameScene = this.scene.get('Game4_1');
 		this.add.image(1440/2,800/2,"bg1");
-        this.add.image(330,450,"eat1");
-		if (x == 0) this.add.image(1100,450,"eat2");
-		if (x == 1) this.add.image(330,450,"ha1");
+        var eat1 = this.add.image(330,450,"eat1");
+		var eat2 = this.add.image(1100,450,"eat2");
+		var ha1 = this.add.image(330,450,"ha1");
+			ha1.scaleX =.7793427; 
+			ha1.scaleY =.7579909;
+			ha1.visible = false;
+		var ha2 = this.add.image(1100,450,"ha2");
+			ha2.scaleX =.78186;
+			ha2.scaleY = .774294;
+			ha2.visible = false;
+		var do1 = this.add.image(330,450,"do1");
+			do1.scaleX=.72489;
+			do1.scaleY= .851282;
+			do1.visible =false;
 		var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
 			fontFamily: "Roboto Condensed",
 			fontSize: 20,
 			color: "#1a65ac",
 		});
+
 		var shape = new Phaser.Geom.Circle(10,0,40);
-		backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);	
+		backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
 		backButton.on('pointerover', function(){   //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
 			backButton.setTint(0x00ff00);
 		});
 		backButton.on('pointerout',function(){    //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
 			backButton.clearTint();
 		});
-		backButton.on('pointerup',()=>gameScene.scene.start('startGame'));
+		backButton.on('pointerup',()=>gameScene.scene.start('startGame'));  //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
 		this.add.text(550,130,"Feed the Elephant",{
 			fontFamily:"Roboto Condensed",
 			fontSize:50,
 			color:"#1a65ac",
 		});
+		var check = false;
 		//thêm các hình khối
 		//tron
 		var c1= this.add.image(600,300,"c1").setInteractive();
@@ -79,30 +93,88 @@ class Game4_1 extends Phaser.Scene {
 		var t4 = this.add.image(555,650,"t4").setInteractive();
 		var t5 = this.add.image(890,370,"t5").setInteractive();
 		//kéo thả các khối
-		this.input.setDraggable(c1,s1,c2,t2);
+		this.input.setDraggable(c1);
+		this.input.setDraggable(c2);
+		this.input.setDraggable(c3);
+		this.input.setDraggable(c4);
+		this.input.setDraggable(c5);
 		this.input.setDraggable(t1);
+		this.input.setDraggable(t2);
+		this.input.setDraggable(t3);
+		this.input.setDraggable(t4);
+		this.input.setDraggable(t5);
+		this.input.setDraggable(s1);
+		this.input.setDraggable(s2);
+		this.input.setDraggable(s3);
+		this.input.setDraggable(s4);
 
     this.input.on('dragstart', function (pointer, gameObject){});
 
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
 
-		if (dragY>340 && dragY<370 && dragX>130 && dragX<170) x=1; else x =0;
+		check = true;
         gameObject.x = dragX;
         gameObject.y = dragY;
 		
 
     });
 
-    this.input.on('dragend', function (pointer, gameObject) {
+    this.input.on('dragend',function(pointer, gameObject) {
+		check = false;
+	/*	if (cir1.contains(c1.x,c1.y) )
+		{
+			eat1.visible = false;
+			do1.visible = true;
+			c1.x=600;
+			c1.y= 300;
+		}else
+		{
+			eat1.visible = true;
+			do1.visible = false;
+			c1.x=600;
+			c1.y=300;
+		}*/
+		
+	
+	
+	
+	});
+		
+		
+		
+	
 
-        gameObject.clearTint();
+		var cir1 = new Phaser.Geom.Circle(220,335,100);
+		var cir2 = new Phaser.Geom.Circle(1220,335,100);
 
-    });
-		
-		
-		
-		
-    }
-    update() {}
+
+    this.input.on('pointermove', function (pointer) {
+
+        if(cir1.contains(pointer.x, pointer.y) && check === true)
+        {
+            eat1.visible = false;
+            ha1.visible = true;
+        }
+        else
+        {
+            eat1.visible = true;
+            ha1.visible = false;
+        }
+
+        if(cir2.contains(pointer.x, pointer.y) && check === true)
+        {
+            eat2.visible = false;
+            ha2.visible = true;
+        }
+        else
+        {
+            eat2.visible = true;
+            ha2.visible = false;
+        }
+
+    
+
+    });	
+
+	}
 }
-
