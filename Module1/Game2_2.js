@@ -15,7 +15,7 @@ class Game2_2 extends Phaser.Scene {
     this.load.image("erase","assets/erase.png");
     this.load.image("next","assets/next.png");
     this.load.image("notification2","assets/notification2.png");
-    this.load.image("eye","assets/eye2_2.png");
+    this.load.image("eye2_2","assets/eye2_2.png");
     this.load.image("tail","assets/tail.png");
     this.load.image("nose","assets/nose.png");
     this.load.image("leg1","assets/leg1.png");
@@ -107,8 +107,8 @@ class Game2_2 extends Phaser.Scene {
    notification2.visible = false;  //Ban đầu không nhìn thấy thông báo
 
    //Hình phụ: mắt, mũi, đuôi cá sấu
-   var eye = this.add.image(585,271,"eye");
-   eye.visible = false;
+   var eye2_2 = this.add.image(585,271,"eye2_2");
+   eye2_2.visible = false;
    var tail = this.add.image(1210, 410,"tail");
    tail.visible = false;
    var nose = this.add.image(340, 180,"nose");
@@ -328,12 +328,12 @@ class Game2_2 extends Phaser.Scene {
            erase.visible = false;
            eraseText.visible = false;
            background.visible = true;
-           eye.visible = true;
+           eye2_2.visible = true;
            nose.visible = true;
            leg1.visible = true;
            leg2.visible = true;
            tail.visible = true;
-           next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene4"));
+           next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene5"));
          }
        }
 

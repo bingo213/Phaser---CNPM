@@ -33,13 +33,8 @@ class Game1_1 extends Phaser.Scene {
     const gameScene = this.scene.get('Game1_1');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
 
     //Background (khung hình chữ nhật, state bar)
-<<<<<<< HEAD
-   this.add.image(config.width/2, config.height/2,"initscene");
-// nut bak
-=======
    this.add.image(config.width/2, config.height/2,"initscene1");
 
->>>>>>> 2903cd7f8eb93aeb1d919c218c165a3519c85755
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,

@@ -16,15 +16,15 @@ class StartScene extends Phaser.Scene {
 
      this.add.image(config.width/2, config.height/2,"startScene");
      //this.startScene.setOrigin(0,0);
-     var g1 = this.add.image(450,310,"game1");
+     var g1 = this.add.image(460,310,"game1");
      g1.setInteractive();
-     g1.on('pointerup',()=>this.scene.start("Game1_1"));
+     g1.on('pointerup',()=>this.scene.start("RateScene"));
 
-     var g2 = this.add.image(730,310,"game2");
+     var g2 = this.add.image(740,310,"game2");
      g2.setInteractive();
      g2.on('pointerup',()=>this.scene.start("Game2_1"));
 
-     var g3 = this.add.image(1010,310,"game3");
+     var g3 = this.add.image(1020,310,"game3");
      g3.setInteractive();
      g3.on('pointerup',()=>this.scene.start("Game3_1"));
 
@@ -32,7 +32,7 @@ class StartScene extends Phaser.Scene {
      g4.setInteractive();
      g4.on('pointerup',()=>this.scene.start("Game4_1"));
 
-     var g5 = this.add.image(450,570,"game5");
+     var g5 = this.add.image(460,570,"game5");
      g5.setInteractive();
      g5.on('pointerup',()=>this.scene.start("Game5_1"));
 
