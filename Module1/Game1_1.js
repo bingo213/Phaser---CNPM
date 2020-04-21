@@ -30,7 +30,7 @@ class Game1_1 extends Phaser.Scene {
 
     //Background (khung hình chữ nhật, state bar)
    this.add.image(config.width/2, config.height/2,"initscene");
-
+// nut bak
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
@@ -40,7 +40,7 @@ class Game1_1 extends Phaser.Scene {
     var shape = new Phaser.Geom.Circle(10,0,40);
     backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
     backButton.on('pointerover', function(){   //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-      backButton.setTint(0x0000ff);
+      backButton.setTint(0x00ff00);
     });
     backButton.on('pointerout',function(){    //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
       backButton.clearTint();

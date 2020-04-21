@@ -128,13 +128,15 @@ class Game4_1 extends Phaser.Scene {
 			c1.x=600;
 			c1.y= 300;
 		}else
+			
+		
 		{
 			eat1.visible = true;
 			do1.visible = false;
 			c1.x=600;
 			c1.y=300;
-		}*/
-		
+		}
+		*/
 	
 	
 	
