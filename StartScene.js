@@ -18,7 +18,7 @@ class StartScene extends Phaser.Scene {
      //this.startScene.setOrigin(0,0);
      var g1 = this.add.image(460,310,"game1");
      g1.setInteractive();
-     g1.on('pointerup',()=>this.scene.start("RateScene"));
+     g1.on('pointerup',()=>this.scene.start("Game1_1"));
 
      var g2 = this.add.image(740,310,"game2");
      g2.setInteractive();

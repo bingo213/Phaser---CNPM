@@ -14,9 +14,9 @@ class RateScene extends Phaser.Scene {
   create(){
     this.add.image(config.width/2, config.height/2, "rateScene");
 
-    this.rated = 0;  //Kiểm tra xem người chơi đã đánh giá chưa, nếu chưa đánh giá thì không nhấn được nút NEXT
+    var rated = 0;  //Kiểm tra xem người chơi đã đánh giá chưa, nếu chưa đánh giá thì không nhấn được nút NEXT
 
-    const scene = this.scene.get('RateScene');
+    const gameScene = this.scene.get('RateScene');
 
     var grayStar1 = this.add.image(config.width/2 - 260, config.height/2 - 80, "grayStar");
     var grayStar2 = this.add.image(config.width/2 - 130, config.height/2 - 80, "grayStar");
@@ -60,7 +60,7 @@ class RateScene extends Phaser.Scene {
       yellowStar1.visible = false;
     });
     grayStar1.on('pointerdown', function(){
-      this.ratedChange();
+      rated = 1;
 
       darkYellowStar1.visible = true;
 
@@ -72,7 +72,7 @@ class RateScene extends Phaser.Scene {
       darkYellowStar4.visible = false;
       yellowStar5.visible = false;
       darkYellowStar5.visible = false;
-    }, this);
+    });
 
     grayStar2.setInteractive(button, Phaser.Geom.Circle.Contains);
     grayStar2.on('pointerover', function(){
@@ -84,7 +84,7 @@ class RateScene extends Phaser.Scene {
       yellowStar2.visible = false;
     });
     grayStar2.on('pointerdown', function(){
-      scene.ratedChange();
+      rated = 1;
 
       darkYellowStar1.visible = true;
       darkYellowStar2.visible = true;
@@ -109,7 +109,7 @@ class RateScene extends Phaser.Scene {
       yellowStar3.visible = false;
     });
     grayStar3.on('pointerdown', function(){
-      scene.ratedChange();
+      rated = 1;
 
       darkYellowStar1.visible = true;
       darkYellowStar2.visible = true;
@@ -135,7 +135,7 @@ class RateScene extends Phaser.Scene {
       yellowStar4.visible = false;
     });
     grayStar4.on('pointerdown', function(){
-      scene.ratedChange();
+      rated = 1;
 
       darkYellowStar1.visible = true;
       darkYellowStar2.visible = true;
@@ -162,35 +162,32 @@ class RateScene extends Phaser.Scene {
       yellowStar5.visible = false;
     });
     grayStar5.on('pointerdown', function(){
-      scene.ratedChange();
+      rated = 1;
 
       darkYellowStar1.visible = true;
       darkYellowStar2.visible = true;
       darkYellowStar3.visible = true;
       darkYellowStar4.visible = true;
       darkYellowStar5.visible = true;
-
-      console.log(scene.rated);
     });
 
 
 
     var next = this.add.image(config.width/2, config.height/2 + 100, "next");
-    console.log(this.rated);
 
-    if(this.rated === 1){
-        next.setInteractive(button, Phaser.Geom.Circle.Contains);
-        next.on('pointerover', function(){
-        next.setTint(0x303f9f);
-       });
-        next.on('pointerout', function(){
+     var button = new Phaser.Geom.Circle(46,45,50);
+     next.setInteractive(button, Phaser.Geom.Circle.Contains);
+     next.on('pointerover', function(){
+       if(rated === 1)
+         next.setTint(0x303f9f);
+   });
+    next.on('pointerout', function(){
+      if(rated === 1)
         next.clearTint();
-       });
-        next.on('pointerup', ()=> gameScene.scene.start('startGame'));
-     }
-   }
-
-   ratedChange(){
-     this.rated = 1;
-   }
+   });
+   next.on('pointerup', function(){
+     if(rated === 1)
+      gameScene.scene.start('startGame');
+    });
+  }
 }
