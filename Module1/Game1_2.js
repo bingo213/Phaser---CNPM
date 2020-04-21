@@ -11,7 +11,11 @@ class Game1_2 extends Phaser.Scene {
     this.load.image("green","assets/green.png");
     this.load.image("brown","assets/brown.png");
     this.load.image("blue","assets/blue.png");
-
+    this.load.image("next","assets/next.png");
+    this.load.image("carrot","assets/carrot.png");
+    this.load.image("snowman","assets/snowman.png");
+    this.load.image("bow","assets/bow.png");
+    this.load.image("snow_background","assets/snow background.png");
   }
 
   create(){
@@ -26,11 +30,15 @@ class Game1_2 extends Phaser.Scene {
     const gameScene = this.scene.get('Game1_2');  //Đặt biến gameScene, đoạn dưới dùng biến này để restart lại game, chuyển sang game mới
 
    this.add.image(config.width/2, config.height/2,"initscene2");
+
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
       color: "#1a65ac",
     });
+
+    var snow_background = this.add.image(config.width/2,config.height/2 - 8,"snow_background"); //Nền tuyết, sau khi hoàn thành và nhấ nút DONE thì mới xuất hiện
+    snow_background.visible = false;
 
     var shape = new Phaser.Geom.Circle(10,0,40);
     backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
@@ -50,19 +58,19 @@ class Game1_2 extends Phaser.Scene {
 
    //Thêm cọ và chữ bên phải cọ
    var green = this.add.image(545,580,"green");
-   this.add.text(580, 560, 'Triangles', {
+   var triangleText = this.add.text(580, 560, 'Triangles', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
    var blue = this.add.image(840,580,"blue");
-   this.add.text(875, 560, 'Circles', {
+   var circleText = this.add.text(875, 560, 'Circles', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
    var brown = this.add.image(1112,580,"brown");
-   this.add.text(1147, 560, 'Squares', {
+   var squareText = this.add.text(1147, 560, 'Squares', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
@@ -70,11 +78,14 @@ class Game1_2 extends Phaser.Scene {
 
    var done = this.add.image(701,660,"done");   //Nút done
    var erase = this.add.image(230,580,"erase"); //Tẩy và chữ Erase bên phải tẩy
-   this.add.text(270, 560, 'Erase', {
+   var eraseText = this.add.text(270, 560, 'Erase', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
+
+   var next = this.add.image(701,580,"next"); //Nút NEXT (ban đầu không nhìn thấy)
+   next.visible = false;
 
    var notification = this.add.image(1030,655,"notification");  //Thông báo khi nhấn nút Done mà chưa tô hết các hình
    notification.visible = false;  //Ban đầu không nhìn thấy thông báo
@@ -130,6 +141,15 @@ class Game1_2 extends Phaser.Scene {
    t7.setInteractive().on('pointerup',()=>t7.color(color));
    t8.setInteractive().on('pointerup',()=>t8.color(color));
    t9.setInteractive().on('pointerup',()=>t9.color(color));
+
+   //Hình phụ, xuất hiện khi làm đúng yêu cầu và nhấn nút DONE
+   var snowman = this.add.image(505,300,"snowman"); //Mũ, khăn len, mắt, tay của người tuyết
+   snowman.visible = false;
+   var carrot = this.add.image(530,290,"carrot"); //Mũi người tuyết
+   carrot.visible = false;
+   var bow = this.add.image(r1.x,r1.y - 40,"bow"); //Nơ của hộp quà
+   bow.visible = false;
+
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
    //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -202,18 +222,56 @@ class Game1_2 extends Phaser.Scene {
       gameScene.check(t8);
       gameScene.check(t9);
 
-      if(gameScene.countFailCorlor > 0)    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 3s sau đó restart lại chính màn chơi này
-           setTimeout(()=>gameScene.scene.restart(),3000);
+      if(gameScene.countFailCorlor > 0)    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 1s sau đó xóa màu của những hình tô sai
+      {
+        gameScene.deleteColor(c1);
+        gameScene.deleteColor(c2);
+        gameScene.deleteColor(c3);
 
-        else if(gameScene.countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", dừng màn hình 3s sau đó restart lại chính màn chơi này
+        gameScene.deleteColor(r1);
+        gameScene.deleteColor(r2);
+        gameScene.deleteColor(r3);
+        gameScene.deleteColor(r4);
+
+        gameScene.deleteColor(t1);
+        gameScene.deleteColor(t2);
+        gameScene.deleteColor(t3);
+        gameScene.deleteColor(t4);
+        gameScene.deleteColor(t5);
+        gameScene.deleteColor(t6);
+        gameScene.deleteColor(t7);
+        gameScene.deleteColor(t8);
+        gameScene.deleteColor(t9);
+      }
+
+        else if(gameScene.countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 3s thì ẩn thông báo
           notification.visible = true;
-          setTimeout(()=>gameScene.scene.restart(),3000);
+          setTimeout(()=>notification.visible = false,3000);
         }
-        else gameScene.scene.start("Game1_3");   //Nếu làm đúng thì chuyển sang game tiếp theo (Game1_3)
+        else {
+          this.visible = false;
+          green.visible = false;
+          brown.visible = false;
+          blue.visible = false;
+          erase.visible = false;
+          eraseText.visible = false;
+          triangleText.visible = false;
+          circleText.visible = false;
+          squareText.visible = false;
+          snowman.visible = true;
+          snow_background.visible = true;
+          bow.visible = true;
+          next.visible = true;
+          next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene2"));
+        }
+
+        //Set lại giá trị biến đếm số hình chưa tô và biến đếm số lượng hình tô sai màu
+        gameScene.countFill = 0;
+        gameScene.countFailCorlor = 0;
        });
  }
 
-//Kiểm tra xem hình đã tô màu chưa, tô màu đã đúng chưa
+ //Đếm số hình chưa tô, số hình tô sai, tô sai thì vẽ viền đỏ
  check(shape){
          if(shape.isFill() === false) this.countFill++;
          else {
@@ -223,6 +281,17 @@ class Game1_2 extends Phaser.Scene {
                }
          }
        }
+
+ //Xóa màu và viền đỏ của hình tô màu sai
+ deleteColor(shape){
+        if(shape.isFill() === true && this.isTrueColor(shape) === false){
+            setTimeout(function(){
+              shape.setStrokeStyle(2,0x000000);
+              shape.fillColor = 0xffffff;
+            },1500);
+          }
+      }
+
   isTrueColor(shape){
     if(shape instanceof Rect){
       if(shape.fillColor === this.brownColor) return true;
