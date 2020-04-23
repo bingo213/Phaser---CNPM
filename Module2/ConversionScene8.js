@@ -1,6 +1,6 @@
-class ConversionScene4 extends Phaser.Scene { //Chuyển từ Game2_1 sang Game2_2
+class ConversionScene8 extends Phaser.Scene { //Chuyển từ Game4_2 sang Game4_3
   constructor() {
-    super("ConversionScene4");
+    super("ConversionScene8");
   }
 
   preload(){
@@ -14,15 +14,16 @@ class ConversionScene4 extends Phaser.Scene { //Chuyển từ Game2_1 sang Gam
     this.loading = this.add.image(config.width/2, config.height/2,"load");
     var ball_1 = this.add.image(481,74,"ball");
     this.ball_2 = this.add.image(510,74,"ball");
+    var ball_3 = this.add.image(965,74,"ball");
   }
 
   update(){
-    if(this.ball_2.x < 965){
+    if(this.ball_2.x < 935){
         this.ball_2.x += 3;       //Quả bóng di chuyển về bên phải
         this.loading.angle += 3;  //Xoay nút loading tạo hiệu ứng loading...
       }
     else {
-      this.scene.start("Game2_2");
+      this.scene.start("Game4_3");
     }
   }
 

@@ -1,4 +1,4 @@
-class ConversionScene5 extends Phaser.Scene {
+class ConversionScene5 extends Phaser.Scene { //Sau khi chạy thì 2 quả bóng đều nằm bên phải
   constructor() {
     super("ConversionScene5");
   }

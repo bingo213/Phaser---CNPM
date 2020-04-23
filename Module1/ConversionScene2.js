@@ -1,4 +1,4 @@
-class ConversionScene2 extends Phaser.Scene {
+class ConversionScene2 extends Phaser.Scene { //Chuyển từ Game1_2 sang Game1_3
   constructor() {
     super("ConversionScene2");
   }

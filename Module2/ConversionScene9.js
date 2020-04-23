@@ -1,6 +1,6 @@
-class ConversionScene4 extends Phaser.Scene { //Chuyển từ Game2_1 sang Game2_2
+class ConversionScene9 extends Phaser.Scene { //Chuyển từ Game5_1 sang Game5_2
   constructor() {
-    super("ConversionScene4");
+    super("ConversionScene9");
   }
 
   preload(){
@@ -22,7 +22,7 @@ class ConversionScene4 extends Phaser.Scene { //Chuyển từ Game2_1 sang Gam
         this.loading.angle += 3;  //Xoay nút loading tạo hiệu ứng loading...
       }
     else {
-      this.scene.start("Game2_2");
+      this.scene.start("Game5_2");
     }
   }
 
