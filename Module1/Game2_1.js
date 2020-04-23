@@ -101,28 +101,23 @@ class Game2_1 extends Phaser.Scene {
    var notification2 = this.add.image(1030,655,"notification2");  //Thông báo khi nhấn nút Done mà chưa tô hết các hình
    notification2.visible = false;  //Ban đầu không nhìn thấy thông báo
 
+   var shapes = [];
    //Vẽ hình
-   var t1 = new Tri(this, 455, 189, 0, 70, 90, 70, 45, 0); //Hình tam giác thứ 1 từ trái sang
-   var t2 = new Tri(this, 715, 249, 0, 150, 70, 150, 32, 0);  //Hình tam giác thứ 2 từ trái sang
-   var t3 = new Tri(this, 975, 189, 0, 70, 90, 70, 45, 0); //Hình tam giác thứ 3 từ trái sang
-   var r2 = new Rect(this, 589, 466, 140, 100); //Hình chữ nhật thứ 2 từ trái sang
-   var r4 = new Rect(this, 841, 460, 140, 100); //Hình chữ nhật thứ 4 từ trái sang
-   var r1 = new Rect(this, 455, 380, 122, 308); //Hình chữ nhật thứ 1 từ trái sang
-   var r3 = new Rect(this, 715, 430, 106, 208); //Hình chữ nhật thứ 3 từ trái sang
-   var r5 = new Rect(this, 975, 380, 122, 308); //Hình chữ nhật thứ 5 từ trái sang
-   var c1 = new Cir(this, 275, 450, 60,60);    //Hình tròn thứ 1 từ trái sang
-   var c2 = new Cir(this, 1155, 450, 60,60);   //Hình tròn thứ 2 từ trái sang
+   shapes.push(new Tri(this, 455, 189, 0, 70, 90, 70, 45, 0)); //Hình tam giác thứ 1 từ trái sang
+   shapes.push(new Tri(this, 715, 249, 0, 150, 70, 150, 32, 0));  //Hình tam giác thứ 2 từ trái sang
+   shapes.push(new Tri(this, 975, 189, 0, 70, 90, 70, 45, 0)); //Hình tam giác thứ 3 từ trái sang
+   shapes.push(new Rect(this, 589, 466, 140, 100)); //Hình chữ nhật thứ 2 từ trái sang
+   shapes.push(new Rect(this, 841, 460, 140, 100)); //Hình chữ nhật thứ 4 từ trái sang
+   shapes.push(new Rect(this, 455, 380, 122, 308)); //Hình chữ nhật thứ 1 từ trái sang
+   shapes.push(new Rect(this, 715, 430, 106, 208)); //Hình chữ nhật thứ 3 từ trái sang
+   shapes.push(new Rect(this, 975, 380, 122, 308)); //Hình chữ nhật thứ 5 từ trái sang
+   shapes.push(new Cir(this, 275, 450, 60,60));    //Hình tròn thứ 1 từ trái sang
+   shapes.push(new Cir(this, 1155, 450, 60,60));   //Hình tròn thứ 2 từ trái sang
 
-   t1.setInteractive().on('pointerup',()=> t1.color(color));
-   t2.setInteractive().on('pointerup',()=> t2.color(color));
-   t3.setInteractive().on('pointerup',()=> t3.color(color));
-   r1.setInteractive().on('pointerup',()=> r1.color(color));
-   r2.setInteractive().on('pointerup',()=> r2.color(color));
-   r3.setInteractive().on('pointerup',()=> r3.color(color));
-   r4.setInteractive().on('pointerup',()=> r4.color(color));
-   r5.setInteractive().on('pointerup',()=> r5.color(color));
-   c1.setInteractive().on('pointerup',()=> c1.color(color));
-   c2.setInteractive().on('pointerup',()=> c2.color(color));
+   //Khi nhấn chuột vào thì tô màu vừa chọn vào hình
+   shapes.forEach(item => {
+     item.setInteractive().on('pointerup', ()=>item.color(color));
+   });
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
    //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -169,32 +164,14 @@ class Game2_1 extends Phaser.Scene {
      });
      done.on('pointerup',function(){
        if(complete === false){
-          gameScene.check(r1);
-          gameScene.check(r2);
-          gameScene.check(r3);
-          gameScene.check(r4);
-          gameScene.check(r5);
-
-          gameScene.check(c1);
-          gameScene.check(c2);
-
-          gameScene.check(t1);
-          gameScene.check(t2);
-          gameScene.check(t3);
+         for(var i = 0; i < shapes.length; i++){
+           gameScene.check(shapes[i]);
+         }
 
           if(gameScene.countFailCorlor > 0){    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 1s sau đó xóa màu của những hình tô sai
-             gameScene.deleteColor(r1);
-             gameScene.deleteColor(r2);
-             gameScene.deleteColor(r3);
-             gameScene.deleteColor(r4);
-             gameScene.deleteColor(r5);
-
-             gameScene.deleteColor(c1);
-             gameScene.deleteColor(c2);
-
-             gameScene.deleteColor(t1);
-             gameScene.deleteColor(t2);
-             gameScene.deleteColor(t3);
+            for(var i = 0; i < shapes.length; i++){
+              gameScene.deleteColor(shapes[i]);
+            }
            }
          else if(gameScene.countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 3s thì ẩn thông báo
              notification2.visible = true;
@@ -219,14 +196,13 @@ class Game2_1 extends Phaser.Scene {
          brown.visible = true;
          yellow.visible = true;
          console.log(complete);
+
          //Khi đã tô đúng màu vào các hình được yêu cầu và nhấn DONE thì những hình đó không tô vào hay xóa đi được nữa
-         r1.removeInteractive();
-         r2.removeInteractive();
-         r3.removeInteractive();
-         r4.removeInteractive();
-         r5.removeInteractive();
-         c1.removeInteractive();
-         c2.removeInteractive();
+         shapes.forEach(item => {
+           if(item instanceof Rect || item instanceof Cir){
+             item.removeInteractive();
+           }
+         });
 
          //Thêm hiệu ứng cho các cọ vừa xuất hiện
          blue.setInteractive(button, Phaser.Geom.Circle.Contains);

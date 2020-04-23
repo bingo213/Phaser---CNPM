@@ -118,46 +118,35 @@ class Game2_2 extends Phaser.Scene {
    var leg2 = this.add.image(1000,430,"leg2");
    leg2.visible = false;
 
-   //Vẽ hình
-   var t1 = new Tri(this, 291, 261, 0, 60, 60, 80, 42, 0); //Răng cá sấu
-   t1.setAngle(-49);
-   var t2 = new Tri(this, 365, 301, 0, 60, 60, 80, 42, 0); //Răng cá sấu
-   t2.setAngle(-49);
-   var t3 = new Tri(this, 440, 342, 0, 60, 60, 80, 42, 0); //Răng cá sấu
-   t3.setAngle(-49);
-   var t4 = new Tri(this, 810, 260, 0, 80, 80, 80, 42, 0); //Gai trên lưng
-   var t5 = new Tri(this, 900, 260, 0, 80, 80, 80, 42, 0); //Gai trên lưng
-   var t6 = new Tri(this, 990, 260, 0, 80, 80, 80, 42, 0); //Gai trên lưng
-   var t7 = new Tri(this, 1122, 345, 0, 80, 80, 80, 42, 0); //Gai trên đuôi
-   var r1 = new Rect(this, 400, 260, 265, 60);   //Hàm trên con cá sấu
-   r1.setAngle(28.69);
-   var r2 = new Rect(this, 385, 410, 265, 60); //Hàm dưới con cá sấu
-   var r3 = new Rect(this, 859, 360, 414, 116); //Thân con cá sấu
-   var r4 = new Rect(this, 1122, 420, 110, 65); //Đuôi con cá sấu
-   var c1 = new Cir(this, 585, 352, 65,65);    //Đầu cá sấu
-   var c2 = new Cir(this, 410, 520, 20,20);   //Hình tròn bên dưới cá sấu
-   var c3 = new Cir(this, 480, 490, 35,35);   //Hình tròn bên dưới cá sấu
-   var c4 = new Cir(this, 820, 480, 30,30);   //Hình tròn bên dưới cá sấu
-   var c5 = new Cir(this, 920, 500, 45,45);   //Hình tròn bên dưới cá sấu
-   var c6 = new Cir(this, 1115, 500, 35,35);   //Hình tròn bên dưới cá sấu
+   var shapes = [];
 
-   t1.setInteractive().on('pointerup',()=> t1.color(color));
-   t2.setInteractive().on('pointerup',()=> t2.color(color));
-   t3.setInteractive().on('pointerup',()=> t3.color(color));
-   t4.setInteractive().on('pointerup',()=> t4.color(color));
-   t5.setInteractive().on('pointerup',()=> t5.color(color));
-   t6.setInteractive().on('pointerup',()=> t6.color(color));
-   t7.setInteractive().on('pointerup',()=> t7.color(color));
-   r1.setInteractive().on('pointerup',()=> r1.color(color));
-   r2.setInteractive().on('pointerup',()=> r2.color(color));
-   r3.setInteractive().on('pointerup',()=> r3.color(color));
-   r4.setInteractive().on('pointerup',()=> r4.color(color));
-   c1.setInteractive().on('pointerup',()=> c1.color(color));
-   c2.setInteractive().on('pointerup',()=> c2.color(color));
-   c3.setInteractive().on('pointerup',()=> c3.color(color));
-   c4.setInteractive().on('pointerup',()=> c4.color(color));
-   c5.setInteractive().on('pointerup',()=> c5.color(color));
-   c6.setInteractive().on('pointerup',()=> c6.color(color));
+   //Vẽ hình
+   shapes.push(new Tri(this, 291, 261, 0, 60, 60, 80, 42, 0)); //Răng cá sấu
+   shapes[0].setAngle(-49);
+   shapes.push(new Tri(this, 365, 301, 0, 60, 60, 80, 42, 0)); //Răng cá sấu
+   shapes[1].setAngle(-49);
+   shapes.push(new Tri(this, 440, 342, 0, 60, 60, 80, 42, 0)); //Răng cá sấu
+   shapes[2].setAngle(-49);
+   shapes.push(new Tri(this, 810, 260, 0, 80, 80, 80, 42, 0)); //Gai trên lưng
+   shapes.push(new Tri(this, 900, 260, 0, 80, 80, 80, 42, 0)); //Gai trên lưng
+   shapes.push(new Tri(this, 990, 260, 0, 80, 80, 80, 42, 0)); //Gai trên lưng
+   shapes.push(new Tri(this, 1122, 345, 0, 80, 80, 80, 42, 0)); //Gai trên đuôi
+   shapes.push(new Rect(this, 400, 260, 265, 60));   //Hàm trên con cá sấu
+   shapes[7].setAngle(28.69);
+   shapes.push(new Rect(this, 385, 410, 265, 60)); //Hàm dưới con cá sấu
+   shapes.push(new Rect(this, 859, 360, 414, 116)); //Thân con cá sấu
+   shapes.push(new Rect(this, 1122, 420, 110, 65)); //Đuôi con cá sấu
+   shapes.push(new Cir(this, 585, 352, 65,65));    //Đầu cá sấu
+   shapes.push(new Cir(this, 410, 520, 20,20));   //Hình tròn bên dưới cá sấu
+   shapes.push(new Cir(this, 480, 490, 35,35));   //Hình tròn bên dưới cá sấu
+   shapes.push(new Cir(this, 820, 480, 30,30));   //Hình tròn bên dưới cá sấu
+   shapes.push(new Cir(this, 920, 500, 45,45));   //Hình tròn bên dưới cá sấu
+   shapes.push(new Cir(this, 1115, 500, 35,35));   //Hình tròn bên dưới cá sấu
+
+   //Khi nhấn chuột vào thì tô màu vừa chọn vào hình
+   shapes.forEach(item => {
+     item.setInteractive().on('pointerup', ()=>item.color(color));
+   });
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
    //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -204,46 +193,14 @@ class Game2_2 extends Phaser.Scene {
      });
      done.on('pointerup',function(){
        if(complete === false){
-          gameScene.check(r1);
-          gameScene.check(r2);
-          gameScene.check(r3);
-          gameScene.check(r4);
-
-          gameScene.check(c1);
-          gameScene.check(c2);
-          gameScene.check(c3);
-          gameScene.check(c4);
-          gameScene.check(c5);
-          gameScene.check(c6);
-
-          gameScene.check(t1);
-          gameScene.check(t2);
-          gameScene.check(t3);
-          gameScene.check(t4);
-          gameScene.check(t5);
-          gameScene.check(t6);
-          gameScene.check(t7);
+         for(var i = 0; i < shapes.length; i++){
+           gameScene.check(shapes[i]);
+         }
 
           if(gameScene.countFailCorlor > 0){    //Nếu có hình tô sai thì viền đỏ (đã làm trong hàm check()), dừng màn hình 1s sau đó xóa màu của những hình tô sai
-             gameScene.deleteColor(r1);
-             gameScene.deleteColor(r2);
-             gameScene.deleteColor(r3);
-             gameScene.deleteColor(r4);
-
-             gameScene.deleteColor(c1);
-             gameScene.deleteColor(c2);
-             gameScene.deleteColor(c3);
-             gameScene.deleteColor(c4);
-             gameScene.deleteColor(c5);
-             gameScene.deleteColor(c6);
-
-             gameScene.deleteColor(t1);
-             gameScene.deleteColor(t2);
-             gameScene.deleteColor(t3);
-             gameScene.deleteColor(t4);
-             gameScene.deleteColor(t5);
-             gameScene.deleteColor(t6);
-             gameScene.deleteColor(t7);
+            for(var i = 0; i < shapes.length; i++){
+              gameScene.deleteColor(shapes[i]);
+            }
            }
          else if(gameScene.countFill > 0){  //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 3s thì ẩn thông báo
              notification2.visible = true;
@@ -268,18 +225,11 @@ class Game2_2 extends Phaser.Scene {
          yellow.visible = true;
 
          //Khi đã tô đúng màu vào các hình được yêu cầu và nhấn DONE thì những hình đó không tô vào hay xóa đi được nữa
-         r1.removeInteractive();
-         r2.removeInteractive();
-         r3.removeInteractive();
-         r4.removeInteractive();
-         t1.removeInteractive();
-         t2.removeInteractive();
-         t3.removeInteractive();
-         t4.removeInteractive();
-         t5.removeInteractive();
-         t6.removeInteractive();
-         t7.removeInteractive();
-
+         shapes.forEach(item => {
+           if(item instanceof Rect || item instanceof Tri){
+             item.removeInteractive();
+           }
+         });
 
          //Thêm hiệu ứng cho các cọ vừa xuất hiện
          blue.setInteractive(button, Phaser.Geom.Circle.Contains);

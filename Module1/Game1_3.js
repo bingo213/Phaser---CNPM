@@ -64,62 +64,50 @@ class Game1_3 extends Phaser.Scene {
        color: "#000",
      });
 
+     var shapes = [];
      //Khai báo và vẽ 4 tam giác
-     var t1 = new Tri(this,265, 490, 0, 100, 100, 100, 102, 0);
-     var t2 = new Tri(this,775, 293, 0, 100, 90, 100,50, 0);
-     var t3 = new Tri(this,895, 288, 0, 150, 80, 120,90, 0);
-     t3.setAngle(20);
-     var t4 = new Tri(this,850, 258, 0, 100, 90, 100,50, 0);
-     t4.setAngle(-39);
+     shapes.push(new Tri(this,265, 490, 0, 100, 100, 100, 102, 0));
+     shapes.push(new Tri(this,775, 293, 0, 100, 90, 100,50, 0));
+     shapes.push(new Tri(this,895, 288, 0, 150, 80, 120,90, 0));
+     shapes[2].setAngle(20);
+     shapes.push(new Tri(this,850, 258, 0, 100, 90, 100,50, 0));
+     shapes[3].setAngle(-39);
 
      //Khai báo và vẽ 7 hình chữ nhật
-     var r1 = new Rect(this,420,410,206,131);
-     var r2 = new Rect(this,351,283,70,120);
-     var r3 = new Rect(this,585,320,120,170);
-     var r4 = new Rect(this,820,410,206,131);
-     var r5 = new Rect(this,820,509,78,63);
-     var r6 = new Rect(this,1100,410,206,131);
-     var r7 = new Rect(this,1110,509,78,63);
+     shapes.push(new Rect(this,420,410,206,131));
+     shapes.push(new Rect(this,351,283,70,120));
+     shapes.push(new Rect(this,585,320,120,170));
+     shapes.push(new Rect(this,820,410,206,131));
+     shapes.push(new Rect(this,820,509,78,63));
+     shapes.push(new Rect(this,1100,410,206,131));
+     shapes.push(new Rect(this,1110,509,78,63));
 
      //Khai báo và vẽ 7 hình tròn
-     var c1 = new Cir(this,357,512,35);
-     var c2 = new Cir(this,445,512,35);
-     var c3 = new Cir(this,595,477,70);
-     var c4 = new Cir(this,744,512,35);
-     var c5 = new Cir(this,896,512,35);
-     var c6 = new Cir(this,1034,512,35);
-     var c7 = new Cir(this,1186,512,35);
+     shapes.push(new Cir(this,357,512,35));
+     shapes.push(new Cir(this,445,512,35));
+     shapes.push(new Cir(this,595,477,70));
+     shapes.push(new Cir(this,744,512,35));
+     shapes.push(new Cir(this,896,512,35));
+     shapes.push(new Cir(this,1034,512,35));
+     shapes.push(new Cir(this,1186,512,35));
 
      //Cửa sổ - Hình ảnh phụ
-     var window1 = this.add.image(r3.x, r3.y -30, "window1");
+     var window1 = this.add.image(shapes[6].x, shapes[6].y -30, "window1");
      window1.visible = false;
-     var window2 = this.add.image(r4.x,r4.y - 20,"window");
+     var window2 = this.add.image(shapes[7].x,shapes[7].y - 20,"window");
      window2.visible = false;
-     var window3 = this.add.image(r6.x,r6.y - 20,"window");
+     var window3 = this.add.image(shapes[9].x,shapes[9].y - 20,"window");
      window3.visible = false;
 
      this.countColor = 0;
+
      //Khi nhấn chuột vào thì tô màu vừa chọn vào hình
-     c1.setInteractive().on('pointerup',()=>{c1.color(color); gameScene.countColor++;});
-     c2.setInteractive().on('pointerup',()=>{c2.color(color); gameScene.countColor++;});
-     c3.setInteractive().on('pointerup',()=>{c3.color(color); gameScene.countColor++;});
-     c4.setInteractive().on('pointerup',()=>{c4.color(color); gameScene.countColor++;});
-     c5.setInteractive().on('pointerup',()=>{c5.color(color); gameScene.countColor++;});
-     c6.setInteractive().on('pointerup',()=>{c6.color(color); gameScene.countColor++;});
-     c7.setInteractive().on('pointerup',()=>{c7.color(color); gameScene.countColor++;});
-
-     r1.setInteractive().on('pointerup',()=>{r1.color(color); gameScene.countColor++;});
-     r2.setInteractive().on('pointerup',()=>{r2.color(color); gameScene.countColor++;});
-     r3.setInteractive().on('pointerup',()=>{r3.color(color); gameScene.countColor++;});
-     r4.setInteractive().on('pointerup',()=>{r4.color(color); gameScene.countColor++;});
-     r5.setInteractive().on('pointerup',()=>{r5.color(color); gameScene.countColor++;});
-     r6.setInteractive().on('pointerup',()=>{r6.color(color); gameScene.countColor++;});
-     r7.setInteractive().on('pointerup',()=>{r7.color(color); gameScene.countColor++;});
-
-     t1.setInteractive().on('pointerup',()=>{t1.color(color); gameScene.countColor++;});
-     t2.setInteractive().on('pointerup',()=>{t2.color(color); gameScene.countColor++;});
-     t3.setInteractive().on('pointerup',()=>{t3.color(color); gameScene.countColor++;});
-     t4.setInteractive().on('pointerup',()=>{t4.color(color); gameScene.countColor++;});
+     shapes.forEach(item => {
+       item.setInteractive().on('pointerup', function(){
+         item.color(color);
+         gameScene.countColor++;
+       })
+     });
 
      //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
      //Khi nhấn chuột vào thì màu (biến color) được set lại
@@ -173,7 +161,6 @@ class Game1_3 extends Phaser.Scene {
         done.clearTint();
       });
       done.on('pointerup',function(){
-        console.log(gameScene.countColor);
         if(gameScene.countColor > 0){
         this.visible = false;
         green.visible = false;
