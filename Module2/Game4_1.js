@@ -2,181 +2,558 @@ class Game4_1 extends Phaser.Scene {
   constructor() {
     super("Game4_1");
   }
-  
-    preload()
-    {
-		this.load.image("t1","assets/triangle1.png");
-		this.load.image("t2","assets/triangle2.png");
-		this.load.image("t3","assets/triangle3.png");
-		this.load.image("t4","assets/triangle4.png");
-		this.load.image("t5","assets/triangle5.png");
-		this.load.image("c1","assets/circle1.png");
-		this.load.image("c2","assets/circle2.png");
-		this.load.image("c3","assets/circle3.png");
-		this.load.image("c4","assets/circle4.png");
-		this.load.image("c5","assets/circle5.png");
-		this.load.image("s1","assets/square1.png");
-		this.load.image("s2","assets/square2.png");
-		this.load.image("s3","assets/square3.png");
-		this.load.image("s4","assets/square4.png");
-		this.load.image("s5","assets/square5.png");
-		this.load.image("bg1","assets/initscene1.png");
-    	this.load.image("eat1","assets/voi1.png");
-		this.load.image("eat2","assets/voi2.png");
-		this.load.image("sleep1","assets/voi cam sleep.png");
-		this.load.image("sleep2","assets/voi tim sleep.png");
-		this.load.image("ha1","assets/voi ha mieng.png");
-		this.load.image("ha2","assets/voi tim ha mieng.png");
-		this.load.image("do1","assets/voi do.png");
-    }
-    create() {
-		const gameScene = this.scene.get('Game4_1');
-		this.add.image(1440/2,800/2,"bg1");
-        var eat1 = this.add.image(330,450,"eat1");
-		var eat2 = this.add.image(1100,450,"eat2");
-		var ha1 = this.add.image(330,450,"ha1");
-			ha1.scaleX =.7793427; 
-			ha1.scaleY =.7579909;
-			ha1.visible = false;
-		var ha2 = this.add.image(1100,450,"ha2");
-			ha2.scaleX =.78186;
-			ha2.scaleY = .774294;
-			ha2.visible = false;
-		var do1 = this.add.image(330,450,"do1");
-			do1.scaleX=.72489;
-			do1.scaleY= .851282;
-			do1.visible =false;
-		var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
-			fontFamily: "Roboto Condensed",
-			fontSize: 20,
-			color: "#1a65ac",
-		});
+  preload() {
+    this.load.image("t1", "assets/triangle1.png");
+    this.load.image("t2", "assets/triangle2.png");
+    this.load.image("t3", "assets/triangle3.png");
+    this.load.image("t4", "assets/triangle4.png");
+    this.load.image("t5", "assets/triangle5.png");
+    this.load.image("c1", "assets/circle1.png");
+    this.load.image("c2", "assets/circle2.png");
+    this.load.image("c3", "assets/circle3.png");
+    this.load.image("c4", "assets/circle4.png");
+    this.load.image("c5", "assets/circle5.png");
+    this.load.image("s1", "assets/square1.png");
+    this.load.image("s2", "assets/square2.png");
+    this.load.image("s3", "assets/square3.png");
+    this.load.image("s4", "assets/square4.png");
+    this.load.image("s5", "assets/square5.png");
+    this.load.image("bg1", "assets/initscene1.png");
+    this.load.image("orangeElephant", "assets/orangeElephant.png");
+    this.load.image("purpleElephant", "assets/purpleElephant.png");
+    this.load.image("orangeElephantSleep", "assets/orangeElephantSleep.png");
+    this.load.image("purpleElephantSleep", "assets/purpleElephantSleep.png");
+    this.load.image("orangeMouthOpen", "assets/orangeMouthOpen.png");
+    this.load.image("purpleMouthOpen", "assets/purpleMouthOpen.png");
+    this.load.image("redRightElephant", "assets/redRightElephant.png");
+    this.load.image("redLeftElephant", "assets/redLeftElephant.png");
+    this.load.image("bone","assets/bone.png");
+    this.load.image("thigh","assets/thigh.png");
+    this.load.image("next", "assets/next.png");
+  }
+  create() {
+    const gameScene = this.scene.get('Game4_1');
 
-		var shape = new Phaser.Geom.Circle(10,0,40);
-		backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
-		backButton.on('pointerover', function(){   //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-			backButton.setTint(0x00ff00);
-		});
-		backButton.on('pointerout',function(){    //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
-			backButton.clearTint();
-		});
-		backButton.on('pointerup',()=>gameScene.scene.start('startGame'));  //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
-		this.add.text(550,130,"Feed the Elephant",{
-			fontFamily:"Roboto Condensed",
-			fontSize:50,
-			color:"#1a65ac",
-		});
-		var check = false;
-		//thêm các hình khối
-		//tron
-		var c1= this.add.image(600,300,"c1").setInteractive();
-		var c2=this.add.image(770,425,"c2").setInteractive();
-		var c3 = this.add.image(560,530,"c3").setInteractive();
-		var c4 = this.add.image(750,640,"c4").setInteractive();
-		var c5 = this.add.image(860,600,"c5").setInteractive();
-		//vuong
-		var s1= this.add.image(750,310,"s1").setInteractive();
-		s1.angle= 38;
-		var s2 = this.add.image(770,550,"s2").setInteractive();
-		var s3 = this.add.image(650,605,"s3").setInteractive();
-		s3.angle = -10;
-		var s4 = this.add.image(870,500,"s4").setInteractive();
-		s4.scaleX =.7; s4.scaleY=.7;s4.angle = -15;
-		//tam giac
-		var t1= this.add.image(650,390,"t1").setInteractive();
-		
-		var t2=this.add.image(550,400,"t2").setInteractive();
-		t2.angle=30;
-		
-		var t3= this.add.image(650,490,"t3").setInteractive();
-		t3.angle = -30;
-		var t4 = this.add.image(555,650,"t4").setInteractive();
-		var t5 = this.add.image(890,370,"t5").setInteractive();
-		//kéo thả các khối
-		this.input.setDraggable(c1);
-		this.input.setDraggable(c2);
-		this.input.setDraggable(c3);
-		this.input.setDraggable(c4);
-		this.input.setDraggable(c5);
-		this.input.setDraggable(t1);
-		this.input.setDraggable(t2);
-		this.input.setDraggable(t3);
-		this.input.setDraggable(t4);
-		this.input.setDraggable(t5);
-		this.input.setDraggable(s1);
-		this.input.setDraggable(s2);
-		this.input.setDraggable(s3);
-		this.input.setDraggable(s4);
+    this.incorrect = 0;  //Đếm số lần làm sai
 
-    this.input.on('dragstart', function (pointer, gameObject){});
+    this.add.image(1440 / 2, 800 / 2, "bg1");
 
-    this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+    this.next = this.add.image(config.width/2, config.height/2 + 100, "next");
+    this.next.visible = false;
 
-		check = true;
-        gameObject.x = dragX;
-        gameObject.y = dragY;
-		
+    this.thigh1 = this.add.image(1120, 130, "thigh");
+    this.thigh2 = this.add.image(1180, 130, "thigh");
+    this.thigh3 = this.add.image(1240, 130, "thigh");
+    this.bone1 = this.add.image(1120, 130, "bone");
+    this.bone2 = this.add.image(1180, 130, "bone");
+    this.bone3 = this.add.image(1240, 130, "bone");
+    this.bone1.visible = false;
+    this.bone2.visible = false;
+    this.bone3.visible = false;
 
+    this.sleepTime1 = 0;  //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi cam ngủ
+    this.sleepTime2 = 0;  //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi tím ngủ
+
+    const orangeElephantX = 330;
+    const orangeElephantY = 430;
+    this.mouthOrangeX = 230;
+    this.mouthOrangeY = 330;
+
+    const purpleElephantX = 1100;
+    const purpleElephantY = 430;
+    this.mouthPurpleX = 1220;
+    this.mouthPurpleY = 330;
+
+    this.orangeElephant = this.add.image(orangeElephantX, orangeElephantY, "orangeElephant");
+    this.orangeMouthOpen = this.add.image(orangeElephantX, orangeElephantY, "orangeMouthOpen");
+    this.orangeMouthOpen.visible = false;
+    this.orangeElephantSleep = this.add.image(orangeElephantX, orangeElephantY, "orangeElephantSleep");
+    this.orangeElephantSleep.visible = false;
+    this.redLeftElephant = this.add.image(orangeElephantX, orangeElephantY, "redLeftElephant");
+    this.redLeftElephant.visible = false;
+
+    this.purpleElephant = this.add.image(purpleElephantX, purpleElephantY, "purpleElephant");
+    this.purpleMouthOpen = this.add.image(purpleElephantX, purpleElephantY, "purpleMouthOpen");
+    this.purpleMouthOpen.visible = false;
+    this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");
+    this.purpleElephantSleep.visible = false;
+    this.redRightElephant = this.add.image(purpleElephantX, purpleElephantY, "redRightElephant");
+    this.redRightElephant.visible = false;
+
+    var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
+      fontFamily: "Roboto Condensed",
+      fontSize: 20,
+      color: "#1a65ac",
     });
 
-    this.input.on('dragend',function(pointer, gameObject) {
-		check = false;
-	/*	if (cir1.contains(c1.x,c1.y) )
-		{
-			eat1.visible = false;
-			do1.visible = true;
-			c1.x=600;
-			c1.y= 300;
-		}else
-			
-		
-		{
-			eat1.visible = true;
-			do1.visible = false;
-			c1.x=600;
-			c1.y=300;
-		}
-		*/
-	
-	
-	
-	});
-		
-		
-		
-	
+    var shape = new Phaser.Geom.Circle(10, 0, 40);
+    backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
+    backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
+      backButton.setTint(0x0000ff);
+    });
+    backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
+      backButton.clearTint();
+    });
+    backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
+    this.add.text(550, 100, "Feed the Elephant", {
+      fontFamily: "Roboto Condensed",
+      fontSize: 50,
+      color: "#000000",
+    });
 
-		var cir1 = new Phaser.Geom.Circle(220,335,100);
-		var cir2 = new Phaser.Geom.Circle(1220,335,100);
+    //thêm các hình khối
+    //tron
+    this.c1 = this.add.image(600, 300, "c1").setName('circle').setInteractive();
+    this.c2 = this.add.image(770, 400, "c2").setName('circle').setInteractive();
+    this.c3 = this.add.image(560, 530, "c3").setName('circle').setInteractive();
+    this.c4 = this.add.image(750, 640, "c4").setName('circle').setInteractive();
+    this.c5 = this.add.image(860, 620, "c5").setName('circle').setInteractive();
+    //vuong
+    this.s1 = this.add.image(750, 270, "s1").setName('square').setInteractive();
+    this.s1.angle = 38;
+    this.s2 = this.add.image(770, 550, "s2").setName('square').setInteractive();
+    this.s3 = this.add.image(650, 620, "s3").setName('square').setInteractive();
+    this.s3.angle = -10;
+    this.s4 = this.add.image(870, 500, "s4").setName('square').setInteractive();
+    this.s4.angle = -15;
+    //tam giac
+    this.t1 = this.add.image(650, 390, "t1").setName('triangle').setInteractive();
+    this.t2 = this.add.image(550, 400, "t2").setName('triangle').setInteractive();
+    this.t2.angle = 30;
+    this.t3 = this.add.image(650, 490, "t3").setName('triangle').setInteractive();
+    this.t3.angle = -30;
+    this.t4 = this.add.image(555, 650, "t4").setName('triangle').setInteractive();
+    this.t5 = this.add.image(890, 340, "t5").setName('triangle').setInteractive();
 
+    this.canNotSeeShape();
 
-    this.input.on('pointermove', function (pointer) {
+    this.triangleInBoard = new Tri(this, orangeElephantX + 70, orangeElephantY - 195);
+    this.triangleInBoard.fillColor = 0x00ff00;
+    this.triangleInBoard.scaleX = 0.5;
+    this.triangleInBoard.scaleY = 0.5;
+    this.circleInBoard = new Cir(this, purpleElephantX - 70, purpleElephantY - 195, 36, 36);
+    this.circleInBoard.fillColor = 0x0000ff;
 
-        if(cir1.contains(pointer.x, pointer.y) && check === true)
+    this.triangleText = this.add.text(config.width/2 - 10, config.height/2, 'I eat triangles', {
+      fontFamily: "Roboto Condensed",
+      fontSize: 50,
+      color: "#000",
+    });
+    this.tweens.timeline({
+      targets: this.triangleText,
+      ease: 'Linear',
+      tweens: [{
+          x: this.triangleText.x - 200,
+          y: this.triangleText.y,
+          scaleX: 1.5,
+          scaleY: 1.5,
+          duration: 1500
+        },
         {
-            eat1.visible = false;
-            ha1.visible = true;
+          x: orangeElephantX - 8,
+          y: orangeElephantY - 260,
+          scaleX: 0.6,
+          scaleY: 0.6,
+          duration: 1000
         }
-        else
-        {
-            eat1.visible = true;
-            ha1.visible = false;
+      ]
+    });
+
+    this.circleText = this.add.text(config.width/2 - 10, config.height/2, 'I eat circles', {
+      fontFamily: "Roboto Condensed",
+      fontSize: 50,
+      color: "#000",
+    });
+    this.circleText.visible = false;
+    setTimeout(function(){
+      gameScene.tweens.timeline({
+        targets: gameScene.circleText,
+        ease: 'Linear',
+        tweens: [{
+            x: gameScene.circleText.x - 200,
+            y: gameScene.circleText.y,
+            scaleX: 1.5,
+            scaleY: 1.5,
+            duration: 1500
+          },
+          {
+            x: purpleElephantX - 145,
+            y: purpleElephantY - 260,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 1000
+          }
+        ]
+      });
+       gameScene.circleText.visible = true;
+     }, 3000);
+
+    setTimeout(()=>this.canSeeShape(), 6000);
+
+    //kéo thả các khối
+    this.input.setDraggable(this.t1);
+    this.input.setDraggable(this.t2);
+    this.input.setDraggable(this.t3);
+    this.input.setDraggable(this.t4);
+    this.input.setDraggable(this.t5);
+    this.input.setDraggable(this.c1);
+    this.input.setDraggable(this.c2);
+    this.input.setDraggable(this.c3);
+    this.input.setDraggable(this.c4);
+    this.input.setDraggable(this.c5);
+    this.input.setDraggable(this.s1);
+    this.input.setDraggable(this.s2);
+    this.input.setDraggable(this.s3);
+    this.input.setDraggable(this.s4);
+
+
+    var check = false;  //Kiểm tra xem có đang drag hay không
+
+    //Drop zone
+    var zone1 = this.add.zone(orangeElephantX, orangeElephantY, 350, 480).setRectangleDropZone(350, 480);
+    var zone2 = this.add.zone(purpleElephantX, purpleElephantY, 350, 480).setRectangleDropZone(350, 480);
+
+    //Vị trí các hình khi vào bụng voi cam
+    this.orangeElephantStomach = [{
+        x: orangeElephantX -50,
+        y: orangeElephantY + 180
+      },
+      {
+        x: orangeElephantX + 50,
+        y: orangeElephantY + 180
+      },
+      {
+        x: orangeElephantX + 50,
+        y: orangeElephantY + 80
+      },
+      {
+        x: orangeElephantX - 50,
+        y: orangeElephantY + 80
+      },
+      {
+        x: orangeElephantX + 10,
+        y: orangeElephantY
+      }];
+    //Vị trí các hình khi vào bụng voi tím
+    this.purpleElephantStomach = [{
+        x: purpleElephantX + 50,
+        y: purpleElephantY + 180
+      },
+      {
+        x: purpleElephantX - 50,
+        y: purpleElephantY + 180
+      },
+      {
+        x: purpleElephantX + 50,
+        y: purpleElephantY + 80
+      },
+      {
+        x: purpleElephantX - 50,
+        y: purpleElephantY + 80
+      },
+      {
+        x: purpleElephantX - 10,
+        y: purpleElephantY - 30
+      }];
+
+      this.input.on('dragstart', function(pointer, gameObject) {
+        this.children.bringToTop(gameObject);
+      }, this);
+
+    this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+      check = true;
+      gameObject.x = dragX;
+      gameObject.y = dragY;
+    });
+
+    this.input.on('dragend', function(pointer, gameObject, dropped) {
+      check = false;
+      if (!dropped) {
+        gameObject.x = gameObject.input.dragStartX;
+        gameObject.y = gameObject.input.dragStartY;
+      }
+      if (gameScene.orangeElephantStomach.length === 0) zone1.destroy();
+      if (gameScene.purpleElephantStomach.length === 0) zone2.destroy();
+    });
+
+    this.input.on('drop', function(pointer, gameObject) {
+      check = false;
+      if (elephant === 1) {
+        if (gameObject.name === 'triangle') {
+          gameScene.orangeMouthOpen.visible = true;
+          gameScene.moveToStomatch(elephant, gameObject);
+
+        } else {
+          gameScene.incorrect ++;
+          gameScene.thighTurnToBone(gameScene.incorrect);
+          gameScene.redLeftElephant.visible = true;
+          setTimeout(function() {
+            gameScene.redLeftElephant.visible = false;
+          }, 1500);
+          gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
+      }
 
-        if(cir2.contains(pointer.x, pointer.y) && check === true)
-        {
-            eat2.visible = false;
-            ha2.visible = true;
+      if (elephant === 2) {
+        if (gameObject.name === 'circle') {
+          gameScene.purpleMouthOpen.visible = true;
+          gameScene.moveToStomatch(elephant, gameObject);
+        } else {
+          gameScene.incorrect ++;
+          gameScene.thighTurnToBone(gameScene.incorrect);
+          gameScene.redRightElephant.visible = true;
+          setTimeout(function() {
+            gameScene.redRightElephant.visible = false;
+          }, 1500);
+          gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
-        else
-        {
-            eat2.visible = true;
-            ha2.visible = false;
+      }
+
+      if(gameScene.incorrect === 3)
+         gameScene.giveNotice(gameScene);
+      if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
+         setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
+    });
+
+    var rect1 = new Phaser.Geom.Rectangle(orangeElephantX -180, orangeElephantY -240, 350,480);
+    var rect2 = new Phaser.Geom.Rectangle(purpleElephantX -170, purpleElephantY -240, 350,480);
+
+    var elephant = 0;
+    this.input.on('pointermove', function(pointer) {
+      if (rect1.contains(pointer.x, pointer.y) && check === true) {
+        gameScene.orangeElephant.visible = false;
+        gameScene.orangeMouthOpen.visible = true;
+        elephant = 1;
+      } else {
+        gameScene.orangeElephant.visible = true;
+        gameScene.orangeMouthOpen.visible = false;
+      }
+
+      if (rect2.contains(pointer.x, pointer.y) && check === true) {
+        gameScene.purpleElephant.visible = false;
+        gameScene.purpleMouthOpen.visible = true;
+        elephant = 2;
+      } else {
+        gameScene.purpleElephant.visible = true;
+        gameScene.purpleMouthOpen.visible = false;
+      }
+    });
+  }
+
+  update() {
+    const gameScene = this.scene.get('Game4_1');
+    if (this.orangeElephantStomach.length === 0) {
+      if(this.sleepTime1 < 150)
+        this.sleepTime1++;
+      else {
+          this.sleepOrangeElephant();
         }
+      }
+    if (this.purpleElephantStomach.length === 0) {
+      if(this.sleepTime2 < 150)
+        this.sleepTime2++;
+      else {
+          this.sleepPurpleElephant();
+        }
+    }
+  }
 
-    
+  back(elephant, gameObject, x, y) {
+    if (elephant === 1) {
+      this.tweens.timeline({
+        targets: gameObject,
+        ease: 'Linear',
+        tweens: [{
+            x: this.mouthOrangeX,
+            y: this.mouthOrangeY,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 200
+          },
+          {
+            x: this.mouthOrangeX,
+            y: this.mouthOrangeY,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 1000
+          },
+          {
+            x: x,
+            y: y,
+            scaleX: 1,
+            scaleY: 1,
+            duration: 1000
+          }
+        ]
+      });
+    }
+    if (elephant === 2) {
+      this.tweens.timeline({
+        targets: gameObject,
+        ease: 'Power1',
+        tweens: [{
+            x: this.mouthPurpleX,
+            y: this.mouthPurpleY,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 200
+          },
+          {
+            x: this.mouthPurpleX,
+            y: this.mouthPurpleY,
+            scaleX: 0.6,
+            scaleY: 0.6,
+            duration: 1000
+          },
+          {
+            x: x,
+            y: y,
+            scaleX: 1,
+            scaleY: 1,
+            duration: 1000
+          }
+        ]
+      });
+    }
+  }
 
-    });	
+  moveToStomatch(elephant, gameObject) {
+    if (elephant === 1) {
+      this.tweens.timeline({
+        targets: gameObject,
+        ease: 'Linear',
+        tweens: [{
+            x: this.mouthOrangeX,
+            y: this.mouthOrangeY,
+            duration: 200
+          },
+          {
+            x: this.orangeElephantStomach[0].x,
+            y: this.orangeElephantStomach[0].y,
+            scaleX: 0.7,
+            scaleY: 0.7,
+            angle: 180,
+            ease: 'Bounce.easeOut',
+            duration: 2000
+          }
+        ]
+      });
+      this.orangeElephantStomach.shift();
+    }
+    if (elephant === 2) {
+      this.tweens.timeline({
+        targets: gameObject,
+        ease: 'Power1',
+        tweens: [{
+            x: this.mouthPurpleX,
+            y: this.mouthOrangeY,
+            duration: 200
+          },
+          {
+            x: this.purpleElephantStomach[0].x,
+            y: this.purpleElephantStomach[0].y,
+            scaleX: 0.7,
+            scaleY: 0.7,
+            angle: 180,
+            ease: 'Bounce.easeOut',
+            duration: 2000
+          }
+        ]
+      });
+      this.purpleElephantStomach.shift();
+    }
+  }
 
-	}
+   canSeeShape(){
+     this.t1.visible = true;
+     this.t2.visible = true;
+     this.t3.visible = true;
+     this.t4.visible = true;
+     this.t5.visible = true;
+     this.c1.visible = true;
+     this.c2.visible = true;
+     this.c3.visible = true;
+     this.c4.visible = true;
+     this.c5.visible = true;
+     this.s1.visible = true;
+     this.s2.visible = true;
+     this.s3.visible = true;
+     this.s4.visible = true;
+   }
+
+   canNotSeeShape(){
+     this.t1.visible = false;
+     this.t2.visible = false;
+     this.t3.visible = false;
+     this.t4.visible = false;
+     this.t5.visible = false;
+     this.c1.visible = false;
+     this.c2.visible = false;
+     this.c3.visible = false;
+     this.c4.visible = false;
+     this.c5.visible = false;
+     this.s1.visible = false;
+     this.s2.visible = false;
+     this.s3.visible = false;
+     this.s4.visible = false;
+   }
+
+   thighTurnToBone(incorrect){
+     if(incorrect === 1){
+       this.thigh1.visible = false;
+       this.bone1.visible = true;
+     }
+     else if (incorrect === 2){
+       this.thigh2.visible = false;
+       this.bone2.visible = true;
+     }
+     else{
+       this.thigh3.visible = false;
+       this.bone3.visible = true;
+     }
+   }
+
+   giveNotice(gameScene){
+     this.canNotSeeShape();
+     this.add.text(config.width/2 - 190, config.height/2 - 50, 'Too many mistakes!', {
+       fontFamily: "Roboto Condensed",
+       fontSize: 50,
+       color: "#000",
+     });
+     this.add.text(config.width/2 - 110, config.height/2, 'Try again!', {
+       fontFamily: "Roboto Condensed",
+       fontSize: 50,
+       color: "#000",
+     });
+     this.next.visible = true;
+     this.next.setInteractive().on('pointerup',()=>gameScene.scene.restart());
+   }
+
+  sleepOrangeElephant() {
+    this.t1.visible = false;
+    this.t2.visible = false;
+    this.t3.visible = false;
+    this.t4.visible = false;
+    this.t5.visible = false;
+    this.orangeElephant.visible = false;
+    this.orangeMouthOpen.visible = false;
+    this.triangleText.visible = false;
+    this.triangleInBoard.visible = false;
+    this.orangeElephantSleep.visible = true;
+  }
+
+  sleepPurpleElephant() {
+    this.c1.visible = false;
+    this.c2.visible = false;
+    this.c3.visible = false;
+    this.c4.visible = false;
+    this.c5.visible = false;
+    this.purpleElephant.visible = false;
+    this.purpleMouthOpen.visible = false;
+    this.circleText.visible = false;
+    this.circleInBoard.visible = false;
+    this.purpleElephantSleep.visible = true;
+  }
+
+
 }
