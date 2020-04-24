@@ -282,8 +282,7 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'triangle') {
           gameScene.orangeMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-		  gameObject.input.enabled = false;
-		  
+		  this.blockInput();		  
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -299,7 +298,7 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'circle') {
           gameScene.purpleMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-		  gameObject.input.enabled = false;
+		  this.blockInput();
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -557,6 +556,20 @@ class Game4_1 extends Phaser.Scene {
     this.circleInBoard.visible = false;
     this.purpleElephantSleep.visible = true;
   }
-
-
+	blockInput(){
+	 this.t1.input.enabled = false;
+     this.t2.input.enabled = false;
+     this.t3.input.enabled = false;
+     this.t4.input.enabled = false;
+     this.t5.input.enabled = false;
+     this.c1.input.enabled = false;
+     this.c2.input.enabled = false;
+     this.c3.input.enabled = false;
+     this.c4.input.enabled = false;
+     this.c5.input.enabled = false;
+     this.s1.input.enabled = false;
+     this.s2.input.enabled = false;
+     this.s3.input.enabled = false;
+     this.s4.input.enabled = false;
+	}
 }
