@@ -128,11 +128,11 @@ class Game4_1 extends Phaser.Scene {
     this.canNotSeeShape();
 
     this.triangleInBoard = new Tri(this, orangeElephantX + 70, orangeElephantY - 195);
-    this.triangleInBoard.fillColor = 0x00ff00;
+    this.triangleInBoard.fillColor = 0x8729e5;
     this.triangleInBoard.scaleX = 0.5;
     this.triangleInBoard.scaleY = 0.5;
     this.circleInBoard = new Cir(this, purpleElephantX - 70, purpleElephantY - 195, 36, 36);
-    this.circleInBoard.fillColor = 0x0000ff;
+    this.circleInBoard.fillColor = 0xe7ea0e;
 
     this.triangleText = this.add.text(config.width/2 - 10, config.height/2, 'I eat triangles', {
       fontFamily: "Roboto Condensed",
@@ -282,7 +282,8 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'triangle') {
           gameScene.orangeMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-
+		  gameObject.input.enabled = false;
+		  
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -298,6 +299,7 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'circle') {
           gameScene.purpleMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
+		  gameObject.input.enabled = false;
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -313,6 +315,7 @@ class Game4_1 extends Phaser.Scene {
          gameScene.giveNotice(gameScene);
       if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
          setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
+	  
     });
 
     var rect1 = new Phaser.Geom.Rectangle(orangeElephantX -180, orangeElephantY -240, 350,480);
@@ -463,7 +466,7 @@ class Game4_1 extends Phaser.Scene {
       this.purpleElephantStomach.shift();
     }
   }
-
+//hiện các hình
    canSeeShape(){
      this.t1.visible = true;
      this.t2.visible = true;
@@ -480,7 +483,7 @@ class Game4_1 extends Phaser.Scene {
      this.s3.visible = true;
      this.s4.visible = true;
    }
-
+//ẩn các hình
    canNotSeeShape(){
      this.t1.visible = false;
      this.t2.visible = false;
@@ -497,7 +500,7 @@ class Game4_1 extends Phaser.Scene {
      this.s3.visible = false;
      this.s4.visible = false;
    }
-
+//hiển thị mạng
    thighTurnToBone(incorrect){
      if(incorrect === 1){
        this.thigh1.visible = false;
@@ -512,7 +515,7 @@ class Game4_1 extends Phaser.Scene {
        this.bone3.visible = true;
      }
    }
-
+//khi hết mạng
    giveNotice(gameScene){
      this.canNotSeeShape();
      this.add.text(config.width/2 - 190, config.height/2 - 50, 'Too many mistakes!', {
@@ -528,7 +531,7 @@ class Game4_1 extends Phaser.Scene {
      this.next.visible = true;
      this.next.setInteractive().on('pointerup',()=>gameScene.scene.restart());
    }
-
+//voi cam ngủ
   sleepOrangeElephant() {
     this.t1.visible = false;
     this.t2.visible = false;
@@ -541,7 +544,7 @@ class Game4_1 extends Phaser.Scene {
     this.triangleInBoard.visible = false;
     this.orangeElephantSleep.visible = true;
   }
-
+//voi tím ngủ
   sleepPurpleElephant() {
     this.c1.visible = false;
     this.c2.visible = false;
