@@ -10,15 +10,14 @@ class Game4_2 extends Phaser.Scene {
     this.load.image("t5", "assets/triangle5.png");
     this.load.image("c1", "assets/circle1.png");
     this.load.image("c2", "assets/circle2.png");
-    this.load.image("c3", "assets/circle3.png");
-    this.load.image("c4", "assets/circle4.png");
-    this.load.image("c5", "assets/circle5.png");
+    this.load.image("h1", "assets/hexagon1.png");
+    this.load.image("h2", "assets/hexagon2.png");
     this.load.image("s1", "assets/square1.png");
     this.load.image("s2", "assets/square2.png");
     this.load.image("s3", "assets/square3.png");
     this.load.image("s4", "assets/square4.png");
     this.load.image("s5", "assets/square5.png");
-    this.load.image("bg1", "assets/initscene1.png");
+    this.load.image("bg2", "assets/initscene2.png");
     this.load.image("blueElephant", "assets/blueElephant.png");
     this.load.image("blueElephantSleep", "assets/blueElephantSleep.png");
     this.load.image("purpleElephantSleep", "assets/purpleElephantSleep.png");
@@ -33,7 +32,7 @@ class Game4_2 extends Phaser.Scene {
 
     this.incorrect = 0;  //Đếm số lần làm sai
 
-    this.add.image(1440 / 2, 800 / 2, "bg1");
+    this.add.image(1440 / 2, 800 / 2, "bg2");
 
     this.next = this.add.image(config.width/2, config.height/2 + 100, "next");
     this.next.visible = false;
@@ -93,28 +92,28 @@ class Game4_2 extends Phaser.Scene {
 
     //thêm các hình khối
     //tron
-    this.c1 = this.add.image(600, 300, "c1").setName('circle').setInteractive();
+    this.c1 = this.add.image(555, 640, "c1").setName('circle').setInteractive();
     this.c2 = this.add.image(770, 400, "c2").setName('circle').setInteractive();
-    this.c3 = this.add.image(560, 530, "c3").setName('circle').setInteractive();
-    this.c4 = this.add.image(750, 640, "c4").setName('circle').setInteractive();
-    this.c5 = this.add.image(860, 620, "c5").setName('circle').setInteractive();
+	//lục giác 
+    this.h1 = this.add.image(890, 340, "h1").setName('hexagon').setInteractive();
+    this.h2 = this.add.image(750, 640, "h2").setName('hexagon').setInteractive();
     //vuong
-    this.s1 = this.add.image(750, 270, "s1").setName('square').setInteractive();
+    this.s1 = this.add.image(560, 530, "s1").setName('square').setInteractive();
     this.s1.angle = 38;
-    this.s2 = this.add.image(770, 550, "s2").setName('square').setInteractive();
+    this.s2 = this.add.image(650, 390, "s2").setName('square').setInteractive();
     this.s3 = this.add.image(650, 620, "s3").setName('square').setInteractive();
     this.s3.angle = -10;
     this.s4 = this.add.image(870, 500, "s4").setName('square').setInteractive();
     this.s4.angle = -15;
     //tam giac
-    this.t1 = this.add.image(650, 390, "t1").setName('triangle').setInteractive();
+    this.t1 = this.add.image(770, 550, "t1").setName('triangle').setInteractive();
     this.t2 = this.add.image(550, 400, "t2").setName('triangle').setInteractive();
     this.t2.angle = 30;
     this.t3 = this.add.image(650, 490, "t3").setName('triangle').setInteractive();
     this.t3.angle = -30;
-    this.t4 = this.add.image(555, 650, "t4").setName('triangle').setInteractive();
-    this.t5 = this.add.image(890, 340, "t5").setName('triangle').setInteractive();
-
+    this.t4 = this.add.image(600, 300, "t4").setName('triangle').setInteractive();
+    this.t5 = this.add.image(700, 270, "t5").setName('triangle').setInteractive();
+	//t5.setScale(0.8);
     this.canNotSeeShape();
 
     this.triangleInBoard = new Tri(this, blueElephantX + 70, blueElephantY - 165);
@@ -122,7 +121,7 @@ class Game4_2 extends Phaser.Scene {
     this.triangleInBoard.scaleX = 0.5;
     this.triangleInBoard.scaleY = 0.5;
 
-    this.triangleText = this.add.text(config.width/2 - 10,( config.height/2 + 60	), 'I eat triangles', {
+    this.triangleText = this.add.text(config.width/2 - 10, config.height/2 	, 'I eat triangles', {
       fontFamily: "Roboto Condensed",
       fontSize: 50,
       color: "#000",
@@ -139,7 +138,7 @@ class Game4_2 extends Phaser.Scene {
         },
         {
           x: blueElephantX - 8,
-          y: blueElephantY - 260,
+          y: blueElephantY - 230,
           scaleX: 0.6,
           scaleY: 0.6,
           duration: 1000
@@ -157,9 +156,8 @@ class Game4_2 extends Phaser.Scene {
     this.input.setDraggable(this.t5);
     this.input.setDraggable(this.c1);
     this.input.setDraggable(this.c2);
-    this.input.setDraggable(this.c3);
-    this.input.setDraggable(this.c4);
-    this.input.setDraggable(this.c5);
+    this.input.setDraggable(this.h1);
+    this.input.setDraggable(this.h2);
     this.input.setDraggable(this.s1);
     this.input.setDraggable(this.s2);
     this.input.setDraggable(this.s3);
@@ -330,9 +328,8 @@ class Game4_2 extends Phaser.Scene {
      this.t5.visible = true;
      this.c1.visible = true;
      this.c2.visible = true;
-     this.c3.visible = true;
-     this.c4.visible = true;
-     this.c5.visible = true;
+     this.h1.visible = true;
+     this.h2.visible = true;
      this.s1.visible = true;
      this.s2.visible = true;
      this.s3.visible = true;
@@ -347,9 +344,8 @@ class Game4_2 extends Phaser.Scene {
      this.t5.visible = false;
      this.c1.visible = false;
      this.c2.visible = false;
-     this.c3.visible = false;
-     this.c4.visible = false;
-     this.c5.visible = false;
+     this.h1.visible = false;
+     this.h2.visible = false;
      this.s1.visible = false;
      this.s2.visible = false;
      this.s3.visible = false;
@@ -399,8 +395,5 @@ class Game4_2 extends Phaser.Scene {
     this.triangleInBoard.visible = false;
     this.blueElephantSleep.visible = true;
   }
-
-
-
 
 }
