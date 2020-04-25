@@ -286,12 +286,16 @@ class Game4_1 extends Phaser.Scene {
 
     this.input.on('drop', function(pointer, gameObject) {
       check = false;
+	  gameScene.blockInput();
       if (elephant === 1) {
         if (gameObject.name === 'triangle') {
           gameScene.orangeMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
+<<<<<<< HEAD
 		      gameObject.setName('inStomach');
           gameScene.blockInput();
+=======
+>>>>>>> d63aa8f9258c3c0fc70523d6f6c8552e441c7de3
         } else {
           gameScene.blockInput();
           gameScene.incorrect ++;
@@ -302,14 +306,22 @@ class Game4_1 extends Phaser.Scene {
           }, 1500);
           gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
+<<<<<<< HEAD
 
       }
+=======
+	}
+>>>>>>> d63aa8f9258c3c0fc70523d6f6c8552e441c7de3
 
-      if (elephant === 2) {
+	{  
+		if (elephant === 2) {
         if (gameObject.name === 'circle') {
           gameScene.purpleMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
+<<<<<<< HEAD
           gameObject.setName('inStomach');
+=======
+>>>>>>> d63aa8f9258c3c0fc70523d6f6c8552e441c7de3
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -322,15 +334,23 @@ class Game4_1 extends Phaser.Scene {
         // gameScene.enableInput();
         //setTimeout(gameScene.enableInput(),5000);
       }
+<<<<<<< HEAD
       // gameScene.blockInput();
       // setTimeout(gameScene.enableInput(),5000);
 
+=======
+	}
+>>>>>>> d63aa8f9258c3c0fc70523d6f6c8552e441c7de3
 
       if(gameScene.incorrect === 3)
          gameScene.giveNotice(gameScene);
       if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
          setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
+<<<<<<< HEAD
 
+=======
+      gameScene.openInput();
+>>>>>>> d63aa8f9258c3c0fc70523d6f6c8552e441c7de3
     });
 
     var rect1 = new Phaser.Geom.Rectangle(orangeElephantX -180, orangeElephantY -240, 350,480);
@@ -603,6 +623,36 @@ class Game4_1 extends Phaser.Scene {
     this.circleInBoard.visible = false;
     this.purpleElephantSleep.visible = true;
   }
-
-
+	blockInput(){
+	 this.t1.input.enabled = false;
+     this.t2.input.enabled = false;
+     this.t3.input.enabled = false;
+     this.t4.input.enabled = false;
+     this.t5.input.enabled = false;
+     this.c1.input.enabled = false;
+     this.c2.input.enabled = false;
+     this.c3.input.enabled = false;
+     this.c4.input.enabled = false;
+     this.c5.input.enabled = false;
+     this.s1.input.enabled = false;
+     this.s2.input.enabled = false;
+     this.s3.input.enabled = false;
+     this.s4.input.enabled = false;
+	}
+	openInput(){
+		if (this.t1.x>540 && this.t1.x<900) this.t1.input.enabled = true;
+    	if (this.t2.x>540 && this.t2.x<900) this.t2.input.enabled = true;
+    	if (this.t3.x>540 && this.t3.x<900) this.t3.input.enabled = true;
+    	if (this.t4.x>540 && this.t4.x<900) this.t4.input.enabled = true;
+		if (this.t5.x>540 && this.t5.x<900) this.t5.input.enabled = true;
+    	if (this.c1.x>540 && this.c1.x<900) this.c1.input.enabled = true;
+    	if (this.c2.x>540 && this.c2.x<900) this.c2.input.enabled = true;
+		if (this.c3.x>540 && this.c3.x<900) this.c3.input.enabled = true;
+    	if (this.c4.x>540 && this.c4.x<900) this.c4.input.enabled = true;
+    	if (this.c5.x>540 && this.c5.x<900) this.c5.input.enabled = true;
+		if (this.s1.x>540 && this.s1.x<900) this.s1.input.enabled = true;
+    	if (this.s2.x>540 && this.s2.x<900) this.s2.input.enabled = true;
+    	if (this.s3.x>540 && this.s3.x<900) this.s3.input.enabled = true;
+     	if (this.s4.x>540 && this.s4.x<900) this.s4.input.enabled = true;
+	}
 }
