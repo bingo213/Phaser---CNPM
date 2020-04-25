@@ -25,7 +25,7 @@ class Game3_1 extends Phaser.Scene {
     this.brownColor  = 0xE74C3C;
     var grayColor  = 0xBFC9CA;
     var blueColor   = 0x81D4FA;
-    var pinkColor   = 0xFFCCBC;
+    var pinkColor   = 0xFF1744 ;
     var yellowColor = 0xFBC02D;
 
 
@@ -63,28 +63,61 @@ class Game3_1 extends Phaser.Scene {
     text2.visible = false; //Text2 tạm thời chưa nhìn thấy
 
     //Màu tùy chọn
+    var yellowRectangle = new Rect(this,275,580,120,60);
+    yellowRectangle.setStrokeStyle(0,0xffffff);
+    yellowRectangle.fillColor = yellowColor;
+    yellowRectangle.visible = false;
    var yellow = this.add.image(245,580,"yellow");
    yellow.visible = false;
+
+   var grayRectangle = new Rect(this,475,580,120,60);
+   grayRectangle.setStrokeStyle(0,0xffffff);
+   grayRectangle.fillColor = grayColor;
+   grayRectangle.visible = false;
    var gray = this.add.image(445,580,"gray");
    gray.visible = false;
+
+   var blueRectangle = new Rect(this,675,580,120,60);
+   blueRectangle.setStrokeStyle(0,0xffffff);
+   blueRectangle.fillColor = blueColor;
+   blueRectangle.visible = false;
    var blue = this.add.image(645,580,"blue");
    blue.visible = false;
+
+   var pinkRectangle = new Rect(this,875,580,120,60);
+   pinkRectangle.setStrokeStyle(0,0xffffff);
+   pinkRectangle.fillColor = pinkColor;
+   pinkRectangle.visible = false;
    var pink = this.add.image(845,580,"pink");
    pink.visible = false;
 
    //Thêm cọ, tẩy và chữ bên phải cọ, tẩy
+   var greenRectangle = new Rect(this,335,580,230,60);
+   greenRectangle.setStrokeStyle(0,0xffffff);
+   greenRectangle.fillColor = this.greenColor;
+   greenRectangle.visible = false;
    var green = this.add.image(245,580,"green");
    var triangleText = this.add.text(280, 560, 'Triangles', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
+
+   var brownRectangle = new Rect(this,728,580,230,60);
+   brownRectangle.setStrokeStyle(0,0xffffff);
+   brownRectangle.fillColor = this.brownColor;
+   brownRectangle.visible = false;
    var brown = this.add.image(640,580,"brown");
    var hexagonText = this.add.text(675, 560, 'Hexagons', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
+
+   var eraseRectangle = new Rect(this,1085,580,205,60);
+   eraseRectangle.setStrokeStyle(0,0xffffff);
+   eraseRectangle.fillColor = 0xFFEBEE;
+   eraseRectangle.visible = false;
    var erase = this.add.image(1040,580,"erase"); //Tẩy và chữ Erase bên phải tẩy
    var eraseText = this.add.text(1075, 560, 'Erase', {
      fontFamily: "Roboto Condensed",
@@ -172,7 +205,12 @@ class Game3_1 extends Phaser.Scene {
    green.on('pointerout', function(){
      green.clearTint();
    });
-   green.on('pointerup',()=> color = gameScene.greenColor);
+   green.on('pointerup',function(){
+      color = gameScene.greenColor;
+      greenRectangle.visible = true;
+      brownRectangle.visible = false;
+      eraseRectangle.visible = false;
+    });
 
    //Cọ xám
    brown.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -182,7 +220,12 @@ class Game3_1 extends Phaser.Scene {
    brown.on('pointerout', function(){
      brown.clearTint();
    });
-   brown.on('pointerup',()=> color = gameScene.brownColor);
+   brown.on('pointerup',function(){
+      color = gameScene.brownColor;
+      brownRectangle.visible = true;
+      greenRectangle.visible = false;
+      eraseRectangle.visible = false;
+    });
 
    //Hiệu ứng khi di chuột qua tẩy
    erase.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -192,7 +235,16 @@ class Game3_1 extends Phaser.Scene {
     erase.on('pointerout', function(){
       erase.clearTint();
     });
-     erase.on('pointerup',()=> color = 0xffffff);
+    erase.on('pointerup',function(){
+       color = 0xffffff;
+       eraseRectangle.visible = true;
+       brownRectangle.visible = false;
+       greenRectangle.visible = false;
+       yellowRectangle.visible = false;
+       grayRectangle.visible = false;
+       pinkRectangle.visible = false;
+       blueRectangle.visible = false;
+     });
 
      var complete = false;
      var count = 0;
@@ -233,6 +285,9 @@ class Game3_1 extends Phaser.Scene {
          brown.visible = false;
          hexagonText.visible = false;
          triangleText.visible = false;
+         greenRectangle.visible = false;
+         brownRectangle.visible = false;
+         eraseRectangle.visible = false;
          blue.visible = true;
          pink.visible = true;
          gray.visible = true;
@@ -255,16 +310,30 @@ class Game3_1 extends Phaser.Scene {
          blue.on('pointerout', function(){
            blue.clearTint();
          });
-         blue.on('pointerup',()=> color = blueColor);
+         blue.on('pointerup',function(){
+            color = blueColor;
+            blueRectangle.visible = true;
+            grayRectangle.visible = false;
+            pinkRectangle.visible = false;
+            yellowRectangle.visible = false;
+            eraseRectangle.visible = false;
+          });
 
          gray.setInteractive(button, Phaser.Geom.Circle.Contains);
          gray.on('pointerover', function(){
-           gray.setTint(0x5D4037);
+           gray.setTint(0x5D6D7E);
          });
          gray.on('pointerout', function(){
            gray.clearTint();
          });
-         gray.on('pointerup',()=> color = grayColor);
+         gray.on('pointerup',function(){
+            color = grayColor;
+            grayRectangle.visible = true;
+            blueRectangle.visible = false;
+            pinkRectangle.visible = false;
+            yellowRectangle.visible = false;
+            eraseRectangle.visible = false;
+          });
 
          pink.setInteractive(button, Phaser.Geom.Circle.Contains);
          pink.on('pointerover', function(){
@@ -273,7 +342,14 @@ class Game3_1 extends Phaser.Scene {
          pink.on('pointerout', function(){
            pink.clearTint();
          });
-         pink.on('pointerup',()=> color = pinkColor);
+         pink.on('pointerup',function(){
+            color = pinkColor;
+            pinkRectangle.visible = true;
+            grayRectangle.visible = false;
+            blueRectangle.visible = false;
+            yellowRectangle.visible = false;
+            eraseRectangle.visible = false;
+          });
 
          yellow.setInteractive(button, Phaser.Geom.Circle.Contains);
          yellow.on('pointerover', function(){
@@ -282,8 +358,14 @@ class Game3_1 extends Phaser.Scene {
          yellow.on('pointerout', function(){
            yellow.clearTint();
          });
-         yellow.on('pointerup',()=> color = yellowColor);
-
+         yellow.on('pointerup',function(){
+            color = yellowColor;
+            yellowRectangle.visible = true;
+            grayRectangle.visible = false;
+            pinkRectangle.visible = false;
+            blueRectangle.visible = false;
+            eraseRectangle.visible = false;
+          });
          if(count === 2){
            done.visible = false;
            next.visible = true;
@@ -292,6 +374,11 @@ class Game3_1 extends Phaser.Scene {
            yellow.visible = false;
            gray.visible = false;
            erase.visible = false;
+           yellowRectangle.visible = false;
+           grayRectangle.visible = false;
+           pinkRectangle.visible = false;
+           blueRectangle.visible = false;
+           eraseRectangle.visible = false;
            eraseText.visible = false;
            next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene6"));
          }

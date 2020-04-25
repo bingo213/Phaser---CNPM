@@ -58,18 +58,32 @@ class Game1_1 extends Phaser.Scene {
     });
 
    //Thêm cọ và chữ bên phải cọ
+   var greenRectangle = new Rect(this,630,580,220,60);
+   greenRectangle.setStrokeStyle(0,0xffffff);
+   greenRectangle.fillColor = this.greenColor;
+   greenRectangle.visible = false;
    var green = this.add.image(545,580,"green");
    var squareText = this.add.text(580, 560, 'Squares', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
+
+   var pinkRectangle = new Rect(this,918,580,220,60);
+   pinkRectangle.setStrokeStyle(0,0xffffff);
+   pinkRectangle.fillColor = this.pinkColor;
+   pinkRectangle.visible = false;
    var pink = this.add.image(840,580,"pink");
    var triangleText = this.add.text(875, 560, 'Triangles', {
      fontFamily: "Roboto Condensed",
      fontSize: 35,
      color: "#000",
    });
+
+   var yellowRectangle = new Rect(this,1185,580,205,60);
+   yellowRectangle.setStrokeStyle(0,0xffffff);
+   yellowRectangle.fillColor = this.yellowColor;
+   yellowRectangle.visible = false;
    var yellow = this.add.image(1112,580,"yellow");
    var circleText = this.add.text(1147, 560, 'Circles', {
      fontFamily: "Roboto Condensed",
@@ -85,6 +99,11 @@ class Game1_1 extends Phaser.Scene {
    tree.visible = false;
 
    var done = this.add.image(701,660,"done");   //Nút done
+
+   var eraseRectangle = new Rect(this,280,580,205,60);
+   eraseRectangle.setStrokeStyle(0,0xffffff);
+   eraseRectangle.fillColor = 0xFFEBEE;
+   eraseRectangle.visible = false;
    var erase = this.add.image(230,580,"erase"); //Tẩy và chữ Erase bên phải tẩy
    var eraseText = this.add.text(270, 560, 'Erase', {
      fontFamily: "Roboto Condensed",
@@ -148,7 +167,13 @@ class Game1_1 extends Phaser.Scene {
    green.on('pointerout', function(){
      green.clearTint();
    });
-   green.on('pointerup',()=> color = gameScene.greenColor);
+   green.on('pointerup',function(){
+     color = gameScene.greenColor;
+     greenRectangle.visible = true;
+     pinkRectangle.visible = false;
+     yellowRectangle.visible = false;
+     eraseRectangle.visible = false;
+   });
 
    //Cọ hồng
    pink.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -158,7 +183,13 @@ class Game1_1 extends Phaser.Scene {
    pink.on('pointerout', function(){
      pink.clearTint();
    });
-   pink.on('pointerup',()=> color = gameScene.pinkColor);
+   pink.on('pointerup',function(){
+     color = gameScene.pinkColor;
+     pinkRectangle.visible = true;
+     greenRectangle.visible = false;
+     yellowRectangle.visible = false;
+     eraseRectangle.visible = false;
+   });
 
    //Cọ vàng
    yellow.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -168,7 +199,13 @@ class Game1_1 extends Phaser.Scene {
    yellow.on('pointerout', function(){
      yellow.clearTint();
    });
-   yellow.on('pointerup',()=> color = gameScene.yellowColor);
+   yellow.on('pointerup',function(){
+     color = gameScene.yellowColor;
+     yellowRectangle.visible = true;
+     pinkRectangle.visible = false;
+     greenRectangle.visible = false;
+     eraseRectangle.visible = false;
+   });
 
    //Tẩy cũng có hiệu ứng khi di chuột qua, khi nhấn chuột vào tẩy thì màu (biến color) được set là màu trắng
   erase.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -178,7 +215,13 @@ class Game1_1 extends Phaser.Scene {
    erase.on('pointerout', function(){
      erase.clearTint();
    });
-    erase.on('pointerup',()=> color = 0xffffff);
+    erase.on('pointerup',function(){
+       color = 0xffffff;
+       eraseRectangle.visible = true;
+       yellowRectangle.visible = false;
+       pinkRectangle.visible = false;
+       greenRectangle.visible = false;
+     });
 
     //Nút Done cũng có hiệu ứng khi di chuột qua
     done.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -207,6 +250,10 @@ class Game1_1 extends Phaser.Scene {
         else {
           this.visible = false;
           green.visible = false;
+          greenRectangle.visible = false;
+          pinkRectangle.visible = false;
+          yellowRectangle.visible = false;
+          eraseRectangle.visible = false;
           pink.visible = false;
           yellow.visible = false;
           erase.visible = false;
