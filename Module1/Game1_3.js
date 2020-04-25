@@ -46,11 +46,30 @@ class Game1_3 extends Phaser.Scene {
      backButton.on('pointerup',()=>gameScene.scene.start('startGame'));  //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
 
      //Thêm cọ vẽ
+     var greenRectangle = new Rect(this,575,580,120,60);
+     greenRectangle.setStrokeStyle(0,0xffffff);
+     greenRectangle.fillColor = this.greenColor;
+     greenRectangle.visible = false;
      var green = this.add.image(545,580,"green");
+
+     var purpleRectangle = new Rect(this,870,580,120,60);
+     purpleRectangle.setStrokeStyle(0,0xffffff);
+     purpleRectangle.fillColor = this.purpleColor;
+     purpleRectangle.visible = false;
      var purple = this.add.image(840,580,"purple");
+
+     var orangeRectangle = new Rect(this,1142,580,120,60);
+     orangeRectangle.setStrokeStyle(0,0xffffff);
+     orangeRectangle.fillColor = this.orangeColor;
+     orangeRectangle.visible = false;
      var orange = this.add.image(1112,580,"orange");
 
      var done = this.add.image(701,660,"done");   //Nút done
+
+     var eraseRectangle = new Rect(this,280,580,205,60);
+     eraseRectangle.setStrokeStyle(0,0xffffff);
+     eraseRectangle.fillColor = 0xFFEBEE;
+     eraseRectangle.visible = false;
      var erase = this.add.image(230,580,"erase"); //Tẩy và chữ Erase bên phải tẩy
      var eraseText = this.add.text(270, 560, 'Erase', {
        fontFamily: "Roboto Condensed",
@@ -120,7 +139,13 @@ class Game1_3 extends Phaser.Scene {
      green.on('pointerout', function(){
        green.clearTint();
      });
-     green.on('pointerup',()=> color = gameScene.greenColor );
+     green.on('pointerup',function(){
+      color = gameScene.greenColor;
+      greenRectangle.visible = true;
+      purpleRectangle.visible = false;
+      orangeRectangle.visible = false;
+      eraseRectangle.visible = false;
+    });
 
      //Cọ tím
      purple.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -130,7 +155,13 @@ class Game1_3 extends Phaser.Scene {
      purple.on('pointerout', function(){
        purple.clearTint();
      });
-     purple.on('pointerup',()=> color = gameScene.purpleColor);
+     purple.on('pointerup',function(){
+        color = gameScene.purpleColor;
+        purpleRectangle.visible = true;
+        orangeRectangle.visible = false;
+        greenRectangle.visible = false;
+        eraseRectangle.visible = false;
+      });
 
      //Cọ vàng
      orange.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -140,7 +171,13 @@ class Game1_3 extends Phaser.Scene {
      orange.on('pointerout', function(){
        orange.clearTint();
      });
-     orange.on('pointerup',()=> color = gameScene.orangeColor);
+     orange.on('pointerup',function(){
+        color = gameScene.orangeColor;
+        orangeRectangle.visible = true;
+        greenRectangle.visible = false;
+        purpleRectangle.visible = false;
+        eraseRectangle.visible = false;
+      });
 
      //Tẩy cũng có hiệu ứng khi di chuột qua, khi nhấn chuột vào tẩy thì màu (biến color) được set là màu trắng
     erase.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -150,7 +187,13 @@ class Game1_3 extends Phaser.Scene {
      erase.on('pointerout', function(){
        erase.clearTint();
      });
-      erase.on('pointerup',()=> color = 0xffffff);
+      erase.on('pointerup',function(){
+         color = 0xffffff;
+         eraseRectangle.visible = true;
+         orangeRectangle.visible = false;
+         greenRectangle.visible = false;
+         purpleRectangle.visible = false;
+       });
 
       //Nút Done cũng có hiệu ứng khi di chuột qua
       done.setInteractive(button, Phaser.Geom.Circle.Contains);
@@ -167,6 +210,10 @@ class Game1_3 extends Phaser.Scene {
         purple.visible = false;
         orange.visible = false;
         erase.visible = false;
+        orangeRectangle.visible = false;
+        greenRectangle.visible = false;
+        purpleRectangle.visible = false;
+        eraseRectangle.visible = false;
         eraseText.visible = false;
         bg.visible = true;
         window1.visible = true;
