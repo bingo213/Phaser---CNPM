@@ -101,29 +101,31 @@ class Game4_1 extends Phaser.Scene {
       color: "#000000",
     });
 
+    this.shapes = [];
+
     //thêm các hình khối
     //tron
-    this.c1 = this.add.image(600, 300, "c1").setName('circle').setInteractive();
-    this.c2 = this.add.image(770, 400, "c2").setName('circle').setInteractive();
-    this.c3 = this.add.image(560, 530, "c3").setName('circle').setInteractive();
-    this.c4 = this.add.image(750, 640, "c4").setName('circle').setInteractive();
-    this.c5 = this.add.image(860, 620, "c5").setName('circle').setInteractive();
+    this.shapes.push(this.add.image(600, 300, "c1").setName('circle').setInteractive());
+    this.shapes.push(this.add.image(770, 400, "c2").setName('circle').setInteractive());
+    this.shapes.push(this.add.image(560, 530, "c3").setName('circle').setInteractive());
+    this.shapes.push(this.add.image(750, 640, "c4").setName('circle').setInteractive());
+    this.shapes.push(this.add.image(860, 620, "c5").setName('circle').setInteractive());
     //vuong
-    this.s1 = this.add.image(750, 270, "s1").setName('square').setInteractive();
-    this.s1.angle = 38;
-    this.s2 = this.add.image(770, 550, "s2").setName('square').setInteractive();
-    this.s3 = this.add.image(650, 620, "s3").setName('square').setInteractive();
-    this.s3.angle = -10;
-    this.s4 = this.add.image(870, 500, "s4").setName('square').setInteractive();
-    this.s4.angle = -15;
+    this.shapes.push(this.add.image(750, 270, "s1").setName('square').setInteractive());
+    //this.s1.angle = 38;
+    this.shapes.push(this.add.image(770, 550, "s2").setName('square').setInteractive());
+    this.shapes.push(this.add.image(650, 620, "s3").setName('square').setInteractive());
+    //this.s3.angle = -10;
+    this.shapes.push(this.add.image(870, 500, "s4").setName('square').setInteractive());
+    //this.s4.angle = -15;
     //tam giac
-    this.t1 = this.add.image(650, 390, "t1").setName('triangle').setInteractive();
-    this.t2 = this.add.image(550, 400, "t2").setName('triangle').setInteractive();
-    this.t2.angle = 30;
-    this.t3 = this.add.image(650, 490, "t3").setName('triangle').setInteractive();
-    this.t3.angle = -30;
-    this.t4 = this.add.image(555, 650, "t4").setName('triangle').setInteractive();
-    this.t5 = this.add.image(890, 340, "t5").setName('triangle').setInteractive();
+    this.shapes.push(this.add.image(650, 390, "t1").setName('triangle').setInteractive());
+    this.shapes.push(this.add.image(550, 400, "t2").setName('triangle').setInteractive());
+    //this.t2.angle = 30;
+    this.shapes.push(this.add.image(650, 490, "t3").setName('triangle').setInteractive());
+    //this.t3.angle = -30;
+    this.shapes.push(this.add.image(555, 650, "t4").setName('triangle').setInteractive());
+    this.shapes.push(this.add.image(890, 340, "t5").setName('triangle').setInteractive());
 
     this.canNotSeeShape();
 
@@ -191,20 +193,24 @@ class Game4_1 extends Phaser.Scene {
     setTimeout(()=>this.canSeeShape(), 6000);
 
     //kéo thả các khối
-    this.input.setDraggable(this.t1);
-    this.input.setDraggable(this.t2);
-    this.input.setDraggable(this.t3);
-    this.input.setDraggable(this.t4);
-    this.input.setDraggable(this.t5);
-    this.input.setDraggable(this.c1);
-    this.input.setDraggable(this.c2);
-    this.input.setDraggable(this.c3);
-    this.input.setDraggable(this.c4);
-    this.input.setDraggable(this.c5);
-    this.input.setDraggable(this.s1);
-    this.input.setDraggable(this.s2);
-    this.input.setDraggable(this.s3);
-    this.input.setDraggable(this.s4);
+    // this.input.setDraggable(this.t1);
+    // this.input.setDraggable(this.t2);
+    // this.input.setDraggable(this.t3);
+    // this.input.setDraggable(this.t4);
+    // this.input.setDraggable(this.t5);
+    // this.input.setDraggable(this.c1);
+    // this.input.setDraggable(this.c2);
+    // this.input.setDraggable(this.c3);
+    // this.input.setDraggable(this.c4);
+    // this.input.setDraggable(this.c5);
+    // this.input.setDraggable(this.s1);
+    // this.input.setDraggable(this.s2);
+    // this.input.setDraggable(this.s3);
+    // this.input.setDraggable(this.s4);
+
+    this.shapes.forEach(item => {
+      gameScene.input.setDraggable(item);
+    });
 
 
     var check = false;  //Kiểm tra xem có đang drag hay không
@@ -256,6 +262,8 @@ class Game4_1 extends Phaser.Scene {
         y: purpleElephantY - 30
       }];
 
+
+
       this.input.on('dragstart', function(pointer, gameObject) {
         this.children.bringToTop(gameObject);
       }, this);
@@ -282,9 +290,10 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'triangle') {
           gameScene.orangeMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-		  gameObject.input.enabled = false;
-		  
+		      gameObject.setName('inStomach');
+          gameScene.blockInput();
         } else {
+          gameScene.blockInput();
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
           gameScene.redLeftElephant.visible = true;
@@ -293,13 +302,14 @@ class Game4_1 extends Phaser.Scene {
           }, 1500);
           gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
+
       }
 
       if (elephant === 2) {
         if (gameObject.name === 'circle') {
           gameScene.purpleMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-		  gameObject.input.enabled = false;
+          gameObject.setName('inStomach');
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -309,13 +319,18 @@ class Game4_1 extends Phaser.Scene {
           }, 1500);
           gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
+        // gameScene.enableInput();
+        //setTimeout(gameScene.enableInput(),5000);
       }
+      // gameScene.blockInput();
+      // setTimeout(gameScene.enableInput(),5000);
+
 
       if(gameScene.incorrect === 3)
          gameScene.giveNotice(gameScene);
       if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
          setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
-	  
+
     });
 
     var rect1 = new Phaser.Geom.Rectangle(orangeElephantX -180, orangeElephantY -240, 350,480);
@@ -341,6 +356,8 @@ class Game4_1 extends Phaser.Scene {
         gameScene.purpleMouthOpen.visible = false;
       }
     });
+
+    this.dragTime = 0;
   }
 
   update() {
@@ -359,6 +376,8 @@ class Game4_1 extends Phaser.Scene {
           this.sleepPurpleElephant();
         }
     }
+    if(this.dragTime < 400)
+       th
   }
 
   back(elephant, gameObject, x, y) {
@@ -468,38 +487,64 @@ class Game4_1 extends Phaser.Scene {
   }
 //hiện các hình
    canSeeShape(){
-     this.t1.visible = true;
-     this.t2.visible = true;
-     this.t3.visible = true;
-     this.t4.visible = true;
-     this.t5.visible = true;
-     this.c1.visible = true;
-     this.c2.visible = true;
-     this.c3.visible = true;
-     this.c4.visible = true;
-     this.c5.visible = true;
-     this.s1.visible = true;
-     this.s2.visible = true;
-     this.s3.visible = true;
-     this.s4.visible = true;
+     // this.t1.visible = true;
+     // this.t2.visible = true;
+     // this.t3.visible = true;
+     // this.t4.visible = true;
+     // this.t5.visible = true;
+     // this.c1.visible = true;
+     // this.c2.visible = true;
+     // this.c3.visible = true;
+     // this.c4.visible = true;
+     // this.c5.visible = true;
+     // this.s1.visible = true;
+     // this.s2.visible = true;
+     // this.s3.visible = true;
+     // this.s4.visible = true;
+     this.shapes.forEach(item => {
+       item.visible = true;
+     });
    }
 //ẩn các hình
    canNotSeeShape(){
-     this.t1.visible = false;
-     this.t2.visible = false;
-     this.t3.visible = false;
-     this.t4.visible = false;
-     this.t5.visible = false;
-     this.c1.visible = false;
-     this.c2.visible = false;
-     this.c3.visible = false;
-     this.c4.visible = false;
-     this.c5.visible = false;
-     this.s1.visible = false;
-     this.s2.visible = false;
-     this.s3.visible = false;
-     this.s4.visible = false;
+     // this.t1.visible = false;
+     // this.t2.visible = false;
+     // this.t3.visible = false;
+     // this.t4.visible = false;
+     // this.t5.visible = false;
+     // this.c1.visible = false;
+     // this.c2.visible = false;
+     // this.c3.visible = false;
+     // this.c4.visible = false;
+     // this.c5.visible = false;
+     // this.s1.visible = false;
+     // this.s2.visible = false;
+     // this.s3.visible = false;
+     // this.s4.visible = false;
+     this.shapes.forEach(item => {
+       item.visible = false;
+     });
+
    }
+
+   blockInput(){
+     this.shapes.forEach(item => {
+       item.input.enabled = false;
+     });
+
+   }
+
+   enableInput(){
+     this.shapes.forEach(item => {
+       if(item.name === 'inStomach')
+       item.input.enabled = false;
+       else {
+         item.input.enabled = false;
+         setTimeout(item.input.enabled = true,5000);
+       }
+     });
+   }
+
 //hiển thị mạng
    thighTurnToBone(incorrect){
      if(incorrect === 1){
@@ -531,13 +576,14 @@ class Game4_1 extends Phaser.Scene {
      this.next.visible = true;
      this.next.setInteractive().on('pointerup',()=>gameScene.scene.restart());
    }
+
 //voi cam ngủ
   sleepOrangeElephant() {
-    this.t1.visible = false;
-    this.t2.visible = false;
-    this.t3.visible = false;
-    this.t4.visible = false;
-    this.t5.visible = false;
+    // this.t1.visible = false;
+    // this.t2.visible = false;
+    // this.t3.visible = false;
+    // this.t4.visible = false;
+    // this.t5.visible = false;
     this.orangeElephant.visible = false;
     this.orangeMouthOpen.visible = false;
     this.triangleText.visible = false;
@@ -546,11 +592,11 @@ class Game4_1 extends Phaser.Scene {
   }
 //voi tím ngủ
   sleepPurpleElephant() {
-    this.c1.visible = false;
-    this.c2.visible = false;
-    this.c3.visible = false;
-    this.c4.visible = false;
-    this.c5.visible = false;
+    // this.c1.visible = false;
+    // this.c2.visible = false;
+    // this.c3.visible = false;
+    // this.c4.visible = false;
+    // this.c5.visible = false;
     this.purpleElephant.visible = false;
     this.purpleMouthOpen.visible = false;
     this.circleText.visible = false;
