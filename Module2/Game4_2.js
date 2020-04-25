@@ -18,7 +18,7 @@ class Game4_2 extends Phaser.Scene {
     this.load.image("s3", "assets/square3.png");
     this.load.image("s4", "assets/square4.png");
     this.load.image("s5", "assets/square5.png");
-    this.load.image("bg1", "assets/initscene1.png");
+    this.load.image("initscene2", "assets/initscene2.png");
     this.load.image("blueElephant", "assets/blueElephant.png");
     this.load.image("blueElephantSleep", "assets/blueElephantSleep.png");
     this.load.image("purpleElephantSleep", "assets/purpleElephantSleep.png");
@@ -33,7 +33,7 @@ class Game4_2 extends Phaser.Scene {
 
     this.incorrect = 0;  //Đếm số lần làm sai
 
-    this.add.image(1440 / 2, 800 / 2, "bg1");
+    this.add.image(1440 / 2, 800 / 2, "initscene2");
 
     this.next = this.add.image(config.width/2, config.height/2 + 100, "next");
     this.next.visible = false;
@@ -69,7 +69,7 @@ class Game4_2 extends Phaser.Scene {
     this.redLeftElephant.visible = false;
 
     this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");
-	
+
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
@@ -139,7 +139,7 @@ class Game4_2 extends Phaser.Scene {
         },
         {
           x: blueElephantX - 8,
-          y: blueElephantY - 260,
+          y: blueElephantY - 240,
           scaleX: 0.6,
           scaleY: 0.6,
           duration: 1000
@@ -219,7 +219,7 @@ class Game4_2 extends Phaser.Scene {
           gameScene.blueMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
 		  gameObject.input.enabled = false;
-		  
+
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -234,7 +234,7 @@ class Game4_2 extends Phaser.Scene {
          gameScene.giveNotice(gameScene);
       if(gameScene.blueElephantStomach.length === 0 )
          setTimeout(()=>gameScene.scene.start("ConversionScene8"),5000);
-	  
+
     }});
 
     var rect1 = new Phaser.Geom.Rectangle(blueElephantX -180, blueElephantY -240, 350,480);
@@ -293,7 +293,7 @@ class Game4_2 extends Phaser.Scene {
         ]
       });
     }
-    
+
   }
 
   moveToStomatch(elephant, gameObject) {
@@ -319,7 +319,7 @@ class Game4_2 extends Phaser.Scene {
       });
       this.blueElephantStomach.shift();
     }
-    
+
   }
 
    canSeeShape(){
