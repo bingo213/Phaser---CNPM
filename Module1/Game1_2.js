@@ -15,7 +15,7 @@ class Game1_2 extends Phaser.Scene {
     this.load.image("carrot","assets/carrot.png");
     this.load.image("snowman","assets/snowman.png");
     this.load.image("bow","assets/bow.png");
-    this.load.image("snow_background","assets/snow background.png");
+    this.load.image("snow_background","assets/snow background.jpg");
   }
 
   create(){
@@ -37,7 +37,7 @@ class Game1_2 extends Phaser.Scene {
       color: "#1a65ac",
     });
 
-    var snow_background = this.add.image(config.width/2,config.height/2 - 8,"snow_background"); //Nền tuyết, sau khi hoàn thành và nhấ nút DONE thì mới xuất hiện
+    var snow_background = this.add.image(config.width/2,config.height/2 - 20,"snow_background"); //Nền tuyết, sau khi hoàn thành và nhấ nút DONE thì mới xuất hiện
     snow_background.visible = false;
 
     var shape = new Phaser.Geom.Circle(10,0,40);
@@ -155,7 +155,7 @@ class Game1_2 extends Phaser.Scene {
    snowman.visible = false;
    var carrot = this.add.image(530,290,"carrot"); //Mũi người tuyết
    carrot.visible = false;
-   var bow = this.add.image(shapes[11].x,shapes[11].y - 40,"bow"); //Nơ của hộp quà
+   var bow = this.add.image(shapes[12].x,shapes[12].y - 40,"bow"); //Nơ của hộp quà
    bow.visible = false;
 
 

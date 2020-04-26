@@ -14,7 +14,7 @@ class Game1_1 extends Phaser.Scene {
     this.load.image("notification","assets/notification.png");
     this.load.image("stateBar","assets/state_bar.png");
     this.load.image("next","assets/next.png");
-    this.load.image("eye","assets/eye.png");
+    this.load.image("eye1_1","assets/eye.png");
     this.load.image("beard","assets/beard.png");
     this.load.image("tree","assets/tree.png");
   }
@@ -153,7 +153,7 @@ class Game1_1 extends Phaser.Scene {
    });
 
 
-   var eye = this.add.image(shapes[0].x,shapes[0].y,"eye"); //Mắt con bướm
+   var eye = this.add.image(shapes[0].x,shapes[0].y,"eye1_1"); //Mắt con bướm
    eye.visible = false;
 
    //Hiệu ứng khi di chuột qua cọ vẽ thì cọ có màu đậm hơn, khi chuột ra khỏi vùng cọ vẽ thì cọ trở lại trạng thái ban đầu
