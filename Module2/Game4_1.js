@@ -278,11 +278,12 @@ class Game4_1 extends Phaser.Scene {
 
     this.input.on('drop', function(pointer, gameObject) {
       check = false;
-	  gameScene.blockInput();
+	  //gameScene.blockInput();
       if (elephant === 1) {
         if (gameObject.name === 'triangle') {
           gameScene.orangeMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
+		  gameObject.input.enabled = false;
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -299,6 +300,7 @@ class Game4_1 extends Phaser.Scene {
         if (gameObject.name === 'circle') {
           gameScene.purpleMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
+		  gameObject.input.enabled = false;
         } else {
           gameScene.incorrect ++;
           gameScene.thighTurnToBone(gameScene.incorrect);
@@ -314,8 +316,8 @@ class Game4_1 extends Phaser.Scene {
       if(gameScene.incorrect === 3)
          gameScene.giveNotice(gameScene);
       if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
-         setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
-      gameScene.openInput();
+         setTimeout(()=>gameScene.scene.start("ConversionScene10"),5000);
+      //gameScene.openInput();
     });
 
     var rect1 = new Phaser.Geom.Rectangle(orangeElephantX -180, orangeElephantY -240, 350,480);
