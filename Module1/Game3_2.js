@@ -15,6 +15,10 @@ class Game3_2 extends Phaser.Scene {
     this.load.image("erase","assets/erase.png");
     this.load.image("next","assets/next.png");
     this.load.image("notification2","assets/notification2.png");
+    this.load.image("eye","assets/eyes.png");
+    this.load.image("background3_2","assets/background3_2.png");
+    this.load.image("leg","assets/legBird.png");
+    this.load.image("worm","assets/worm.png");
   }
   create(){
     this.countFill = 0;        //Đếm số lượng hình chưa được tô màu
@@ -33,6 +37,9 @@ class Game3_2 extends Phaser.Scene {
 
     //Background (khung hình chữ nhật, state bar)
    this.add.image(config.width/2, config.height/2,"initscene5");
+
+   var background = this.add.image(config.width/2, config.height/2,"background3_2");
+   background.visible = false;
 
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
@@ -138,16 +145,22 @@ class Game3_2 extends Phaser.Scene {
    //Chim mẹ
    shapes[0] = new Hex(this,config.width/2 - 220, config.height/2 - 55, 100, 100); //Thân
    shapes[0].angle = -10;
+   var leg = this.add.image(config.width/2 - 220, config.height/2 + 70, "leg");
+   leg.visible = false;
    shapes[1] = new Cir(this, config.width/2 - 100, config.height/2 - 160, 70, 70); //Đầu
+   var eye1 = this.add.image(config.width/2 - 50, config.height/2 - 160,"eye");
+   eye1.visible = false;
    shapes[2] = new Tri(this, config.width/2 - 365,config.height/2 - 107, 0, 130, 48, 0, 96, 130);//Đuôi
    shapes[2].angle = -70;
    shapes[3] = new Hex(this,300,config.height/2 + 50, 55, 55);
    shapes[3].angle = -10;
    shapes[4] = new Hex(this,380,config.height/2 + 100, 30, 30);
    shapes[4].angle = 10;
-   //Tổ rơm
+   var worm = this.add.image(config.width/2 + 20, config.height/2 - 110, "worm");
+   worm.visible = false;
    shapes[5] = new Tri(this,config.width/2, config.height/2 - 110,0, 80, 32, 0, 64, 80); //Mỏ
    shapes[5].angle = 117;
+   //Tổ rơm
    shapes[15] = new Tri(this, config.width/2 + 280, config.height/2 - 33, 0, 400, 128, 0, 128, 300);
    shapes[15].angle = 73;
    shapes[16] = new Tri(this, config.width/2 + 400, config.height/2 + 60, 0, 150, 64, 0, 64, 200);
@@ -157,14 +170,20 @@ class Game3_2 extends Phaser.Scene {
    //Chim non
    shapes[6] = new Hex(this, config.width/2 + 130, config.height/2 - 71, 40, 40); //Thân
    shapes[7] = new Cir(this, config.width/2 + 130, config.height/2 - 150,42,42); //Đầu
+   var eye2 = this.add.image(config.width/2 + 110, config.height/2 - 160,"eye");
+   eye2.visible = false;
    shapes[8] = new Tri(this,config.width/2 + 84, config.height/2 - 200,0, 48, 20, 0, 40, 48); //Mỏ
    shapes[8].angle = -40;
    shapes[9] = new Cir(this, config.width/2 + 300, config.height/2 - 71, 35, 35); //Thân
    shapes[10] = new Cir(this, config.width/2 + 260, config.height/2 - 140,42,42); //Đầu
+   var eye3 = this.add.image(config.width/2 + 235, config.height/2 - 150,"eye");
+   eye3.visible = false;
    shapes[11] = new Tri(this,config.width/2 + 210, config.height/2 - 185,0, 48, 20, 0, 40, 48); //Mỏ
    shapes[11].angle = -45;
    shapes[12] = new Hex(this, config.width/2 + 390, config.height/2 - 69, 40, 40); //Thân
    shapes[13] = new Cir(this, config.width/2 + 390, config.height/2 - 148,42,42); //Đầu
+   var eye4 = this.add.image(config.width/2 + 370, config.height/2 - 158,"eye");
+   eye4.visible = false;
    shapes[14] = new Tri(this,config.width/2 + 344, config.height/2 - 198,0, 48, 20, 0, 40, 48); //Mỏ
    shapes[14].angle = -40;
 
@@ -265,7 +284,7 @@ class Game3_2 extends Phaser.Scene {
          hexagonText.visible = false;
          circleText.visible = false;
          greenRectangle.visible = false;
-         brownRectangle.visible = false;
+         blueRectangle.visible = false;
          eraseRectangle.visible = false;
          brown.visible = true;
          pink.visible = true;
@@ -275,7 +294,7 @@ class Game3_2 extends Phaser.Scene {
 
          //Khi đã tô đúng màu vào các hình được yêu cầu và nhấn DONE thì những hình đó không tô vào hay xóa đi được nữa
          shapes.forEach(item => {
-           if(item instanceof Hex || item instanceof Tri){
+           if(item instanceof Hex || item instanceof Cir){
              item.removeInteractive();
            }
          });
@@ -290,7 +309,7 @@ class Game3_2 extends Phaser.Scene {
            brown.clearTint();
          });
          brown.on('pointerup',function(){
-            color = blueColor;
+            color = brownColor;
             brownRectangle.visible = true;
             grayRectangle.visible = false;
             pinkRectangle.visible = false;
@@ -359,7 +378,13 @@ class Game3_2 extends Phaser.Scene {
            brownRectangle.visible = false;
            eraseRectangle.visible = false;
            eraseText.visible = false;
-           next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene6"));
+           eye1.visible = true;
+           eye2.visible = true;
+           eye3.visible = true;
+           eye4.visible = true;
+           leg.visible = true;
+           background.visible = true;
+           next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene5"));
          }
        }
 
