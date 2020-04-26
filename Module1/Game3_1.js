@@ -15,6 +15,8 @@ class Game3_1 extends Phaser.Scene {
     this.load.image("erase","assets/erase.png");
     this.load.image("next","assets/next.png");
     this.load.image("notification2","assets/notification2.png");
+    this.load.image("background","assets/background3_1.png");
+    this.load.image("eye","assets/eyes.png");
   }
   create(){
     this.countFill = 0;        //Đếm số lượng hình chưa được tô màu
@@ -33,6 +35,9 @@ class Game3_1 extends Phaser.Scene {
 
     //Background (khung hình chữ nhật, state bar)
    this.add.image(config.width/2, config.height/2,"initscene4");
+
+    var background = this.add.image(config.width/2, config.height/2,"background");
+    background.visible = false;
 
    var backButton = this.add.text(170, 70, 'BACK', {   //Nút BACK
       fontFamily: "Roboto Condensed",
@@ -177,6 +182,10 @@ class Game3_1 extends Phaser.Scene {
    //Mắt
    shapes[16] = new Cir(this, config.width/2 - 40, config.height/2 - 120, 25,25);
    shapes[17] = new Cir(this, config.width/2 + 40, config.height/2 - 120, 25,25);
+   var eyeLeft = this.add.image(config.width/2 - 35, config.height/2 - 125,"eye");
+   eyeLeft.visible = false;
+   var eyeRight = this.add.image(config.width/2 + 45, config.height/2 - 125,"eye");
+   eyeRight.visible = false;
    //Chân cua
    shapes[21] = new Rect(this,config.width/2-103,config.height/2+100,100,30); //Trái
    shapes[21].angle = -30;
@@ -380,6 +389,9 @@ class Game3_1 extends Phaser.Scene {
            blueRectangle.visible = false;
            eraseRectangle.visible = false;
            eraseText.visible = false;
+           eyeLeft.visible = true;
+           eyeRight.visible = true;
+           background.visible = true;
            next.setInteractive().on('pointerup',()=>gameScene.scene.start("ConversionScene6"));
          }
        }
