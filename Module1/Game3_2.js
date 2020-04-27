@@ -187,8 +187,6 @@ class Game3_2 extends Phaser.Scene {
     shapes[14] = new Tri(this, config.width / 2 + 344, config.height / 2 - 198, 0, 48, 20, 0, 40, 48); //Mỏ
     shapes[14].angle = -40;
 
-
-
     //Hiệu ứng tô màu vào hình
     shapes.forEach(element => element.setInteractive().on('pointerup', () => element.color(color)));
 
@@ -297,7 +295,6 @@ class Game3_2 extends Phaser.Scene {
           }
         });
 
-
         //Thêm hiệu ứng cho các cọ vừa xuất hiện
         brown.setInteractive(button, Phaser.Geom.Circle.Contains);
         brown.on('pointerover', function() {
@@ -381,6 +378,7 @@ class Game3_2 extends Phaser.Scene {
           eye3.visible = true;
           eye4.visible = true;
           leg.visible = true;
+          worm.visible = true;
           background.visible = true;
           next.setInteractive().on('pointerup', () => gameScene.scene.start("ConversionScene5"));
         }
