@@ -64,7 +64,7 @@ class Game5_1 extends Phaser.Scene {
     this.blueMouthOpen.visible = false;
     this.blueElephantSleep = this.add.image(blueElephantX, blueElephantY, "blueElephantSleep");
     this.blueElephantSleep.visible = false;
-    this.redLeftElephant = this.add.image(blueElephantX, blueElephantY, "redLeftElephant");
+    this.redLeftElephant = this.add.image(blueElephantX, blueElephantY+20, "redLeftElephant");
     this.redLeftElephant.visible = false;
 
     this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");

@@ -316,7 +316,7 @@ class Game4_1 extends Phaser.Scene {
       if(gameScene.incorrect === 3)
          gameScene.giveNotice(gameScene);
       if(gameScene.orangeElephantStomach.length === 0 && gameScene.purpleElephantStomach.length === 0)
-         setTimeout(()=>gameScene.scene.start("ConversionScene10"),5000);
+         setTimeout(()=>gameScene.scene.start("ConversionScene7"),5000);
       //gameScene.openInput();
     });
 

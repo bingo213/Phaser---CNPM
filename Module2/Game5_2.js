@@ -111,37 +111,23 @@ class Game5_2 extends Phaser.Scene {
     //vuong
     this.s1 = this.add.image(750, 270, "s1").setName('square').setInteractive();
     this.s1.angle = 38;
-	this.s1.scaleX = 0.6;
-	this.s1.scaleY = 0.6;
     this.s2 = this.add.image(770, 550, "s2").setName('square').setInteractive();
-    this.s2.scaleX = 0.6;
-	this.s2.scaleY = 0.6;
 	this.s3 = this.add.image(650, 620, "s3").setName('square').setInteractive();
     this.s3.angle = -10;
-	this.s3.scaleX = 0.6;
-	this.s3.scaleY = 0.6;
     this.s4 = this.add.image(870, 500, "s4").setName('square').setInteractive();
     this.s4.angle = -15;
-	this.s4.scaleX = 0.6;
-	this.s4.scaleY = 0.6;
 	this.s5 = this.add.image(890,340,"s5").setName('square').setInteractive();
-    this.s5.scaleX = 0.6;
-	this.s5.scaleY = 0.6;
+    
 	//tam giac
     this.t1 = this.add.image(650, 390, "t1").setName('square').setInteractive();
-	this.t1.scaleX = 0.6;
-	this.t1.scaleY = 0.6;
+	
     this.t2 = this.add.image(550, 400, "t2").setName('square').setInteractive();
     this.t2.angle = 30;
-	this.t2.scaleX = 0.6;
-	this.t2.scaleY = 0.6;
 	//tron
     this.c1 = this.add.image(650, 490, "c1").setName('circle').setInteractive();
-	this.c1.scaleX = 0.6;
-	this.c1.scaleY = 0.6;
+	
     this.c2 = this.add.image(555, 650, "c2").setName('circle').setInteractive();
-	this.c2.scaleX = 0.6;
-	this.c2.scaleY = 0.6;
+	
     this.canNotSeeShape();
 
     this.squareInBoard = new Rect(this, orangeElephantX + 70, orangeElephantY - 195,60,60);
