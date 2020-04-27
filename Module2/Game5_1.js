@@ -49,12 +49,12 @@ class Game5_1 extends Phaser.Scene {
 
     this.sleepTime1 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi lam ngủ
 
-    const blueElephantX = 330;
-    const blueElephantY = 390;
+    const blueElephantX = 360;
+    const blueElephantY = 430;
     this.mouthblueX = 230;
     this.mouthblueY = 330;
 
-    const purpleElephantX = 1100;
+    const purpleElephantX = 1070;
     const purpleElephantY = 430;
     this.mouthPurpleX = 1220;
     this.mouthPurpleY = 330;
@@ -64,7 +64,7 @@ class Game5_1 extends Phaser.Scene {
     this.blueMouthOpen.visible = false;
     this.blueElephantSleep = this.add.image(blueElephantX, blueElephantY, "blueElephantSleep");
     this.blueElephantSleep.visible = false;
-    this.redLeftElephant = this.add.image(blueElephantX, blueElephantY + 20, "redLeftElephant");
+    this.redLeftElephant = this.add.image(blueElephantX - 5, blueElephantY, "redLeftElephant");
     this.redLeftElephant.visible = false;
 
     this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");
@@ -114,13 +114,10 @@ class Game5_1 extends Phaser.Scene {
     this.t2 = this.add.image(550, 400, "t2").setName('triangle').setInteractive();
     this.t2.angle = 30;
 
-    //t5.setScale(0.8);
     this.canNotSeeShape();
 
-    this.hexagonInBoard = new Hex(this, blueElephantX + 70, blueElephantY - 165, 30, 30, 0x8729e5);
+    this.hexagonInBoard = new Hex(this, blueElephantX + 20, blueElephantY - 170, 30, 30, 0x8729e5);
     this.hexagonInBoard.fillColor = 0x8729e5;
-    // this.hexagonInBoard.scaleX = 0.5;
-    // this.hexagonInBoard.scaleY = 0.5;
 
     this.hexagonText = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat hexagons', {
       fontFamily: "Roboto Condensed",
@@ -138,7 +135,7 @@ class Game5_1 extends Phaser.Scene {
           duration: 1500
         },
         {
-          x: blueElephantX - 14,
+          x: blueElephantX - 60,
           y: blueElephantY - 230,
           scaleX: 0.6,
           scaleY: 0.6,

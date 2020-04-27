@@ -54,12 +54,12 @@ class Game5_2 extends Phaser.Scene {
     this.sleepTime1 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi cam ngủ
     this.sleepTime2 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi tím ngủ
 
-    const orangeElephantX = 330;
+    const orangeElephantX = 360;
     const orangeElephantY = 430;
     this.mouthOrangeX = 230;
     this.mouthOrangeY = 330;
 
-    const purpleElephantX = 1100;
+    const purpleElephantX = 1070;
     const purpleElephantY = 430;
     this.mouthPurpleX = 1220;
     this.mouthPurpleY = 330;
@@ -77,7 +77,7 @@ class Game5_2 extends Phaser.Scene {
     this.purpleMouthOpen.visible = false;
     this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");
     this.purpleElephantSleep.visible = false;
-    this.redRightElephant = this.add.image(purpleElephantX, purpleElephantY, "redRightElephant");
+    this.redRightElephant = this.add.image(purpleElephantX + 5, purpleElephantY, "redRightElephant");
     this.redRightElephant.visible = false;
 
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
@@ -130,11 +130,11 @@ class Game5_2 extends Phaser.Scene {
 
     this.canNotSeeShape();
 
-    this.squareInBoard = new Rect(this, orangeElephantX + 70, orangeElephantY - 195, 60, 60);
+    this.squareInBoard = new Rect(this, orangeElephantX + 20, orangeElephantY - 170, 100, 100);
     this.squareInBoard.fillColor = 0x8729e5;
     this.squareInBoard.scaleX = 0.5;
     this.squareInBoard.scaleY = 0.5;
-    this.hexagonInBoard = new Hex(this, purpleElephantX - 70, purpleElephantY - 195, 36, 36);
+    this.hexagonInBoard = new Hex(this, purpleElephantX - 20, purpleElephantY - 170, 36, 36);
     this.hexagonInBoard.fillColor = 0xe7ea0e;
 
     this.squareText = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat squares', {
@@ -153,8 +153,8 @@ class Game5_2 extends Phaser.Scene {
           duration: 1500
         },
         {
-          x: orangeElephantX,
-          y: orangeElephantY - 260,
+          x: orangeElephantX - 50,
+          y: orangeElephantY - 230,
           scaleX: 0.6,
           scaleY: 0.6,
           duration: 1000
@@ -180,8 +180,8 @@ class Game5_2 extends Phaser.Scene {
             duration: 1500
           },
           {
-            x: purpleElephantX - 156,
-            y: purpleElephantY - 260,
+            x: purpleElephantX - 110,
+            y: purpleElephantY - 230,
             scaleX: 0.6,
             scaleY: 0.6,
             duration: 1000

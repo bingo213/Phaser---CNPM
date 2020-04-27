@@ -59,12 +59,12 @@ class Game4_3 extends Phaser.Scene {
     this.sleepTime1 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi cam ngủ
     this.sleepTime2 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi tím ngủ
 
-    const greenElephantX = 330;
-    const greenElephantY = 410;
+    const greenElephantX = 360;
+    const greenElephantY = 430;
     this.mouthgreenX = 230;
     this.mouthgreenY = 310;
 
-    const purpleElephantX = 1100;
+    const purpleElephantX = 1070;
     const purpleElephantY = 430;
     this.mouthPurpleX = 1220;
     this.mouthPurpleY = 330;
@@ -134,11 +134,11 @@ class Game4_3 extends Phaser.Scene {
 
     this.canNotSeeShape();
 
-    this.triangleInBoard = new Tri(this, greenElephantX + 70, greenElephantY - 195);
+    this.triangleInBoard = new Tri(this, greenElephantX + 20, greenElephantY - 170);
     this.triangleInBoard.fillColor = 0x8729e5;
     this.triangleInBoard.scaleX = 0.5;
     this.triangleInBoard.scaleY = 0.5;
-    this.squareInBoard = new Rect(this, purpleElephantX - 70, purpleElephantY - 195, 46, 46);
+    this.squareInBoard = new Rect(this, purpleElephantX - 20, purpleElephantY - 170, 48, 48);
     this.squareInBoard.fillColor = 0xe7ea0e;
 
     this.triangleText = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat triangles', {
@@ -157,8 +157,8 @@ class Game4_3 extends Phaser.Scene {
           duration: 1500
         },
         {
-          x: greenElephantX - 18,
-          y: greenElephantY - 260,
+          x: greenElephantX - 50,
+          y: greenElephantY - 230,
           scaleX: 0.6,
           scaleY: 0.6,
           duration: 1000
@@ -184,8 +184,8 @@ class Game4_3 extends Phaser.Scene {
             duration: 1500
           },
           {
-            x: purpleElephantX - 145,
-            y: purpleElephantY - 260,
+            x: purpleElephantX - 100,
+            y: purpleElephantY - 230,
             scaleX: 0.6,
             scaleY: 0.6,
             duration: 1000

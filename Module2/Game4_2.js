@@ -49,13 +49,13 @@ class Game4_2 extends Phaser.Scene {
 
     this.sleepTime1 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi lam ngủ
 
-    const blueElephantX = 330;
-    const blueElephantY = 390;
+    const blueElephantX = 360;
+    const blueElephantY = 430;
     this.mouthblueX = 230;
     this.mouthblueY = 330;
 
-    const purpleElephantX = 1100;
-    const purpleElephantY = 420;
+    const purpleElephantX = 1070;
+    const purpleElephantY = 430;
     this.mouthPurpleX = 1220;
     this.mouthPurpleY = 330;
 
@@ -116,7 +116,7 @@ class Game4_2 extends Phaser.Scene {
     //t5.setScale(0.8);
     this.canNotSeeShape();
 
-    this.triangleInBoard = new Tri(this, blueElephantX + 70, blueElephantY - 165);
+    this.triangleInBoard = new Tri(this, blueElephantX + 20, blueElephantY - 170);
     this.triangleInBoard.fillColor = 0x8729e5;
     this.triangleInBoard.scaleX = 0.5;
     this.triangleInBoard.scaleY = 0.5;
@@ -137,7 +137,7 @@ class Game4_2 extends Phaser.Scene {
           duration: 1500
         },
         {
-          x: blueElephantX - 8,
+          x: blueElephantX - 50,
           y: blueElephantY - 230,
           scaleX: 0.6,
           scaleY: 0.6,
