@@ -23,18 +23,18 @@ class Game4_2 extends Phaser.Scene {
     this.load.image("purpleElephantSleep", "assets/purpleElephantSleep.png");
     this.load.image("blueMouthOpen", "assets/blueMouthOpen.png");
     this.load.image("redLeftElephant", "assets/redLeftElephant.png");
-    this.load.image("bone","assets/bone.png");
-    this.load.image("thigh","assets/thigh.png");
+    this.load.image("bone", "assets/bone.png");
+    this.load.image("thigh", "assets/thigh.png");
     this.load.image("next", "assets/next.png");
   }
   create() {
     const gameScene = this.scene.get('Game4_2');
 
-    this.incorrect = 0;  //Đếm số lần làm sai
+    this.incorrect = 0; //Đếm số lần làm sai
 
     this.add.image(1440 / 2, 800 / 2, "bg2");
 
-    this.next = this.add.image(config.width/2, config.height/2 + 100, "next");
+    this.next = this.add.image(config.width / 2, config.height / 2 + 100, "next");
     this.next.visible = false;
 
     this.thigh1 = this.add.image(1120, 130, "thigh");
@@ -47,7 +47,7 @@ class Game4_2 extends Phaser.Scene {
     this.bone2.visible = false;
     this.bone3.visible = false;
 
-    this.sleepTime1 = 0;  //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi lam ngủ
+    this.sleepTime1 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi lam ngủ
 
     const blueElephantX = 330;
     const blueElephantY = 390;
@@ -55,7 +55,7 @@ class Game4_2 extends Phaser.Scene {
     this.mouthblueY = 330;
 
     const purpleElephantX = 1100;
-    const purpleElephantY = 430;
+    const purpleElephantY = 420;
     this.mouthPurpleX = 1220;
     this.mouthPurpleY = 330;
 
@@ -68,7 +68,7 @@ class Game4_2 extends Phaser.Scene {
     this.redLeftElephant.visible = false;
 
     this.purpleElephantSleep = this.add.image(purpleElephantX, purpleElephantY, "purpleElephantSleep");
-	
+
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
@@ -94,7 +94,7 @@ class Game4_2 extends Phaser.Scene {
     //tron
     this.c1 = this.add.image(555, 640, "c1").setName('circle').setInteractive();
     this.c2 = this.add.image(770, 400, "c2").setName('circle').setInteractive();
-	//lục giác 
+    //lục giác
     this.h1 = this.add.image(890, 340, "h1").setName('hexagon').setInteractive();
     this.h2 = this.add.image(750, 640, "h2").setName('hexagon').setInteractive();
     //vuong
@@ -113,7 +113,7 @@ class Game4_2 extends Phaser.Scene {
     this.t3.angle = -30;
     this.t4 = this.add.image(600, 300, "t4").setName('triangle').setInteractive();
     this.t5 = this.add.image(700, 270, "t5").setName('triangle').setInteractive();
-	//t5.setScale(0.8);
+    //t5.setScale(0.8);
     this.canNotSeeShape();
 
     this.triangleInBoard = new Tri(this, blueElephantX + 70, blueElephantY - 165);
@@ -121,7 +121,7 @@ class Game4_2 extends Phaser.Scene {
     this.triangleInBoard.scaleX = 0.5;
     this.triangleInBoard.scaleY = 0.5;
 
-    this.triangleText = this.add.text(config.width/2 - 10, config.height/2 	, 'I eat triangles', {
+    this.triangleText = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat triangles', {
       fontFamily: "Roboto Condensed",
       fontSize: 50,
       color: "#000",
@@ -146,7 +146,7 @@ class Game4_2 extends Phaser.Scene {
       ]
     });
 
-    setTimeout(()=>this.canSeeShape(), 6000);
+    setTimeout(() => this.canSeeShape(), 6000);
 
     //kéo thả các khối
     this.input.setDraggable(this.t1);
@@ -164,14 +164,14 @@ class Game4_2 extends Phaser.Scene {
     this.input.setDraggable(this.s4);
 
 
-    var check = false;  //Kiểm tra xem có đang drag hay không
+    var check = false; //Kiểm tra xem có đang drag hay không
 
     //Drop zone
     var zone1 = this.add.zone(blueElephantX, blueElephantY, 350, 480).setRectangleDropZone(350, 480);
 
     //Vị trí các hình khi vào bụng voi lam
     this.blueElephantStomach = [{
-        x: blueElephantX -50,
+        x: blueElephantX - 50,
         y: blueElephantY + 180
       },
       {
@@ -189,11 +189,12 @@ class Game4_2 extends Phaser.Scene {
       {
         x: blueElephantX + 10,
         y: blueElephantY
-      }];
+      }
+    ];
 
-      this.input.on('dragstart', function(pointer, gameObject) {
-        this.children.bringToTop(gameObject);
-      }, this);
+    this.input.on('dragstart', function(pointer, gameObject) {
+      this.children.bringToTop(gameObject);
+    }, this);
 
     this.input.on('drag', function(pointer, gameObject, dragX, dragY) {
       check = true;
@@ -216,10 +217,10 @@ class Game4_2 extends Phaser.Scene {
         if (gameObject.name === 'triangle') {
           gameScene.blueMouthOpen.visible = true;
           gameScene.moveToStomatch(elephant, gameObject);
-		  gameObject.input.enabled = false;
-		  
+          gameObject.input.enabled = false;
+
         } else {
-          gameScene.incorrect ++;
+          gameScene.incorrect++;
           gameScene.thighTurnToBone(gameScene.incorrect);
           gameScene.redLeftElephant.visible = true;
           setTimeout(function() {
@@ -228,14 +229,15 @@ class Game4_2 extends Phaser.Scene {
           gameScene.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
         }
 
-      if(gameScene.incorrect === 3)
-         gameScene.giveNotice(gameScene);
-      if(gameScene.blueElephantStomach.length === 0 )
-         setTimeout(()=>gameScene.scene.start("ConversionScene8"),5000);
-	  
-    }});
+        if (gameScene.incorrect === 3)
+          gameScene.giveNotice(gameScene);
+        if (gameScene.blueElephantStomach.length === 0)
+          setTimeout(() => gameScene.scene.start("ConversionScene8"), 5000);
 
-    var rect1 = new Phaser.Geom.Rectangle(blueElephantX -180, blueElephantY -240, 350,480);
+      }
+    });
+
+    var rect1 = new Phaser.Geom.Rectangle(blueElephantX - 180, blueElephantY - 240, 350, 480);
 
     var elephant = 0;
     this.input.on('pointermove', function(pointer) {
@@ -254,12 +256,12 @@ class Game4_2 extends Phaser.Scene {
   update() {
     const gameScene = this.scene.get('Game4_2');
     if (this.blueElephantStomach.length === 0) {
-      if(this.sleepTime1 < 150)
+      if (this.sleepTime1 < 150)
         this.sleepTime1++;
       else {
-          this.sleepblueElephant();
-        }
+        this.sleepblueElephant();
       }
+    }
   }
 
   back(elephant, gameObject, x, y) {
@@ -291,7 +293,7 @@ class Game4_2 extends Phaser.Scene {
         ]
       });
     }
-    
+
   }
 
   moveToStomatch(elephant, gameObject) {
@@ -317,71 +319,69 @@ class Game4_2 extends Phaser.Scene {
       });
       this.blueElephantStomach.shift();
     }
-    
+
   }
 
-   canSeeShape(){
-     this.t1.visible = true;
-     this.t2.visible = true;
-     this.t3.visible = true;
-     this.t4.visible = true;
-     this.t5.visible = true;
-     this.c1.visible = true;
-     this.c2.visible = true;
-     this.h1.visible = true;
-     this.h2.visible = true;
-     this.s1.visible = true;
-     this.s2.visible = true;
-     this.s3.visible = true;
-     this.s4.visible = true;
-   }
+  canSeeShape() {
+    this.t1.visible = true;
+    this.t2.visible = true;
+    this.t3.visible = true;
+    this.t4.visible = true;
+    this.t5.visible = true;
+    this.c1.visible = true;
+    this.c2.visible = true;
+    this.h1.visible = true;
+    this.h2.visible = true;
+    this.s1.visible = true;
+    this.s2.visible = true;
+    this.s3.visible = true;
+    this.s4.visible = true;
+  }
 
-   canNotSeeShape(){
-     this.t1.visible = false;
-     this.t2.visible = false;
-     this.t3.visible = false;
-     this.t4.visible = false;
-     this.t5.visible = false;
-     this.c1.visible = false;
-     this.c2.visible = false;
-     this.h1.visible = false;
-     this.h2.visible = false;
-     this.s1.visible = false;
-     this.s2.visible = false;
-     this.s3.visible = false;
-     this.s4.visible = false;
-   }
+  canNotSeeShape() {
+    this.t1.visible = false;
+    this.t2.visible = false;
+    this.t3.visible = false;
+    this.t4.visible = false;
+    this.t5.visible = false;
+    this.c1.visible = false;
+    this.c2.visible = false;
+    this.h1.visible = false;
+    this.h2.visible = false;
+    this.s1.visible = false;
+    this.s2.visible = false;
+    this.s3.visible = false;
+    this.s4.visible = false;
+  }
 
-   thighTurnToBone(incorrect){
-     if(incorrect === 1){
-       this.thigh1.visible = false;
-       this.bone1.visible = true;
-     }
-     else if (incorrect === 2){
-       this.thigh2.visible = false;
-       this.bone2.visible = true;
-     }
-     else{
-       this.thigh3.visible = false;
-       this.bone3.visible = true;
-     }
-   }
+  thighTurnToBone(incorrect) {
+    if (incorrect === 1) {
+      this.thigh1.visible = false;
+      this.bone1.visible = true;
+    } else if (incorrect === 2) {
+      this.thigh2.visible = false;
+      this.bone2.visible = true;
+    } else {
+      this.thigh3.visible = false;
+      this.bone3.visible = true;
+    }
+  }
 
-   giveNotice(gameScene){
-     this.canNotSeeShape();
-     this.add.text(config.width/2 - 190, config.height/2 - 50, 'Too many mistakes!', {
-       fontFamily: "Roboto Condensed",
-       fontSize: 50,
-       color: "#000",
-     });
-     this.add.text(config.width/2 - 110, config.height/2, 'Try again!', {
-       fontFamily: "Roboto Condensed",
-       fontSize: 50,
-       color: "#000",
-     });
-     this.next.visible = true;
-     this.next.setInteractive().on('pointerup',()=>gameScene.scene.restart());
-   }
+  giveNotice(gameScene) {
+    this.canNotSeeShape();
+    this.add.text(config.width / 2 - 190, config.height / 2 - 50, 'Too many mistakes!', {
+      fontFamily: "Roboto Condensed",
+      fontSize: 50,
+      color: "#000",
+    });
+    this.add.text(config.width / 2 - 110, config.height / 2, 'Try again!', {
+      fontFamily: "Roboto Condensed",
+      fontSize: 50,
+      color: "#000",
+    });
+    this.next.visible = true;
+    this.next.setInteractive().on('pointerup', () => gameScene.scene.restart());
+  }
 
   sleepblueElephant() {
     this.t1.visible = false;
@@ -397,4 +397,3 @@ class Game4_2 extends Phaser.Scene {
   }
 
 }
-  

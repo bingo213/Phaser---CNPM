@@ -8,7 +8,7 @@ var config = {
     Game2_1, ConversionScene4, Game2_2, ConversionScene5,
     Game3_1, ConversionScene6, Game3_2,
     Game4_1, ConversionScene7, Game4_2, ConversionScene8, Game4_3,
-    Game5_1, ConversionScene9, Game5_2,ConversionScene10
+    Game5_1, ConversionScene9, Game5_2, ConversionScene10
   ],
   pixelArt: true
 };

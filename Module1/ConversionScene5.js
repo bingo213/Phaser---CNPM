@@ -3,25 +3,24 @@ class ConversionScene5 extends Phaser.Scene { //Sau khi chạy thì 2 quả bo�
     super("ConversionScene5");
   }
 
-  preload(){
+  preload() {
     this.load.image("conversionScene", "assets/conversionScene.png");
     this.load.image("ball", "assets/ball.png");
     this.load.image("load", "assets/load.png");
   }
 
-  create(){
-    this.add.image(config.width/2, config.height/2,"conversionScene");
-    this.loading = this.add.image(config.width/2, config.height/2,"load");
-    this.ball_1 = this.add.image(481,74,"ball");
-    var ball_2 = this.add.image(965,74,"ball");
+  create() {
+    this.add.image(config.width / 2, config.height / 2, "conversionScene");
+    this.loading = this.add.image(config.width / 2, config.height / 2, "load");
+    this.ball_1 = this.add.image(481, 74, "ball");
+    var ball_2 = this.add.image(965, 74, "ball");
   }
 
-  update(){
-    if(this.ball_1.x < 935){
-        this.ball_1.x += 3;       //Quả bóng di chuyển về bên phải
-        this.loading.angle += 3;  //Xoay nút loading tạo hiệu ứng loading...
-      }
-    else {
+  update() {
+    if (this.ball_1.x < 935) {
+      this.ball_1.x += 3; //Quả bóng di chuyển về bên phải
+      this.loading.angle += 3; //Xoay nút loading tạo hiệu ứng loading...
+    } else {
       this.scene.start("RateScene");
     }
   }
