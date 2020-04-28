@@ -3,7 +3,7 @@ var config = {
   width: 1440,
   height: 800,
   backgroundColor: 0xffffff,
-  scene: [startScene, RateScene,
+  scene: [StartScene, RateScene,
     Game1_1, ConversionScene1, Game1_2, ConversionScene2, Game1_3, ConversionScene3,
     Game2_1, ConversionScene4, Game2_2, ConversionScene5,
     Game3_1, ConversionScene6, Game3_2,
