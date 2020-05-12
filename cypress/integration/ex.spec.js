@@ -1,22 +1,47 @@
-describe('My First Test',function(){
-	it('Does not do much', function(){
-		expect(true).to.equal(true)
-	})
-})	
 describe('outline',function(){
-	it('outline', function(){
+	before(() => {
 		cy.viewport(1440,800)
-		
-		cy.visit('http://localhost/a/Index.html');
-		cy.get('body').click(460,310);
-		//cy.contains('Color the shapes')
-		//cy.wait(1000);
-		
+		cy.visit('https://bingo213.github.io/Phaser---CNPM/');
+		cy.wait(1000);
+	})
+	it('Visit Game1', function(){
+		cy.get('body').click(460, 310);
+		cy.wait(2000);
+
+		//click BACK button
+		cy.get('body').click(170, 70);
+		cy.wait(2000);
+	})
+	it('Visit Game2', function(){
+		cy.get('body').click(740, 310);
+		cy.wait(2000);
+
+		//click BACK button
+		cy.get('body').click(170, 70);
+		cy.wait(2000);
+	})
+	it('Visit Game3', function(){
+		cy.get('body').click(1020, 310);
+		cy.wait(2000);
+
+		//click BACK button
+		cy.get('body').click(170, 70);
+		cy.wait(2000);
+	})
+	it('Visit Game4', function(){
+		cy.get('body').click(1300, 310);
+		cy.wait(2000);
+
+		//click BACK button
+		cy.get('body').click(170, 70);
+		cy.wait(2000);
+	})
+	it('Visit Game5', function(){
+		cy.get('body').click(460, 570);
+		cy.wait(2000);
+
+		//click BACK button
+		cy.get('body').click(170, 70);
+		cy.wait(2000);
 	})
 })
-/*describe('My First Test', function() {
-  it('finds the content "game"', function() {
-    cy.visit('http://localhost/a/Index.html') 
-    cy.contains('startGame') // kiểm tra xem trên trang có từ `hype` nào không
-  })
-})*/
