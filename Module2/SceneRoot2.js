@@ -1,29 +1,12 @@
 class SceneRoot2 extends Phaser.Scene {
   preload() {
-    this.load.image("t1", "assets/triangle1.png");
-    this.load.image("t2", "assets/triangle2.png");
-    this.load.image("t3", "assets/triangle3.png");
-    this.load.image("t4", "assets/triangle4.png");
-    this.load.image("t5", "assets/triangle5.png");
-    this.load.image("h1", "assets/hexagon1.png");
-    this.load.image("h2", "assets/hexagon2.png");
-    this.load.image("h3", "assets/hexagon3.png");
-    this.load.image("h4", "assets/hexagon4.png");
-    this.load.image("h5", "assets/hexagon5.png");
-    this.load.image("c1", "assets/circle1.png");
-    this.load.image("c2", "assets/circle2.png");
-    this.load.image("c3", "assets/circle3.png");
-    this.load.image("c4", "assets/circle4.png");
-    this.load.image("c5", "assets/circle5.png");
-    this.load.image("s1", "assets/square1.png");
-    this.load.image("s2", "assets/square2.png");
-    this.load.image("s3", "assets/square3.png");
-    this.load.image("s4", "assets/square4.png");
-    this.load.image("s5", "assets/square5.png");
-
-    this.load.image("bg1", "assets/initscene1.png");
-    this.load.image("bg2", "assets/initscene2.png")
-    this.load.image("bg3", "assets/initscene3.png");
+    for(var i = 1; i <= 5; i++){
+      this.load.image("t"+i, "assets/triangle"+i+".png");
+      this.load.image("c"+i, "assets/circle"+i+".png");
+      this.load.image("s"+i, "assets/square"+i+".png");
+      this.load.image("h"+i, "assets/hexagon"+i+".png");
+      this.load.image("bg"+i, "assets/initscene"+i+".png");
+    }
 
     this.load.image("greenElephant", "assets/greenElephant.png");
     this.load.image("greenMouthOpen", "assets/greenMouthOpen.png");
@@ -61,6 +44,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.addShapesInBoard();
     this.requireSetUp(this.amount, gameScene);
     this.setDraggable();
+
     this.input.on('dragstart', function(pointer, gameObject) {
       this.children.bringToTop(gameObject);
     }, this);
@@ -170,7 +154,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.sleepTime2 = 0; //Biến sleepTime dùng trong hàm update(), set thời gian trước khi voi tím ngủ
 
     this.leftElephantStomach = [{
-        x: module2Setting.elephantLeftX - 50,
+        x: module2Setting.elephantLeftX - 100,
         y: module2Setting.elephantLeftY + 180
       },
       {
@@ -179,20 +163,20 @@ class SceneRoot2 extends Phaser.Scene {
       },
       {
         x: module2Setting.elephantLeftX + 50,
-        y: module2Setting.elephantLeftY + 80
+        y: module2Setting.elephantLeftY + 100
+      },
+      {
+        x: module2Setting.elephantLeftX - 100,
+        y: module2Setting.elephantLeftY + 100
       },
       {
         x: module2Setting.elephantLeftX - 50,
-        y: module2Setting.elephantLeftY + 80
-      },
-      {
-        x: module2Setting.elephantLeftX + 10,
-        y: module2Setting.elephantLeftY
+        y: module2Setting.elephantLeftY + 20
       }
     ];
     //Vị trí các hình khi vào bụng voi tím
     this.rightElephantStomach = [{
-        x: module2Setting.elephantRightX + 50,
+        x: module2Setting.elephantRightX + 100,
         y: module2Setting.elephantRightY + 180
       },
       {
@@ -200,16 +184,16 @@ class SceneRoot2 extends Phaser.Scene {
         y: module2Setting.elephantRightY + 180
       },
       {
-        x: module2Setting.elephantRightX + 50,
-        y: module2Setting.elephantRightY + 80
+        x: module2Setting.elephantRightX + 100,
+        y: module2Setting.elephantRightY + 100
       },
       {
         x: module2Setting.elephantRightX - 50,
-        y: module2Setting.elephantRightY + 80
+        y: module2Setting.elephantRightY + 100
       },
       {
-        x: module2Setting.elephantRightX - 10,
-        y: module2Setting.elephantRightY - 30
+        x: module2Setting.elephantRightX + 50,
+        y: module2Setting.elephantRightY + 20
       }
     ];
 
@@ -507,7 +491,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.next.visible = true;
     this.next.setInteractive().on('pointerup', () => gameScene.scene.restart());
   }
-  //voi cam ngủ
+  //voi bên trái ngủ
   sleepLeftElephant() {
   for(var i = 0; i < this.shapes.length; i++){
     if(this.shapes[i].image.name === this.shapeLeftName){
@@ -520,7 +504,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.shapeLeft.visible = false;
     this.leftElephant[2].visible = true;
   }
-  //voi tím ngủ
+  //voi bên phải ngủ
   sleepRightElephant() {
     for(var i = 0; i < this.shapes.length; i++){
       if(this.shapes[i].image.name === this.shapeRightName){

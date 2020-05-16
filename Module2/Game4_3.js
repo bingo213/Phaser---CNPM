@@ -20,11 +20,11 @@ class Game4_3 extends SceneRoot2 {
   }
   addShapesInBoard() {
     this.shapeLeft = new Tri(this, module2Setting.elephantLeftX + 20, module2Setting.elephantLeftY - 170);
-    this.shapeLeft.fillColor = 0x8729e5;
+    this.shapeLeft.fillColor = 0x48C9B0;
     this.shapeLeft.scaleX = 0.5;
     this.shapeLeft.scaleY = 0.5;
     this.shapeRight = new Rect(this, module2Setting.elephantRightX - 20, module2Setting.elephantRightY - 170, 48, 48);
-    this.shapeRight.fillColor = 0xe7ea0e;
+    this.shapeRight.fillColor = 0xFF8F00;
   }
 
   addShapes() {
