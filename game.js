@@ -12,6 +12,11 @@ var config = {
   ],
   pixelArt: true
 };
+var module1Setting = {
+  brushY: 580,
+  eraseX1: 280,
+  eraseX2: 1085
+}
 
 var module2Setting = {
   textStartX: config.width / 2 - 10,
