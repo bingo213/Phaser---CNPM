@@ -9,13 +9,15 @@ var config = {
     Game3_1, ConversionScene6, Game3_2,
     Game4_1, ConversionScene7, Game4_2, ConversionScene8, Game4_3,
     Game5_1, ConversionScene9, Game5_2, ConversionScene10
-  ],
-  pixelArt: true
+  ]
 };
 var module1Setting = {
   brushY: 580,
   eraseX1: 280,
-  eraseX2: 1085
+  eraseX2: 1085,
+  extraBrushX: [245, 445, 645, 845], //Tọa độ x của cọ khi có 4 cọ (tọa độ x của cọ phụ)
+  brushX1: [545, 840, 1112], //Tọa độ x của cọ khi có 3 cọ
+  brushX2: [245, 640] //Tọa độ x của cọ khi có 2 cọ
 }
 
 var module2Setting = {

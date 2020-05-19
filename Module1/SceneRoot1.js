@@ -48,11 +48,12 @@ class SceneRoot1 extends Phaser.Scene {
   }
 
   create() {
-   this.setUp();
+   const gameScene = this.scene.get(this.name);
+   this.setUp(gameScene);
    this.shapes = [];
    this.addShapes();
 
-   const gameScene = this.scene.get(this.name);
+
 
    this.countColor = 0;
    this.shapes.forEach(item => {
@@ -101,7 +102,7 @@ class SceneRoot1 extends Phaser.Scene {
     });
   }
 
-  setUp(){
+  setUp(gameScene){
     this.countFill = 0; //Đếm số lượng hình chưa được tô màu
     this.countFailCorlor = 0; //Đếm số lượng hình tô sai màu
 
@@ -110,21 +111,21 @@ class SceneRoot1 extends Phaser.Scene {
     //Background (khung hình chữ nhật, state bar)
     this.add.image(config.width / 2, config.height / 2, this.initscene);
 
-    var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
+    this.backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
       color: "#1a65ac",
     });
 
     var shape = new Phaser.Geom.Circle(10, 0, 40);
-    backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
-    backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-      backButton.setTint(0x0000ff);
+    this.backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
+    this.backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
+      this.setTint(0x0000ff);
     });
-    backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
-      backButton.clearTint();
+    this.backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
+      this.clearTint();
     });
-    backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
+    this.backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
 
     this.title = this.add.text(this.textTitleX, this.textTitleY, this.textTitle, { //Thêm tiêu đề
       fontFamily: "Roboto Condensed",
@@ -134,9 +135,6 @@ class SceneRoot1 extends Phaser.Scene {
 
     this.next = this.add.image(701, 580, "next");
     this.next.visible = false;
-
-    this.brushX1 = [545, 840, 1112];
-    this.brushX2 = [245, 640];
   }
   addShapes(){}
   addErase(){
@@ -182,8 +180,19 @@ class SceneRoot1 extends Phaser.Scene {
     });
   }
   addRequiredBrush(){
+    for(var i = 0; i < this.requireBrush.length; i++){
+      this.requireBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
+      this.requireBrush[i].colorRect.fillColor = this.requireBrush[i].hexColor;
+      this.requireBrush[i].colorRect.visible = false;
+    }
   }
-  addExtraBrush(){}
+  addExtraBrush(){
+    for(var i = 0; i < this.extraBrush.length; i++){
+      this.extraBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
+      this.extraBrush[i].colorRect.fillColor = this.extraBrush[i].hexColor;
+      this.extraBrush[i].colorRect.visible = false;
+    }
+  }
   setBrushInteractive(gameScene, arr){
    for(let i = 0; i < arr.length; i++){
      arr[i].image.setInteractive(gameScene.button, Phaser.Geom.Circle.Contains);

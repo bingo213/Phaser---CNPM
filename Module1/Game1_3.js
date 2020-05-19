@@ -18,33 +18,25 @@ class Game1_3 extends SceneRoot1 {
   }
 
   addRequiredBrush(){
-    var brushX = [545, 840, 1112];
     this.requireBrush.push({
-      color: "yellow",
-      hexColor: 0x66cc66,
+      hexColor: 0x27AE60,
       tintColor: 0x1b5e20,
-      colorRect: new Rect(this, brushX[0] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(brushX[0], module1Setting.brushY, "yellow")
+      colorRect: new Rect(this, module1Setting.brushX1[0] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.brushX1[0], module1Setting.brushY, "green")
     },
     {
-      color: "brown",
-      hexColor: 0xBFC9CA,
-      tintColor: 0xf57f17,
-      colorRect: new Rect(this, brushX[1] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(brushX[1], module1Setting.brushY, "brown")
+      hexColor: 0xBA68C8,
+      tintColor: 0x6C3483,
+      colorRect: new Rect(this, module1Setting.brushX1[1] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.brushX1[1], module1Setting.brushY, "purple")
     },
     {
-      color: "pink",
-      hexColor: 0xBFC9CA,
-      tintColor: 0xf57f17,
-      colorRect: new Rect(this, brushX[2] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(brushX[2], module1Setting.brushY, "pink")
+      hexColor: 0xFF7043,
+      tintColor: 0xE64A19,
+      colorRect: new Rect(this, module1Setting.brushX1[2] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.brushX1[2], module1Setting.brushY, "orange")
     });
-    for(var i = 0; i < this.requireBrush.length; i++){
-      this.requireBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
-      this.requireBrush[i].colorRect.fillColor = this.requireBrush[i].hexColor;
-      this.requireBrush[i].colorRect.visible = false;
-    }
+    super.addRequiredBrush();
   }
 
   addShapes(){

@@ -19,52 +19,42 @@ class Game1_1 extends SceneRoot1 {
   }
  addRequiredBrush(){
     this.requireBrush.push({
-      color: "green",
       hexColor: 0x66cc66,
       tintColor: 0x1b5e20,
       typeShape: Rect,
-      shapeName: "Rectangles",
-      colorRect: new Rect(this, this.brushX1[0] + 85, module1Setting.brushY, 220, 60),
-      image: this.add.image(this.brushX1[0], module1Setting.brushY, "green"),
-      text: this.add.text(this.brushX1[0] + 35, module1Setting.brushY - 20, "Rectangle", {
+      colorRect: new Rect(this, module1Setting.brushX1[0] + 85, module1Setting.brushY, 220, 60),
+      image: this.add.image(module1Setting.brushX1[0], module1Setting.brushY, "green"),
+      text: this.add.text(module1Setting.brushX1[0] + 35, module1Setting.brushY - 20, "Rectangle", {
         fontFamily: "Roboto Condensed",
         fontSize: 35,
         color: "#000",
       })
     },
     {
-      color: "pink",
       hexColor: 0xff6699,
       tintColor: 0xe91e63,
       typeShape: Tri,
-      shapeName: "Triangles",
-      colorRect: new Rect(this, this.brushX1[1] + 80, module1Setting.brushY, 220, 60),
-      image: this.add.image(this.brushX1[1], module1Setting.brushY, "pink"),
-      text: this.add.text(this.brushX1[1] + 35, module1Setting.brushY - 20, "Triangles", {
+      colorRect: new Rect(this, module1Setting.brushX1[1] + 80, module1Setting.brushY, 220, 60),
+      image: this.add.image(module1Setting.brushX1[1], module1Setting.brushY, "pink"),
+      text: this.add.text(module1Setting.brushX1[1] + 35, module1Setting.brushY - 20, "Triangles", {
         fontFamily: "Roboto Condensed",
         fontSize: 35,
         color: "#000",
       })
     },
     {
-      color: "yellow",
       hexColor: 0xffb300,
       tintColor: 0xf57f17,
       typeShape: Cir,
-      shapeName: "Circles",
-      colorRect: new Rect(this, this.brushX1[2] + 75, module1Setting.brushY, 200, 60),
-      image: this.add.image(this.brushX1[2], module1Setting.brushY, "yellow"),
-      text: this.add.text(this.brushX1[2] + 35, module1Setting.brushY - 20, "Circles", {
+      colorRect: new Rect(this, module1Setting.brushX1[2] + 75, module1Setting.brushY, 200, 60),
+      image: this.add.image(module1Setting.brushX1[2], module1Setting.brushY, "yellow"),
+      text: this.add.text(module1Setting.brushX1[2] + 35, module1Setting.brushY - 20, "Circles", {
         fontFamily: "Roboto Condensed",
         fontSize: 35,
         color: "#000",
       })
     });
-    for(var i = 0; i < this.requireBrush.length; i++){
-      this.requireBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
-      this.requireBrush[i].colorRect.fillColor = this.requireBrush[i].hexColor;
-      this.requireBrush[i].colorRect.visible = false;
-    }
+    super.addRequiredBrush();
  }
   addShapes() {
     //Khai báo và vẽ 5 hình tròn

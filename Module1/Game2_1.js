@@ -16,79 +16,63 @@ class Game2_1 extends SceneRoot1 {
     this.requireBrush = [];
     this.extraBrush = [];
     this.extraTypeShape = [Tri];
-    super.create()
+    super.create();
   }
   addRequiredBrush(){
      this.requireBrush.push({
-       color: "green",
-       hexColor: 0x66cc66,
+       hexColor: 0x00C853,
        tintColor: 0x1b5e20,
        typeShape: Cir,
-       shapeName: "Circle",
-       colorRect: new Rect(this, this.brushX2[0] + 88, module1Setting.brushY, 220, 60),
-       image: this.add.image(this.brushX2[0], module1Setting.brushY, "green"),
-       text: this.add.text(this.brushX2[0] + 35, module1Setting.brushY - 20, "Circles", {
+       colorRect: new Rect(this, module1Setting.brushX2[0] + 80, module1Setting.brushY, 230, 60),
+       image: this.add.image(module1Setting.brushX2[0], module1Setting.brushY, "green"),
+       text: this.add.text(module1Setting.brushX2[0] + 35, module1Setting.brushY - 20, "Circles", {
          fontFamily: "Roboto Condensed",
          fontSize: 35,
          color: "#000",
        })
      },
      {
-       color: "gray",
-       hexColor: 0xffb300,
-       tintColor: 0xf57f17,
+       hexColor: 0xBFC9CA,
+       tintColor: 0x34495e,
        typeShape: Rect,
-       shapeName: "Rectangles",
-       colorRect: new Rect(this, this.brushX2[1] + 88, module1Setting.brushY, 200, 60),
-       image: this.add.image(this.brushX2[1], module1Setting.brushY, "gray"),
-       text: this.add.text(this.brushX2[1] + 35, module1Setting.brushY - 20, "Rectangles", {
+       colorRect: new Rect(this, module1Setting.brushX2[1] + 80, module1Setting.brushY, 230, 60),
+       image: this.add.image(module1Setting.brushX2[1], module1Setting.brushY, "gray"),
+       text: this.add.text(module1Setting.brushX2[1] + 35, module1Setting.brushY - 20, "Rectangles", {
          fontFamily: "Roboto Condensed",
          fontSize: 35,
          color: "#000",
        })
      });
-     for(var i = 0; i < this.requireBrush.length; i++){
-       this.requireBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
-       this.requireBrush[i].colorRect.fillColor = this.requireBrush[i].hexColor;
-       this.requireBrush[i].colorRect.visible = false;
-     }
+     super.addRequiredBrush();
   }
 
   addExtraBrush(){
     var extraBrushX = [245, 445, 645, 845];
     this.extraBrush.push({
-      color: "yellow",
-      hexColor: 0x66cc66,
-      tintColor: 0x1b5e20,
-      colorRect: new Rect(this, extraBrushX[0] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(extraBrushX[0], module1Setting.brushY, "yellow")
+      hexColor: 0xFBC02D,
+      tintColor: 0xFFD600,
+      colorRect: new Rect(this, module1Setting.extraBrushX[0] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.extraBrushX[0], module1Setting.brushY, "yellow")
     },
     {
-      color: "brown",
-      hexColor: 0xBFC9CA,
-      tintColor: 0xf57f17,
-      colorRect: new Rect(this, extraBrushX[1] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(extraBrushX[1], module1Setting.brushY, "brown")
+      hexColor: 0x6D4C41,
+      tintColor: 0x5D4037,
+      colorRect: new Rect(this, module1Setting.extraBrushX[1] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.extraBrushX[1], module1Setting.brushY, "brown")
     },
     {
-      color: "blue",
-      hexColor: 0xBFC9CA,
-      tintColor: 0xf57f17,
-      colorRect: new Rect(this, extraBrushX[2] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(extraBrushX[2], module1Setting.brushY, "blue")
+      hexColor: 0x81D4FA,
+      tintColor: 0x00838F,
+      colorRect: new Rect(this, module1Setting.extraBrushX[2] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.extraBrushX[2], module1Setting.brushY, "blue")
     },
     {
-      color: "pink",
-      hexColor: 0xBFC9CA,
-      tintColor: 0xf57f17,
-      colorRect: new Rect(this, extraBrushX[3] + 30, module1Setting.brushY, 120, 60),
-      image: this.add.image(extraBrushX[3], module1Setting.brushY, "pink")
+      hexColor: 0xFFCCBC,
+      tintColor: 0xFF4081,
+      colorRect: new Rect(this, module1Setting.extraBrushX[3] + 30, module1Setting.brushY, 120, 60),
+      image: this.add.image(module1Setting.extraBrushX[3], module1Setting.brushY, "pink")
     });
-    for(var i = 0; i < this.extraBrush.length; i++){
-      this.extraBrush[i].colorRect.setStrokeStyle(0, 0xffffff);
-      this.extraBrush[i].colorRect.fillColor = this.extraBrush[i].hexColor;
-      this.extraBrush[i].colorRect.visible = false;
-    }
+    super.addExtraBrush();
   }
 
   addShapes(){
