@@ -12,10 +12,7 @@ class StartScene extends Phaser.Scene {
     this.load.image("game5", "assets/5.png");
   }
   create() {
-    //this.scene.start("playGame");
-
     this.add.image(config.width / 2, config.height / 2, "startScene");
-    //this.startScene.setOrigin(0,0);
     var g1 = this.add.image(460, 310, "game1");
     g1.setInteractive();
     g1.on('pointerup', () => this.scene.start("Game1_1"));
@@ -35,7 +32,5 @@ class StartScene extends Phaser.Scene {
     var g5 = this.add.image(460, 570, "game5");
     g5.setInteractive();
     g5.on('pointerup', () => this.scene.start("Game5_1"));
-
-
   }
 }

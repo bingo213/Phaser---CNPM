@@ -38,7 +38,7 @@ class SceneRoot2 extends Phaser.Scene {
     var elephant = 0;
     this.setUp();
     this.addElephant(this.amount);
-    this.backButtonSetUp();
+    this.backButtonSetUp(gameScene);
     this.addShapes();
     this.canNotSeeShape();
     this.addShapesInBoard();
@@ -221,7 +221,7 @@ class SceneRoot2 extends Phaser.Scene {
       this.rightElephant = this.add.image(module2Setting.elephantRightX, module2Setting.elephantRightY, this.color2 + "ElephantSleep");
     }
   }
-  backButtonSetUp() {
+  backButtonSetUp(gameScene) {
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: "Roboto Condensed",
       fontSize: 20,
