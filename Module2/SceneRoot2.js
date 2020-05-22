@@ -1,11 +1,11 @@
 class SceneRoot2 extends Phaser.Scene {
   preload() {
-    for(var i = 1; i <= 5; i++){
-      this.load.image("t"+i, "assets/triangle"+i+".png");
-      this.load.image("c"+i, "assets/circle"+i+".png");
-      this.load.image("s"+i, "assets/square"+i+".png");
-      this.load.image("h"+i, "assets/hexagon"+i+".png");
-      this.load.image("bg"+i, "assets/initscene"+i+".png");
+    for (var i = 1; i <= 5; i++) {
+      this.load.image("t" + i, "assets/triangle" + i + ".png");
+      this.load.image("c" + i, "assets/circle" + i + ".png");
+      this.load.image("s" + i, "assets/square" + i + ".png");
+      this.load.image("h" + i, "assets/hexagon" + i + ".png");
+      this.load.image("bg" + i, "assets/initscene" + i + ".png");
     }
 
     this.load.image("greenElephant", "assets/greenElephant.png");
@@ -57,9 +57,9 @@ class SceneRoot2 extends Phaser.Scene {
 
     //Drop zone
     this.zone1 = this.add.zone(module2Setting.elephantLeftX, module2Setting.elephantLeftY, 350, 480).setRectangleDropZone(350, 480);
-    if(this.amount === 2){
-    this.zone2 = this.add.zone(module2Setting.elephantRightX, module2Setting.elephantRightY, 350, 480).setRectangleDropZone(350, 480);
-  }
+    if (this.amount === 2) {
+      this.zone2 = this.add.zone(module2Setting.elephantRightX, module2Setting.elephantRightY, 350, 480).setRectangleDropZone(350, 480);
+    }
 
     this.input.on('dragend', function(pointer, gameObject, dropped) {
       check = false;
@@ -68,9 +68,9 @@ class SceneRoot2 extends Phaser.Scene {
         gameObject.y = gameObject.input.dragStartY;
       }
       if (gameScene.leftElephantStomach.length === 0) gameScene.zone1.destroy();
-      if(gameScene.amount === 2){
-         if (gameScene.rightElephantStomach.length === 0) gameScene.zone2.destroy();
-       }
+      if (gameScene.amount === 2) {
+        if (gameScene.rightElephantStomach.length === 0) gameScene.zone2.destroy();
+      }
     });
 
     this.input.on('drop', function(pointer, gameObject) {
@@ -78,7 +78,7 @@ class SceneRoot2 extends Phaser.Scene {
       if (elephant === 1) {
         gameScene.dropLeft(gameObject, gameScene, elephant);
       }
-      if(elephant === 2 && gameScene.amount === 2){
+      if (elephant === 2 && gameScene.amount === 2) {
         gameScene.dropRight(gameObject, gameScene, elephant);
       }
 
@@ -88,9 +88,9 @@ class SceneRoot2 extends Phaser.Scene {
     });
 
     this.rect1 = new Phaser.Geom.Rectangle(module2Setting.elephantLeftX - 180, module2Setting.elephantLeftY - 240, 350, 480);
-    if(this.amount === 2){
-    this.rect2 = new Phaser.Geom.Rectangle(module2Setting.elephantRightX - 170, module2Setting.elephantRightY - 240, 350, 480);
-  }
+    if (this.amount === 2) {
+      this.rect2 = new Phaser.Geom.Rectangle(module2Setting.elephantRightX - 170, module2Setting.elephantRightY - 240, 350, 480);
+    }
 
     this.input.on('pointermove', function(pointer) {
       if (gameScene.rect1.contains(pointer.x, pointer.y) && check === true) {
@@ -101,16 +101,16 @@ class SceneRoot2 extends Phaser.Scene {
         gameScene.leftElephant[0].visible = true;
         gameScene.leftElephant[1].visible = false;
       }
-      if(gameScene.amount === 2){
-      if (gameScene.rect2.contains(pointer.x, pointer.y) && check === true) {
-        gameScene.rightElephant[0].visible = false;
-        gameScene.rightElephant[1].visible = true;
-        elephant = 2;
-      } else {
-        gameScene.rightElephant[0].visible = true;
-        gameScene.rightElephant[1].visible = false;
+      if (gameScene.amount === 2) {
+        if (gameScene.rect2.contains(pointer.x, pointer.y) && check === true) {
+          gameScene.rightElephant[0].visible = false;
+          gameScene.rightElephant[1].visible = true;
+          elephant = 2;
+        } else {
+          gameScene.rightElephant[0].visible = true;
+          gameScene.rightElephant[1].visible = false;
+        }
       }
-    }
     });
   }
   update() {
@@ -121,15 +121,15 @@ class SceneRoot2 extends Phaser.Scene {
         this.sleepLeftElephant();
       }
     }
-    if(this.amount === 2){
-    if (this.rightElephantStomach.length === 0) {
-      if (this.sleepTime2 < 150)
-        this.sleepTime2++;
-      else {
-        this.sleepRightElephant();
+    if (this.amount === 2) {
+      if (this.rightElephantStomach.length === 0) {
+        if (this.sleepTime2 < 150)
+          this.sleepTime2++;
+        else {
+          this.sleepRightElephant();
+        }
       }
     }
-  }
   }
 
   setUp() {
@@ -223,7 +223,7 @@ class SceneRoot2 extends Phaser.Scene {
   }
   backButtonSetUp(gameScene) {
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 20,
       color: "#1a65ac",
     });
@@ -238,9 +238,9 @@ class SceneRoot2 extends Phaser.Scene {
     });
     backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
     this.add.text(550, 100, "Feed the Elephant", {
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 50,
-      color: "#000000",
+      color: "#000",
     });
   }
   addShapes() {}
@@ -286,29 +286,29 @@ class SceneRoot2 extends Phaser.Scene {
       ]
     });
   }
-  addShapesInBoard(){};
+  addShapesInBoard() {};
   requireSetUp(amount, gameScene) {
     this.textLeft = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat ' + this.shapeLeftName, {
-    fontFamily: "Roboto Condensed",
-    fontSize: 50,
-    color: "#000",
-  });
-  this.moveTextLeft();
-
-  if (amount === 2) {
-    this.textRight = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat ' + this.shapeRightName, {
       fontFamily: "Roboto Condensed",
       fontSize: 50,
       color: "#000",
     });
-    this.textRight.visible = false;
-    setTimeout(function(){
-      gameScene.moveTextRight();
-      gameScene.textRight.visible = true;
-    }, 3000);
+    this.moveTextLeft();
+
+    if (amount === 2) {
+      this.textRight = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat ' + this.shapeRightName, {
+        fontFamily: "Roboto Condensed",
+        fontSize: 50,
+        color: "#000",
+      });
+      this.textRight.visible = false;
+      setTimeout(function() {
+        gameScene.moveTextRight();
+        gameScene.textRight.visible = true;
+      }, 3000);
+    }
+    setTimeout(() => this.canSeeShape(), amount * 3000);
   }
-  setTimeout(()=>this.canSeeShape(), amount*3000);
-}
   setDraggable() {
     this.shapes.forEach(shape => {
       shape.image.setInteractive();
@@ -418,7 +418,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.rightElephantStomach.shift();
   }
 
-  dropLeft(gameObject, gameScene, elephant){
+  dropLeft(gameObject, gameScene, elephant) {
     if (gameObject.name === this.shapeLeftName) {
       this.leftElephant[1].visible = true;
       this.moveToLeftStomatch(gameObject);
@@ -434,7 +434,7 @@ class SceneRoot2 extends Phaser.Scene {
       this.back(elephant, gameObject, gameObject.input.dragStartX, gameObject.input.dragStartY);
     }
   }
-  dropRight(gameObject, gameScene, elephant){
+  dropRight(gameObject, gameScene, elephant) {
     if (gameObject.name === this.shapeRightName) {
       this.rightElephant[1].visible = true;
       this.moveToRightStomatch(gameObject);
@@ -479,12 +479,12 @@ class SceneRoot2 extends Phaser.Scene {
   giveNotice(gameScene) {
     this.canNotSeeShape();
     this.add.text(config.width / 2 - 190, config.height / 2 - 50, 'Too many mistakes!', {
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 50,
       color: "#000",
     });
     this.add.text(config.width / 2 - 110, config.height / 2, 'Try again!', {
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 50,
       color: "#000",
     });
@@ -493,11 +493,11 @@ class SceneRoot2 extends Phaser.Scene {
   }
   //voi bên trái ngủ
   sleepLeftElephant() {
-  for(var i = 0; i < this.shapes.length; i++){
-    if(this.shapes[i].image.name === this.shapeLeftName){
-      this.shapes[i].image.visible = false;
+    for (var i = 0; i < this.shapes.length; i++) {
+      if (this.shapes[i].image.name === this.shapeLeftName) {
+        this.shapes[i].image.visible = false;
+      }
     }
-  }
     this.leftElephant[0].visible = false;
     this.leftElephant[1].visible = false;
     this.textLeft.visible = false;
@@ -506,8 +506,8 @@ class SceneRoot2 extends Phaser.Scene {
   }
   //voi bên phải ngủ
   sleepRightElephant() {
-    for(var i = 0; i < this.shapes.length; i++){
-      if(this.shapes[i].image.name === this.shapeRightName){
+    for (var i = 0; i < this.shapes.length; i++) {
+      if (this.shapes[i].image.name === this.shapeRightName) {
         this.shapes[i].image.visible = false;
       }
     }
@@ -518,14 +518,13 @@ class SceneRoot2 extends Phaser.Scene {
     this.rightElephant[2].visible = true;
   }
 
-  checkSuccess(gameScene, conversionScene){
-    if(this.amount === 2){
-        if (this.leftElephantStomach.length === 0 && this.rightElephantStomach.length === 0)
+  checkSuccess(gameScene, conversionScene) {
+    if (this.amount === 2) {
+      if (this.leftElephantStomach.length === 0 && this.rightElephantStomach.length === 0)
         setTimeout(() => gameScene.scene.start(conversionScene), 5000);
-      }
-    else {
-      if (this.leftElephantStomach.length === 0 )
-      setTimeout(() => gameScene.scene.start(conversionScene), 3000);
-  }
+    } else {
+      if (this.leftElephantStomach.length === 0)
+        setTimeout(() => gameScene.scene.start(conversionScene), 3000);
+    }
   }
 }
