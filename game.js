@@ -11,6 +11,13 @@ var config = {
     Game5_1, ConversionScene9, Game5_2, ConversionScene10
   ]
 };
+
+var conversionSceneSetting = {
+  ballLeftX: [481, 510, 541],
+  ballRightX: [965, 935, 903],
+  ballY: 74
+};
+
 var module1Setting = {
   brushY: 580,
   eraseX1: 280,
@@ -18,7 +25,7 @@ var module1Setting = {
   extraBrushX: [245, 445, 645, 845], //Tọa độ x của cọ khi có 4 cọ (tọa độ x của cọ phụ)
   brushX1: [545, 840, 1112], //Tọa độ x của cọ khi có 3 cọ
   brushX2: [245, 640] //Tọa độ x của cọ khi có 2 cọ
-}
+};
 
 var module2Setting = {
   textStartX: config.width / 2 - 10,
