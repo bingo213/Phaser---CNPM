@@ -12,6 +12,13 @@ var config = {
   ]
 };
 
+var font = "Roboto Condensed";
+
+var textNextToBrush = {
+  fontSize: 35,
+  color: "#000"
+};
+
 var conversionSceneSetting = {
   ballLeftX: [481, 510, 541],
   ballRightX: [965, 935, 903],
@@ -19,6 +26,7 @@ var conversionSceneSetting = {
 };
 
 var module1Setting = {
+  textTitleY: 100,
   brushY: 580,
   eraseX1: 280,
   eraseX2: 1085,
