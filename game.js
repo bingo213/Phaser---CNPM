@@ -20,8 +20,8 @@ var textNextToBrush = {
 };
 
 var conversionSceneSetting = {
-  ballLeftX: [481, 510, 541],
-  ballRightX: [965, 935, 903],
+  ballLeftX: [480, 510, 540],
+  ballRightX: [970, 940, 910],
   ballY: 74
 };
 
@@ -47,5 +47,14 @@ var module2Setting = {
   elephantRightMouthX: 1220,
   elephantRightMouthY: 330
 };
+
+var rateSceneSetting = {
+    starX: [config.width / 2 - 260,
+      config.width / 2 - 130,
+      config.width / 2,
+      config.width / 2 + 130,
+      config.width / 2 + 260],
+    starY: config.height / 2 - 80
+}
 
 var game = new Phaser.Game(config);

@@ -18,165 +18,60 @@ class RateScene extends Phaser.Scene {
 
     const gameScene = this.scene.get('RateScene');
 
-    var grayStar1 = this.add.image(config.width / 2 - 260, config.height / 2 - 80, "grayStar");
-    var grayStar2 = this.add.image(config.width / 2 - 130, config.height / 2 - 80, "grayStar");
-    var grayStar3 = this.add.image(config.width / 2, config.height / 2 - 80, "grayStar");
-    var grayStar4 = this.add.image(config.width / 2 + 130, config.height / 2 - 80, "grayStar");
-    var grayStar5 = this.add.image(config.width / 2 + 260, config.height / 2 - 80, "grayStar");
+    this.grayStar = [];
+    for(let i = 0; i < 5; i++){
+      this.grayStar.push(this.add.image(rateSceneSetting.starX[i], rateSceneSetting.starY, "grayStar"));
+    }
 
-    //Các ngôi sao màu vàng ở vị trí giống các ngôi sao màu xám, nhưng người chơi chưa nhìn thấy những ngôi sao này
-    var yellowStar1 = this.add.image(grayStar1.x, grayStar1.y, "yellowStar");
-    yellowStar1.visible = false;
-    var yellowStar2 = this.add.image(grayStar2.x, grayStar2.y, "yellowStar");
-    yellowStar2.visible = false;
-    var yellowStar3 = this.add.image(grayStar3.x, grayStar3.y, "yellowStar");
-    yellowStar3.visible = false;
-    var yellowStar4 = this.add.image(grayStar4.x, grayStar4.y, "yellowStar");
-    yellowStar4.visible = false;
-    var yellowStar5 = this.add.image(grayStar5.x, grayStar5.y, "yellowStar");
-    yellowStar5.visible = false;
+   this.yellowStar = [];
+   for(let i = 0; i < 5; i++){
+     this.yellowStar.push(this.add.image(rateSceneSetting.starX[i], rateSceneSetting.starY, "yellowStar"));
+     this.yellowStar[i].visible = false;
+   }
 
-    //Sao vàng đậm ban đầu người chơi chưa nhìn thấy
-    var darkYellowStar1 = this.add.image(grayStar1.x, grayStar1.y, "darkYellowStar");
-    darkYellowStar1.visible = false;
-    var darkYellowStar2 = this.add.image(grayStar2.x, grayStar2.y, "darkYellowStar");
-    darkYellowStar2.visible = false;
-    var darkYellowStar3 = this.add.image(grayStar3.x, grayStar3.y, "darkYellowStar");
-    darkYellowStar3.visible = false;
-    var darkYellowStar4 = this.add.image(grayStar4.x, grayStar4.y, "darkYellowStar");
-    darkYellowStar4.visible = false;
-    var darkYellowStar5 = this.add.image(grayStar5.x, grayStar5.y, "darkYellowStar");
-    darkYellowStar5.visible = false;
+   this.darkYellowStar = [];
+   for(let i = 0; i < 5; i++){
+     this.darkYellowStar.push(this.add.image(rateSceneSetting.starX[i], rateSceneSetting.starY, "darkYellowStar"));
+     this.darkYellowStar[i].visible = false;
+   }
 
     var button = new Phaser.Geom.Circle(46, 45, 50);
 
-    //Hiệu ứng khi di chuột qua các ngôi sao màu xám => các ngôi sao xám sẽ trở thành sao vàng
-    //Khi nhấn chuột vào ngôi sao => sao vàng đậm hiện lên
-    grayStar1.setInteractive(button, Phaser.Geom.Circle.Contains);
-    grayStar1.on('pointerover', function() {
-      yellowStar1.visible = true;
-    });
-    grayStar1.on('pointerout', function() {
-      yellowStar1.visible = false;
-    });
-    grayStar1.on('pointerdown', function() {
-      rated = 1;
+    for(let i = 0; i < 5; i++){
+      this.grayStar[i].setInteractive(button, Phaser.Geom.Circle.Contains);
+      this.grayStar[i].on('pointerover', function(){
+        for(let j = 0; j < 5; j++){
+          if(j<=i){
+            gameScene.yellowStar[j].visible = true;
+          }
+        }
+      });
+      this.grayStar[i].on('pointerout', function(){
+        for(let j = 0; j < 5; j++){
+          if(j<=i){
+            gameScene.yellowStar[j].visible = false;
+          }
+        }
+      });
+      this.grayStar[i].on('pointerdown', function(){
+        rated = 1;
+        for(let j = 0; j < 5; j++){
+          if(j>i){
+            gameScene.yellowStar[j].visible = false;
+            gameScene.darkYellowStar[j].visible = false;
+          }
+          else {
+            gameScene.darkYellowStar[j].visible = true;
+          }
+        }
 
-      darkYellowStar1.visible = true;
-
-      yellowStar2.visible = false;
-      darkYellowStar2.visible = false;
-      yellowStar3.visible = false;
-      darkYellowStar3.visible = false;
-      yellowStar4.visible = false;
-      darkYellowStar4.visible = false;
-      yellowStar5.visible = false;
-      darkYellowStar5.visible = false;
-    });
-
-    grayStar2.setInteractive(button, Phaser.Geom.Circle.Contains);
-    grayStar2.on('pointerover', function() {
-      yellowStar1.visible = true;
-      yellowStar2.visible = true;
-    });
-    grayStar2.on('pointerout', function() {
-      yellowStar1.visible = false;
-      yellowStar2.visible = false;
-    });
-    grayStar2.on('pointerdown', function() {
-      rated = 1;
-
-      darkYellowStar1.visible = true;
-      darkYellowStar2.visible = true;
-
-      yellowStar3.visible = false;
-      darkYellowStar3.visible = false;
-      yellowStar4.visible = false;
-      darkYellowStar4.visible = false;
-      yellowStar5.visible = false;
-      darkYellowStar5.visible = false;
-    });
-
-    grayStar3.setInteractive(button, Phaser.Geom.Circle.Contains);
-    grayStar3.on('pointerover', function() {
-      yellowStar1.visible = true;
-      yellowStar2.visible = true;
-      yellowStar3.visible = true;
-    });
-    grayStar3.on('pointerout', function() {
-      yellowStar1.visible = false;
-      yellowStar2.visible = false;
-      yellowStar3.visible = false;
-    });
-    grayStar3.on('pointerdown', function() {
-      rated = 1;
-
-      darkYellowStar1.visible = true;
-      darkYellowStar2.visible = true;
-      darkYellowStar3.visible = true;
-
-      yellowStar4.visible = false;
-      darkYellowStar4.visible = false;
-      yellowStar5.visible = false;
-      darkYellowStar5.visible = false;
-    });
-
-    grayStar4.setInteractive(button, Phaser.Geom.Circle.Contains);
-    grayStar4.on('pointerover', function() {
-      yellowStar1.visible = true;
-      yellowStar2.visible = true;
-      yellowStar3.visible = true;
-      yellowStar4.visible = true;
-    });
-    grayStar4.on('pointerout', function() {
-      yellowStar1.visible = false;
-      yellowStar2.visible = false;
-      yellowStar3.visible = false;
-      yellowStar4.visible = false;
-    });
-    grayStar4.on('pointerdown', function() {
-      rated = 1;
-
-      darkYellowStar1.visible = true;
-      darkYellowStar2.visible = true;
-      darkYellowStar3.visible = true;
-      darkYellowStar4.visible = true;
-
-      yellowStar5.visible = false;
-      darkYellowStar5.visible = false;
-    });
-
-    grayStar5.setInteractive(button, Phaser.Geom.Circle.Contains);
-    grayStar5.on('pointerover', function() {
-      yellowStar1.visible = true;
-      yellowStar2.visible = true;
-      yellowStar3.visible = true;
-      yellowStar4.visible = true;
-      yellowStar5.visible = true;
-    });
-    grayStar5.on('pointerout', function() {
-      yellowStar1.visible = false;
-      yellowStar2.visible = false;
-      yellowStar3.visible = false;
-      yellowStar4.visible = false;
-      yellowStar5.visible = false;
-    });
-    grayStar5.on('pointerdown', function() {
-      rated = 1;
-
-      darkYellowStar1.visible = true;
-      darkYellowStar2.visible = true;
-      darkYellowStar3.visible = true;
-      darkYellowStar4.visible = true;
-      darkYellowStar5.visible = true;
-    });
-
-
+      });
+    }
 
     var next = this.add.image(config.width / 2, config.height / 2 + 100, "next");
 
-    var button = new Phaser.Geom.Circle(46, 45, 50);
-    next.setInteractive(button, Phaser.Geom.Circle.Contains);
+    var button = new Phaser.Geom.Rectangle(0, 0, 140, 60);
+    next.setInteractive(button, Phaser.Geom.Rectangle.Contains);
     next.on('pointerover', function() {
       if (rated === 1)
         next.setTint(0x303f9f);
