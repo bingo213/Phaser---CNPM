@@ -5,13 +5,13 @@ class Game1_2 extends SceneRoot1 {
   create() {
     this.name = "Game1_2";
     this.type = 1; //Kiểu 1: Yêu cầu tô màu vào tất cả các hình
-    this.initscene = "initscene2";
     this.notice = "notification";
     this.textTitle = "Color the shapes";
     this.textTitleX = 555;
-    this.amount = 3; //Số lượng cọ ban đầu
     this.conversionScene = "ConversionScene2";
     this.extraTypeShape = [];
+    this.numberOfBallLeft = 2;
+    this.numberOfBallRight = 1;
     super.create();
   }
 

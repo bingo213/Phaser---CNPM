@@ -6,12 +6,12 @@ class Game1_3 extends SceneRoot1 {
   create() {
     this.name = "Game1_3";
     this.type = 3;
-    this.initscene = "initscene3";
     this.textTitle = "Color the shapes";
     this.textTitleX = 555;
-    this.amount = 3;
     this.conversionScene = "ConversionScene3";
     this.extraTypeShape = [];
+    this.numberOfBallLeft = 1;
+    this.numberOfBallRight = 2;
     super.create();
   }
 

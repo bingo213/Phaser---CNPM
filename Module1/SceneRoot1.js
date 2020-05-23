@@ -1,11 +1,8 @@
 class SceneRoot1 extends Phaser.Scene {
   preload() {
     //Load ảnh
-    this.load.image("initscene1", "assets/initscene1.png");
-    this.load.image("initscene2", "assets/initscene2.png");
-    this.load.image("initscene3", "assets/initscene3.png");
-    this.load.image("initscene4", "assets/initscene4.png");
-    this.load.image("initscene5", "assets/initscene5.png");
+    this.load.image("initscene", "assets/initscene.png");
+    this.load.image("ball", "assets/ball.png");
 
     this.load.image("green", "assets/green.png");
     this.load.image("pink", "assets/pink.png");
@@ -20,7 +17,7 @@ class SceneRoot1 extends Phaser.Scene {
     this.load.image("erase", "assets/erase.png");
     this.load.image("notification", "assets/notification.png");
     this.load.image("notification2", "assets/notification2.png");
-    this.load.image("stateBar", "assets/state_bar.png");
+    //this.load.image("stateBar", "assets/state_bar.png");
     this.load.image("next", "assets/next.png");
 
     this.load.image("eye1_1", "assets/eye.png");
@@ -29,7 +26,7 @@ class SceneRoot1 extends Phaser.Scene {
     this.load.image("carrot", "assets/carrot.png");
     this.load.image("snowman", "assets/snowman.png");
     this.load.image("bow", "assets/bow.png");
-    this.load.image("snow_background", "assets/snow background.jpg");
+    this.load.image("snow_background", "assets/snow background.png");
     this.load.image("bg", "assets/bgr.png");
     this.load.image("window1", "assets/window_1.png");
     this.load.image("window", "assets/window.png");
@@ -50,6 +47,7 @@ class SceneRoot1 extends Phaser.Scene {
   create() {
     const gameScene = this.scene.get(this.name);
     this.setUp(gameScene);
+    this.addStateBar();
 
     //this.addExtraImageBehindShape();
     this.addShapes();
@@ -72,14 +70,16 @@ class SceneRoot1 extends Phaser.Scene {
     this.notification = this.add.image(1030, 655, this.notice); //Thông báo khi nhấn nút Done mà chưa tô hết các hình
     this.notification.visible = false; //Ban đầu không nhìn thấy thông báo
 
-    this.setBrushInteractive(gameScene, gameScene.requireBrush);
-    this.button = new Phaser.Geom.Circle(46, 45, 50);
+    this.setBrushInteractive(gameScene, gameScene.requireBrush, true);
+
+    this.button = new Phaser.Geom.Rectangle(0, 0, 150, 40);
 
     this.setEraseInteractive(this);
 
     this.done = this.add.image(701, 660, "done"); //Nút done
     //Nút Done cũng có hiệu ứng khi di chuột qua
-    this.done.setInteractive(gameScene.button, Phaser.Geom.Circle.Contains);
+    var doneButton = new Phaser.Geom.Rectangle(0, 0, 130, 70);
+    this.done.setInteractive(doneButton, Phaser.Geom.Rectangle.Contains);
     this.done.on('pointerover', function() {
       this.setTint(0x303f9f);
     });
@@ -115,18 +115,18 @@ class SceneRoot1 extends Phaser.Scene {
     this.shapes = [];
 
     //Background (khung hình chữ nhật, state bar)
-    this.add.image(config.width / 2, config.height / 2, this.initscene);
+    this.add.image(config.width / 2, config.height / 2, "initscene");
 
     this.addExtraImageBehindShape();
 
     this.backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 20,
       color: "#1a65ac",
     });
 
-    var shape = new Phaser.Geom.Circle(10, 0, 40);
-    this.backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
+    var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25);
+    this.backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
     this.backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
       this.setTint(0x0000ff);
     });
@@ -136,7 +136,7 @@ class SceneRoot1 extends Phaser.Scene {
     this.backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
 
     this.title = this.add.text(this.textTitleX, module1Setting.textTitleY, this.textTitle, { //Thêm tiêu đề
-      fontFamily: "Roboto Condensed",
+      fontFamily: font,
       fontSize: 50,
       color: "#000",
     });
@@ -144,16 +144,24 @@ class SceneRoot1 extends Phaser.Scene {
     this.next = this.add.image(701, 580, "next");
     this.next.visible = false;
   }
+  addStateBar(){
+    for(let i = 0; i < this.numberOfBallLeft; i++){
+      this.add.image(conversionSceneSetting.ballLeftX[i], conversionSceneSetting.ballY, "ball");
+    }
+    for(let i = 0; i < this.numberOfBallRight; i++){
+      this.add.image(conversionSceneSetting.ballRightX[i], conversionSceneSetting.ballY, "ball");
+    }
+  }
   addShapes() {}
   addErase() {
-    if (this.amount === 3) {
+    if (this.type === 3 || this.type === 1) {
       this.eraseRectangle = new Rect(this, 280, 580, 205, 60);
       this.eraseRectangle.setStrokeStyle(0, 0xffffff);
       this.eraseRectangle.fillColor = 0xFFEBEE;
       this.eraseRectangle.visible = false;
       this.erase = this.add.image(230, 580, "erase"); //Tẩy và chữ Erase bên phải tẩy
       this.eraseText = this.add.text(270, 560, 'Erase', {
-        fontFamily: "Roboto Condensed",
+        fontFamily: font,
         fontSize: 35,
         color: "#000",
       });
@@ -164,14 +172,14 @@ class SceneRoot1 extends Phaser.Scene {
       this.eraseRectangle.visible = false;
       this.erase = this.add.image(1040, 580, "erase"); //Tẩy và chữ Erase bên phải tẩy
       this.eraseText = this.add.text(1075, 560, 'Erase', {
-        fontFamily: "Roboto Condensed",
+        fontFamily: font,
         fontSize: 35,
         color: "#000",
       });
     }
   }
   setEraseInteractive(gameScene) {
-    this.erase.setInteractive(gameScene.button, Phaser.Geom.Circle.Contains);
+    this.erase.setInteractive(gameScene.button, Phaser.Geom.Rectangle.Contains);
     this.erase.on('pointerover', function() {
       this.setTint(0x7878ff);
     });
@@ -200,9 +208,15 @@ class SceneRoot1 extends Phaser.Scene {
       this.extraBrush[i].colorRect.visible = false;
     }
   }
-  setBrushInteractive(gameScene, arr) {
+  setBrushInteractive(gameScene, arr, isRequiredBrush) {
     for (let i = 0; i < arr.length; i++) {
-      arr[i].image.setInteractive(gameScene.button, Phaser.Geom.Circle.Contains);
+      if(isRequiredBrush === true && this.type !== 3){
+        var button = new Phaser.Geom.Rectangle(0, 0, 200, 55);
+      }
+      else {
+        var button = new Phaser.Geom.Rectangle(0, 0, 60, 55);
+      }
+      arr[i].image.setInteractive(button, Phaser.Geom.Rectangle.Contains);
       arr[i].image.on('pointerover', function() {
         this.setTint(arr[i].tintColor);
       });
@@ -250,7 +264,7 @@ class SceneRoot1 extends Phaser.Scene {
           setTimeout(function() {
             shape.setStrokeStyle(2, 0x000000);
             shape.fillColor = 0xffffff;
-          }, 1500);
+          }, 1000);
         }
       }
     }
@@ -260,7 +274,7 @@ class SceneRoot1 extends Phaser.Scene {
           setTimeout(function() {
             shape.setStrokeStyle(2, 0x000000);
             shape.fillColor = 0xffffff;
-          }, 1500);
+          }, 1000);
         }
       }
     }
@@ -314,7 +328,7 @@ class SceneRoot1 extends Phaser.Scene {
       }
     } else if (this.countFill > 0) { //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 3s thì ẩn thông báo
       this.notification.visible = true;
-      setTimeout(() => this.notification.visible = false, 3000);
+      setTimeout(() => this.notification.visible = false, 1500);
     } else {
       this.done.visible = false;
       this.eraseText.visible = false;
@@ -342,7 +356,7 @@ class SceneRoot1 extends Phaser.Scene {
         }
       } else if (this.countFill > 0) {
         this.notification.visible = true;
-        setTimeout(() => this.notification.visible = false, 3000);
+        setTimeout(() => this.notification.visible = false, 1500);
       } else {
         this.complete = true;
       }
@@ -358,7 +372,7 @@ class SceneRoot1 extends Phaser.Scene {
 
       this.title.visible = false;
       this.add.text(270, module1Setting.textTitleY, 'Great! Now color the rest the way you want! ', { //Thêm tiêu đề
-        fontFamily: "Roboto Condensed",
+        fontFamily: font,
         fontSize: 50,
         color: "#000",
       });
@@ -371,7 +385,7 @@ class SceneRoot1 extends Phaser.Scene {
           }
       });
       this.addExtraBrush();
-      this.setBrushInteractive(this, this.extraBrush);
+      this.setBrushInteractive(this, this.extraBrush, false);
       if (this.count === 2) {
         this.done.visible = false;
         this.next.visible = true;

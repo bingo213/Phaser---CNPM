@@ -5,8 +5,10 @@ class SceneRoot2 extends Phaser.Scene {
       this.load.image("c" + i, "assets/circle" + i + ".png");
       this.load.image("s" + i, "assets/square" + i + ".png");
       this.load.image("h" + i, "assets/hexagon" + i + ".png");
-      this.load.image("bg" + i, "assets/initscene" + i + ".png");
     }
+
+    this.load.image("initscene", "assets/initscene.png");
+    this.load.image("ball", "assets/ball.png");
 
     this.load.image("greenElephant", "assets/greenElephant.png");
     this.load.image("greenMouthOpen", "assets/greenMouthOpen.png");
@@ -37,6 +39,7 @@ class SceneRoot2 extends Phaser.Scene {
     var check = false; //Kiểm tra xem có đang drag hay không
     var elephant = 0;
     this.setUp();
+    this.addStateBar();
     this.addElephant(this.amount);
     this.backButtonSetUp(gameScene);
     this.addShapes();
@@ -135,7 +138,7 @@ class SceneRoot2 extends Phaser.Scene {
   setUp() {
     this.incorrect = 0; //Đếm số lần làm sai
 
-    this.add.image(1440 / 2, 800 / 2, this.bg);
+    this.add.image(1440 / 2, 800 / 2, "initscene");
 
     this.next = this.add.image(config.width / 2, config.height / 2 + 100, "next");
     this.next.visible = false;
@@ -198,6 +201,16 @@ class SceneRoot2 extends Phaser.Scene {
     ];
 
   }
+
+  addStateBar(){
+    for(let i = 0; i < this.numberOfBallLeft; i++){
+      this.add.image(conversionSceneSetting.ballLeftX[i], conversionSceneSetting.ballY, "ball");
+    }
+    for(let i = 0; i < this.numberOfBallRight; i++){
+      this.add.image(conversionSceneSetting.ballRightX[i], conversionSceneSetting.ballY, "ball");
+    }
+  }
+
   addElephant(amount) {
     this.leftElephant = [];
     this.leftElephant.push(this.add.image(module2Setting.elephantLeftX, module2Setting.elephantLeftY, this.color1 + "Elephant"));
@@ -228,8 +241,9 @@ class SceneRoot2 extends Phaser.Scene {
       color: "#1a65ac",
     });
 
-    var shape = new Phaser.Geom.Circle(10, 0, 40);
-    backButton.setInteractive(shape, Phaser.Geom.Circle.Contains);
+    var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25);
+
+    backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
     backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
       backButton.setTint(0x0000ff);
     });

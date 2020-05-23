@@ -6,13 +6,13 @@ class Game2_2 extends SceneRoot1 {
   create() {
     this.name = "Game2_2";
     this.type = 2;
-    this.initscene = "initscene5";
     this.notice = "notification2";
     this.textTitle = "Color the triangles and rectangles";
     this.textTitleX = 380;
-    this.amount = 2;
     this.conversionScene = "ConversionScene5";
     this.extraTypeShape = [Cir];
+    this.numberOfBallLeft = 1;
+    this.numberOfBallRight = 1;
     super.create();
   }
   addRequiredBrush() {
