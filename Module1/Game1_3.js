@@ -56,19 +56,21 @@ class Game1_3 extends SceneRoot1 {
       new Tri(this, 775, 293, 0, 100, 90, 100, 50, 0), //1
       new Tri(this, 895, 288, 0, 150, 80, 120, 90, 0), //2
       new Tri(this, 850, 258, 0, 100, 90, 100, 50, 0), //3
-      new Rect(this, 420, 410, 206, 131), //4
-      new Rect(this, 351, 283, 70, 120), //5
-      new Rect(this, 585, 320, 120, 170), //6
-      new Rect(this, 820, 410, 206, 131), //7
+
+      new Rect(this, 420, 410, 206, 131), //4: Đầu tàu
+      new Rect(this, 351, 283, 70, 120), //5: Đầu tàu (hình chữ nhật đứng t1 từ trái qua)
+      new Rect(this, 585, 320, 120, 170), //6: Đầu tàu (hình chữ nhật đứng t2 từ trái qua)
+      new Rect(this, 820, 410, 206, 131), //7: Toa 1
       new Rect(this, 820, 509, 78, 63), //8
-      new Rect(this, 1100, 410, 206, 131), //9
+      new Rect(this, 1100, 410, 206, 131), //9: Toa 2
       new Rect(this, 1110, 509, 78, 63), //10
-      new Cir(this, 357, 512, 35), //11
+
+      new Cir(this, 357, 512, 35), //11: Bánh xe ở đầu tàu
       new Cir(this, 445, 512, 35), //12
-      new Cir(this, 595, 477, 70), //13
-      new Cir(this, 744, 512, 35), //14
+      new Cir(this, 595, 477, 70), //13: Bánh xe lớn
+      new Cir(this, 744, 512, 35), //14: Bánh xe ở toa 1
       new Cir(this, 896, 512, 35), //15
-      new Cir(this, 1034, 512, 35), //16
+      new Cir(this, 1034, 512, 35), //16: Bánh xe ở toa 2
       new Cir(this, 1186, 512, 35) //17
     );
     this.shapes[2].setAngle(20);

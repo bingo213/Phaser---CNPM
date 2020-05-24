@@ -89,10 +89,12 @@ class Game2_2 extends SceneRoot1 {
       new Tri(this, 900, 260, 0, 80, 80, 80, 42, 0), //4: Gai trên lưng
       new Tri(this, 990, 260, 0, 80, 80, 80, 42, 0), //5: Gai trên lưng
       new Tri(this, 1122, 345, 0, 80, 80, 80, 42, 0), //6: Gai trên đuôi
+
       new Rect(this, 400, 260, 265, 60), //7: Hàm trên con cá sấu
       new Rect(this, 385, 410, 265, 60), //8: Hàm dưới con cá sấu
       new Rect(this, 859, 360, 414, 116), //9: Thân con cá sấu
       new Rect(this, 1122, 420, 110, 65), //10: Đuôi con cá sấu
+
       new Cir(this, 585, 352, 65, 65), //11: Đầu cá sấu
       new Cir(this, 410, 520, 20, 20), //12: Hình tròn bên dưới cá sấu
       new Cir(this, 480, 490, 35, 35), //13: Hình tròn bên dưới cá sấu

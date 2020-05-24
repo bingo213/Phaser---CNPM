@@ -68,22 +68,25 @@ class Game1_1 extends SceneRoot1 {
   addShapes() {
     //Khai báo và vẽ 5 hình tròn
     this.shapes.push(
-      new Cir(this, 368, 253, 30), //0
-      new Cir(this, 482, 401, 23), //1
-      new Cir(this, 452, 366, 23), //2
-      new Cir(this, 511, 440, 23), //3
-      new Cir(this, 920, 312, 45), //4
+      new Cir(this, 368, 253, 30), //0: Đầu con bướm
+      new Cir(this, 482, 401, 23), //1: Thân bướm
+      new Cir(this, 452, 366, 23), //2: Thân bướm
+      new Cir(this, 511, 440, 23), //3: Thân bướm
+      new Cir(this, 920, 312, 45), //4: Nhị hoa
 
-      new Rect(this, 415, 315, 50, 50), //5
+      new Rect(this, 415, 315, 50, 50), //5: Thân bướm
+      //Lá của hoa
       new Rect(this, 827, 224, 100, 100), //6
       new Rect(this, 1012, 224, 100, 100), //7
       new Rect(this, 827, 404, 100, 100), //8
       new Rect(this, 1012, 404, 100, 100), //9
 
+      //Cánh bướm
       new Tri(this, 919, 175, 0, 148, 80, 148, 45, 0), //10
       new Tri(this, 920, 450, 0, 148, 80, 148, 45, 0), //11
       new Tri(this, 1059, 315, 0, 148, 78, 148, 45, 0), //12
       new Tri(this, 779, 315, 0, 148, 78, 148, 45, 0), //13
+      //Cánh hoa
       new Tri(this, 530, 230, 0, 200, 100, 200, 45, 0), //14
       new Tri(this, 300, 400, 0, 200, 100, 200, 45, 0), //15
       new Tri(this, 615, 360, 0, 200, 100, 200, 45, 0), //16

@@ -77,14 +77,17 @@ class Game2_1 extends SceneRoot1 {
 
   addShapes() {
     this.shapes.push(
+      //Nóc lâu đài
       new Tri(this, 455, 189, 0, 70, 90, 70, 45, 0),
       new Tri(this, 715, 249, 0, 150, 70, 150, 32, 0),
       new Tri(this, 975, 189, 0, 70, 90, 70, 45, 0),
+
       new Rect(this, 589, 466, 140, 100),
       new Rect(this, 841, 460, 140, 100),
       new Rect(this, 455, 380, 122, 308),
       new Rect(this, 715, 430, 106, 208),
       new Rect(this, 975, 380, 122, 308),
+      //Cây
       new Cir(this, 275, 450, 60, 60),
       new Cir(this, 1155, 450, 60, 60)
     );

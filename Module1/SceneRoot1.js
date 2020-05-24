@@ -17,7 +17,6 @@ class SceneRoot1 extends Phaser.Scene {
     this.load.image("erase", "assets/erase.png");
     this.load.image("notification", "assets/notification.png");
     this.load.image("notification2", "assets/notification2.png");
-    //this.load.image("stateBar", "assets/state_bar.png");
     this.load.image("next", "assets/next.png");
 
     this.load.image("eye1_1", "assets/eye.png");
@@ -49,7 +48,6 @@ class SceneRoot1 extends Phaser.Scene {
     this.setUp(gameScene);
     this.addStateBar();
 
-    //this.addExtraImageBehindShape();
     this.addShapes();
     this.addExtraImageInFrontOfShape();
 
@@ -72,13 +70,12 @@ class SceneRoot1 extends Phaser.Scene {
 
     this.setBrushInteractive(gameScene, gameScene.requireBrush, true);
 
-    this.button = new Phaser.Geom.Rectangle(0, 0, 150, 40);
+    this.button = new Phaser.Geom.Rectangle(0, 0, 150, 40); //Dùng set hiệu ứng contain của cọ
 
     this.setEraseInteractive(this);
 
     this.done = this.add.image(701, 660, "done"); //Nút done
-    //Nút Done cũng có hiệu ứng khi di chuột qua
-    var doneButton = new Phaser.Geom.Rectangle(0, 0, 130, 70);
+    var doneButton = new Phaser.Geom.Rectangle(0, 0, 130, 70); //Dùng set hiệu ứng contain của nút done
     this.done.setInteractive(doneButton, Phaser.Geom.Rectangle.Contains);
     this.done.on('pointerover', function() {
       this.setTint(0x303f9f);
@@ -86,14 +83,14 @@ class SceneRoot1 extends Phaser.Scene {
     this.done.on('pointerout', function() {
       this.clearTint();
     });
-    this.complete = false;
-    this.count = 0;
+    this.complete = false; //Kiểm tra xem hoàn thành yêu cầu chưa (dùng cho type = 2)
+    this.count = 0; //Đếm số lượng hình đã tô (dùng cho type = 3)
     this.done.on('pointerup', function() { //Khi nhấn chuột thì kiểm tra các hình đã được tô chưa, nếu tô thì tô đúng chưa
-      if (gameScene.type === 1)
+      if (gameScene.type === 1) //type = 1: Tô màu vào tất cả các hình
         gameScene.doneClick1(gameScene);
-      if (gameScene.type === 2)
+      if (gameScene.type === 2) //type = 2: Tô màu vào 2 loại hình được yêu cầu
         gameScene.doneClick2(gameScene);
-      if (gameScene.type === 3)
+      if (gameScene.type === 3) //type = 3: Chỉ cần tô màu vào 1 hình
         gameScene.doneClick3(gameScene);
 
       //Set lại giá trị biến đếm số hình chưa tô và biến đếm số lượng hình tô sai màu
@@ -106,29 +103,28 @@ class SceneRoot1 extends Phaser.Scene {
     this.countFill = 0; //Đếm số lượng hình chưa được tô màu
     this.countFailCorlor = 0; //Đếm số lượng hình tô sai màu
 
-    this.color = 0xffffff;
+    this.color = 0xffffff; //Màu đang được chọn
 
-    this.requireBrush = [];
-    this.extraBrush = [];
-    this.extraImageInFrontOfShape = [];
-    this.extraImageBehindShape = [];
-    this.shapes = [];
+    this.requireBrush = []; //Cọ bắt buộc
+    this.extraBrush = []; //Cọ thêm
+    this.extraImageInFrontOfShape = []; //Hình phụ nằm trên shapes
+    this.extraImageBehindShape = []; //Hình phụ nằm dưới shapes
+    this.shapes = []; //Các hình
 
-    //Background (khung hình chữ nhật, state bar)
     this.add.image(config.width / 2, config.height / 2, "initscene");
 
     this.addExtraImageBehindShape();
 
     this.backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: font,
-      fontSize: 20,
-      color: "#1a65ac",
+      fontSize: backButtonSetting.fontSize,
+      color: backButtonSetting.color,
     });
 
-    var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25);
+    var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25); //Dùng để set hiệu ứng contain của nút BACK
     this.backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
     this.backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-      this.setTint(0x0000ff);
+      this.setTint(backButtonSetting.tintColor);
     });
     this.backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
       this.clearTint();
@@ -137,8 +133,8 @@ class SceneRoot1 extends Phaser.Scene {
 
     this.title = this.add.text(this.textTitleX, module1Setting.textTitleY, this.textTitle, { //Thêm tiêu đề
       fontFamily: font,
-      fontSize: 50,
-      color: "#000",
+      fontSize: textTitleSetting.fontSize,
+      color: textTitleSetting.color
     });
 
     this.next = this.add.image(701, 580, "next");
