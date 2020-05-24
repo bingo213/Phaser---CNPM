@@ -237,15 +237,15 @@ class SceneRoot2 extends Phaser.Scene {
   backButtonSetUp(gameScene) {
     var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: font,
-      fontSize: 20,
-      color: "#1a65ac",
+      fontSize: backButtonSetting.fontSize,
+      color: backButtonSetting.color,
     });
 
     var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25);
 
     backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
     backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-      backButton.setTint(0x0000ff);
+      backButton.setTint(backButtonSetting.tintColor);
     });
     backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
       backButton.clearTint();
@@ -253,8 +253,8 @@ class SceneRoot2 extends Phaser.Scene {
     backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
     this.add.text(550, 100, "Feed the Elephant", {
       fontFamily: font,
-      fontSize: 50,
-      color: "#000",
+      fontSize: textTitleSetting.fontSize,
+      color: textTitleSetting.color
     });
   }
   addShapes() {}
