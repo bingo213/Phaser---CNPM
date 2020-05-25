@@ -1,6 +1,6 @@
 class SceneRoot2 extends Phaser.Scene {
   preload() {
-    for (var i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 5; i++) {
       this.load.image("t" + i, "assets/triangle" + i + ".png");
       this.load.image("c" + i, "assets/circle" + i + ".png");
       this.load.image("s" + i, "assets/square" + i + ".png");
@@ -507,7 +507,7 @@ class SceneRoot2 extends Phaser.Scene {
   }
   //voi bên trái ngủ
   sleepLeftElephant() {
-    for (var i = 0; i < this.shapes.length; i++) {
+    for (let i = 0; i < this.shapes.length; i++) {
       if (this.shapes[i].image.name === this.shapeLeftName) {
         this.shapes[i].image.visible = false;
       }
@@ -520,7 +520,7 @@ class SceneRoot2 extends Phaser.Scene {
   }
   //voi bên phải ngủ
   sleepRightElephant() {
-    for (var i = 0; i < this.shapes.length; i++) {
+    for (let i = 0; i < this.shapes.length; i++) {
       if (this.shapes[i].image.name === this.shapeRightName) {
         this.shapes[i].image.visible = false;
       }

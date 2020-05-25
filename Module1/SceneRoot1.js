@@ -140,39 +140,30 @@ class SceneRoot1 extends Phaser.Scene {
     this.next = this.add.image(701, 580, "next");
     this.next.visible = false;
   }
-  addStateBar(){
-    for(let i = 0; i < this.numberOfBallLeft; i++){
+  addStateBar() {
+    for (let i = 0; i < this.numberOfBallLeft; i++) {
       this.add.image(conversionSceneSetting.ballLeftX[i], conversionSceneSetting.ballY, "ball");
     }
-    for(let i = 0; i < this.numberOfBallRight; i++){
+    for (let i = 0; i < this.numberOfBallRight; i++) {
       this.add.image(conversionSceneSetting.ballRightX[i], conversionSceneSetting.ballY, "ball");
     }
   }
   addShapes() {}
   addErase() {
-    if (this.type === 3 || this.type === 1) {
-      this.eraseRectangle = new Rect(this, 280, 580, 205, 60);
-      this.eraseRectangle.setStrokeStyle(0, 0xffffff);
-      this.eraseRectangle.fillColor = 0xFFEBEE;
-      this.eraseRectangle.visible = false;
-      this.erase = this.add.image(230, 580, "erase"); //Tẩy và chữ Erase bên phải tẩy
-      this.eraseText = this.add.text(270, 560, 'Erase', {
-        fontFamily: font,
-        fontSize: 35,
-        color: "#000",
-      });
-    } else {
-      this.eraseRectangle = new Rect(this, 1085, 580, 205, 60);
-      this.eraseRectangle.setStrokeStyle(0, 0xffffff);
-      this.eraseRectangle.fillColor = 0xFFEBEE;
-      this.eraseRectangle.visible = false;
-      this.erase = this.add.image(1040, 580, "erase"); //Tẩy và chữ Erase bên phải tẩy
-      this.eraseText = this.add.text(1075, 560, 'Erase', {
-        fontFamily: font,
-        fontSize: 35,
-        color: "#000",
-      });
+    let tmp = module1Setting.eraseX1;
+    if (this.type === 2) {
+      tmp = module1Setting.eraseX2;
     }
+    this.eraseRectangle = new Rect(this, tmp + 50, module1Setting.brushY, 210, 60);
+    this.eraseRectangle.setStrokeStyle(0, 0xffffff);
+    this.eraseRectangle.fillColor = 0xFFEBEE;
+    this.eraseRectangle.visible = false;
+    this.erase = this.add.image(tmp, module1Setting.brushY, "erase"); //Tẩy và chữ Erase bên phải tẩy
+    this.eraseText = this.add.text(tmp + 30, module1Setting.brushY - 20, 'Erase', {
+      fontFamily: font,
+      fontSize: textNextToBrush.fontSize,
+      color: textNextToBrush.color
+    });
   }
   setEraseInteractive(gameScene) {
     this.erase.setInteractive(gameScene.button, Phaser.Geom.Rectangle.Contains);
@@ -206,10 +197,9 @@ class SceneRoot1 extends Phaser.Scene {
   }
   setBrushInteractive(gameScene, arr, isRequiredBrush) {
     for (let i = 0; i < arr.length; i++) {
-      if(isRequiredBrush === true && this.type !== 3){
+      if (isRequiredBrush === true && this.type !== 3) {
         var button = new Phaser.Geom.Rectangle(0, 0, 200, 55);
-      }
-      else {
+      } else {
         var button = new Phaser.Geom.Rectangle(0, 0, 60, 55);
       }
       arr[i].image.setInteractive(button, Phaser.Geom.Rectangle.Contains);
@@ -313,7 +303,7 @@ class SceneRoot1 extends Phaser.Scene {
   }
 
   doneClick1(gameScene) {
-    for (var i = 0; i < this.shapes.length; i++) {
+    for (let i = 0; i < this.shapes.length; i++) {
       this.check(this.shapes[i]);
     }
 
@@ -343,11 +333,11 @@ class SceneRoot1 extends Phaser.Scene {
 
   doneClick2(gameScene) {
     if (this.complete === false) {
-      for (var i = 0; i < this.shapes.length; i++) {
+      for (let i = 0; i < this.shapes.length; i++) {
         this.check(this.shapes[i]);
       }
       if (this.countFailCorlor > 0) {
-        for (var i = 0; i < this.shapes.length; i++) {
+        for (let i = 0; i < this.shapes.length; i++) {
           this.deleteColor(this.shapes[i]);
         }
       } else if (this.countFill > 0) {

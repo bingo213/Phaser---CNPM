@@ -25,7 +25,7 @@ var textTitleSetting = {
   color: "#000"
 }
 
-var textNextToBrush = { //Chữ bên cạnh cọ
+var textNextToBrush = { //Chữ bên cạnh cọ, tẩy
   fontSize: 35,
   color: "#000"
 };
@@ -39,8 +39,8 @@ var conversionSceneSetting = {
 var module1Setting = {
   textTitleY: 100, //Tọa độ y của title
   brushY: 580, //Tọa độ y của cọ và tẩy
-  eraseX1: 280, //Tọa độ x của tẩy khi game thuộc kiểu 1 hoặc 3 (this.type)
-  eraseX2: 1085, //Tọa độ x của tẩy khi game thuộc kiểu 2 (this.type === 2)
+  eraseX1: 230, //Tọa độ x của tẩy khi game thuộc kiểu 1 hoặc 3 (this.type)
+  eraseX2: 1040, //Tọa độ x của tẩy khi game thuộc kiểu 2 (this.type === 2)
   extraBrushX: [245, 445, 645, 845], //Tọa độ x của cọ khi có 4 cọ (tọa độ x của cọ phụ)
   brushX1: [545, 840, 1112], //Tọa độ x của cọ khi có 3 cọ
   brushX2: [245, 640] //Tọa độ x của cọ khi có 2 cọ

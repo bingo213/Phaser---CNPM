@@ -71,7 +71,7 @@ class Game1_1 extends SceneRoot1 {
       new Cir(this, 368, 253, 30), //0: Đầu con bướm
       new Cir(this, 482, 401, 23), //1: Thân bướm
       new Cir(this, 452, 366, 23), //2: Thân bướm
-      new Cir(this, 511, 440, 23), //3: Thân bướm
+      new Cir(this, 512, 438, 23), //3: Thân bướm
       new Cir(this, 920, 312, 45), //4: Nhị hoa
 
       new Rect(this, 415, 315, 50, 50), //5: Thân bướm
