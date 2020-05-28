@@ -70,11 +70,10 @@ class RateScene extends Phaser.Scene {
 
     var next = this.add.image(config.width / 2, config.height / 2 + 100, "next");
 
-    var button = new Phaser.Geom.Rectangle(0, 0, 140, 60);
-    next.setInteractive(button, Phaser.Geom.Rectangle.Contains);
+    next.setInteractive();
     next.on('pointerover', function() {
       if (rated === 1)
-        next.setTint(0x303f9f);
+        next.setTint(tintColorNextButton);
     });
     next.on('pointerout', function() {
       if (rated === 1)
