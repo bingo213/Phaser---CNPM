@@ -4,15 +4,14 @@ var config = {
   height: 800,
   backgroundColor: 0xffffff,
   scene: [StartScene, RateScene,
-    Game1_1, ConversionScene1, Game1_2, ConversionScene2, Game1_3, ConversionScene3,
-    Game2_1, ConversionScene4, Game2_2, ConversionScene5,
-    Game3_1, ConversionScene6, Game3_2,
-    Game4_1, ConversionScene7, Game4_2, ConversionScene8, Game4_3,
-    Game5_1, ConversionScene9, Game5_2
+    Game1_1, Game1_2, Game1_3, Game2_1, Game2_2, Game3_1, Game3_2,
+    Game4_1, Game4_2, Game4_3, Game5_1, Game5_2
   ]
 };
 
 var font = "Roboto Condensed";
+
+var tintColorNextButton = 0x303f9f;
 
 var backButtonSetting = {
   fontSize: 20,
@@ -30,7 +29,7 @@ var textNextToBrush = { //Chữ bên cạnh cọ, tẩy
   color: "#000"
 };
 
-var conversionSceneSetting = {
+var ballSetting = {
   ballLeftX: [480, 510, 540], //Tọa độ x của bóng bên trái
   ballRightX: [970, 940, 910],//Tọa độ x của bóng bên phải
   ballY: 74 //Tọa độ y của bóng
