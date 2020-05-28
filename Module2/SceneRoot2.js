@@ -32,6 +32,8 @@ class SceneRoot2 extends Phaser.Scene {
     this.load.image("bone", "assets/bone.png");
     this.load.image("thigh", "assets/thigh.png");
     this.load.image("next", "assets/next.png");
+
+    this.load.image("blank", "assets/blank.png");
   }
   create() {
 
@@ -41,7 +43,7 @@ class SceneRoot2 extends Phaser.Scene {
     this.setUp();
     this.addStateBar();
     this.addElephant(this.amount);
-    this.backButtonSetUp(gameScene);
+    this.backButtonSetUp();
     this.addShapes();
     this.canNotSeeShape();
     this.addShapesInBoard();
@@ -87,7 +89,7 @@ class SceneRoot2 extends Phaser.Scene {
 
       if (gameScene.incorrect === 3)
         gameScene.giveNotice(gameScene);
-      gameScene.checkSuccess(gameScene, gameScene.conversionScene);
+      gameScene.winGame();
     });
 
     this.rect1 = new Phaser.Geom.Rectangle(module2Setting.elephantLeftX - 180, module2Setting.elephantLeftY - 240, 350, 480);
@@ -202,12 +204,13 @@ class SceneRoot2 extends Phaser.Scene {
 
   }
 
-  addStateBar(){
-    for(let i = 0; i < this.numberOfBallLeft; i++){
-      this.add.image(conversionSceneSetting.ballLeftX[i], conversionSceneSetting.ballY, "ball");
+  addStateBar() {
+    this.ball = [];
+    for (let i = 0; i < this.numberOfBallLeft; i++) {
+      this.ball.push(this.add.image(ballSetting.ballLeftX[i], ballSetting.ballY, "ball"));
     }
-    for(let i = 0; i < this.numberOfBallRight; i++){
-      this.add.image(conversionSceneSetting.ballRightX[i], conversionSceneSetting.ballY, "ball");
+    for (let i = 0; i < this.numberOfBallRight; i++) {
+      this.ball.push(this.add.image(ballSetting.ballRightX[i], ballSetting.ballY, "ball"));
     }
   }
 
@@ -234,8 +237,8 @@ class SceneRoot2 extends Phaser.Scene {
       this.rightElephant = this.add.image(module2Setting.elephantRightX, module2Setting.elephantRightY, this.color2 + "ElephantSleep");
     }
   }
-  backButtonSetUp(gameScene) {
-    var backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
+  backButtonSetUp() {
+    this.backButton = this.add.text(170, 70, 'BACK', { //Nút BACK
       fontFamily: font,
       fontSize: backButtonSetting.fontSize,
       color: backButtonSetting.color,
@@ -243,19 +246,19 @@ class SceneRoot2 extends Phaser.Scene {
 
     var shape = new Phaser.Geom.Rectangle(0, 0, 55, 25);
 
-    backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
-    backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
-      backButton.setTint(backButtonSetting.tintColor);
-    });
-    backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
-      backButton.clearTint();
-    });
-    backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
+    this.backButton.setInteractive(shape, Phaser.Geom.Rectangle.Contains);
+    this.backButton.on('pointerover', function() { //Hiệu ứng khi di chuột vào nút BACK nút sẽ có màu xanh đậm
+        this.backButton.setTint(backButtonSetting.tintColor);
+      }, this)
+      .on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
+        this.backButton.clearTint();
+      }, this)
+      .on('pointerup', () => this.scene.start('startGame'), this); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
     this.add.text(550, 100, "Feed the Elephant", {
       fontFamily: font,
       fontSize: textTitleSetting.fontSize,
       color: textTitleSetting.color
-    });
+    }, this);
   }
   addShapes() {}
   moveTextLeft() {
@@ -503,7 +506,10 @@ class SceneRoot2 extends Phaser.Scene {
       color: "#000",
     });
     this.next.visible = true;
-    this.next.setInteractive().on('pointerup', () => gameScene.scene.restart());
+    this.next.setInteractive()
+      .on('pointerover', () => gameScene.next.setTint(tintColorNextButton))
+      .on('pointerout', () => gameScene.next.clearTint())
+      .on('pointerup', () => gameScene.scene.restart());
   }
   //voi bên trái ngủ
   sleepLeftElephant() {
@@ -532,13 +538,38 @@ class SceneRoot2 extends Phaser.Scene {
     this.rightElephant[2].visible = true;
   }
 
-  checkSuccess(gameScene, conversionScene) {
+  winGame() {
     if (this.amount === 2) {
-      if (this.leftElephantStomach.length === 0 && this.rightElephantStomach.length === 0)
-        setTimeout(() => gameScene.scene.start(conversionScene), 5000);
+      if (this.leftElephantStomach.length === 0 && this.rightElephantStomach.length === 0) {
+        setTimeout(() => {
+          this.backButton.visible = false;
+          this.add.image(config.width / 2, config.height / 2, "blank");
+          this.moveBall();
+        }, 4000);
+      }
     } else {
-      if (this.leftElephantStomach.length === 0)
-        setTimeout(() => gameScene.scene.start(conversionScene), 3000);
+      if (this.leftElephantStomach.length === 0) {
+        setTimeout(() => {
+          this.backButton.visible = false;
+          this.add.image(config.width / 2, config.height / 2, "blank");
+          this.moveBall();
+        }, 3000);
+      }
     }
+  }
+  moveBall() {
+    // di chuyển bóng và chuyển Scene
+    this.tweens.add({
+      targets: this.ball[this.numberOfBallLeft - 1],
+      ease: "Linear",
+      x: ballSetting.ballRightX[this.numberOfBallRight],
+      duration: 2000,
+
+      completeDelay: 600,
+      onComplete: function() {
+        this.scene.start(this.nextScene);
+      },
+      onCompleteScope: this,
+    }, this);
   }
 }

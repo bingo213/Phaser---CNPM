@@ -9,7 +9,7 @@ class Game2_2 extends SceneRoot1 {
     this.notice = "notification2";
     this.textTitle = "Color the triangles and rectangles";
     this.textTitleX = 380;
-    this.conversionScene = "ConversionScene5";
+    this.nextScene = "RateScene";
     this.extraTypeShape = [Cir];
     this.numberOfBallLeft = 1;
     this.numberOfBallRight = 1;

@@ -9,7 +9,7 @@ class Game4_2 extends SceneRoot2 {
     this.shapeLeftName = "triangle";
     this.numberOfBallLeft = 2;
     this.numberOfBallRight = 1;
-    this.conversionScene = "ConversionScene8";
+    this.nextScene = "Game4_3";
 
     this.shapes = [];
 

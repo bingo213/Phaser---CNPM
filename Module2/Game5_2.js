@@ -10,7 +10,7 @@ class Game5_2 extends SceneRoot2 {
     this.shapeRightName = "hexagon";
     this.numberOfBallLeft = 1;
     this.numberOfBallRight = 1;
-    this.conversionScene = "ConversionScene5";
+    this.nextScene = "RateScene";
 
     this.shapes = [];
 

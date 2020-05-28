@@ -41,13 +41,14 @@ class SceneRoot1 extends Phaser.Scene {
     this.load.image("background3_2", "assets/background3_2.png");
     this.load.image("leg", "assets/legBird.png");
     this.load.image("worm", "assets/worm.png");
+
+    this.load.image("blank", "assets/blank.png");
   }
 
   create() {
     const gameScene = this.scene.get(this.name);
-    this.setUp(gameScene);
+    this.setUp();
     this.addStateBar();
-
     this.addShapes();
     this.addExtraImageInFrontOfShape();
 
@@ -87,11 +88,11 @@ class SceneRoot1 extends Phaser.Scene {
     this.count = 0; //Đếm số lượng hình đã tô (dùng cho type = 3)
     this.done.on('pointerup', function() { //Khi nhấn chuột thì kiểm tra các hình đã được tô chưa, nếu tô thì tô đúng chưa
       if (gameScene.type === 1) //type = 1: Tô màu vào tất cả các hình
-        gameScene.doneClick1(gameScene);
+        gameScene.doneClick1();
       if (gameScene.type === 2) //type = 2: Tô màu vào 2 loại hình được yêu cầu
-        gameScene.doneClick2(gameScene);
+        gameScene.doneClick2();
       if (gameScene.type === 3) //type = 3: Chỉ cần tô màu vào 1 hình
-        gameScene.doneClick3(gameScene);
+        gameScene.doneClick3();
 
       //Set lại giá trị biến đếm số hình chưa tô và biến đếm số lượng hình tô sai màu
       gameScene.countFill = 0;
@@ -99,7 +100,7 @@ class SceneRoot1 extends Phaser.Scene {
     });
   }
 
-  setUp(gameScene) {
+  setUp() {
     this.countFill = 0; //Đếm số lượng hình chưa được tô màu
     this.countFailCorlor = 0; //Đếm số lượng hình tô sai màu
 
@@ -129,7 +130,7 @@ class SceneRoot1 extends Phaser.Scene {
     this.backButton.on('pointerout', function() { //Khi chuột không còn ở nút BACK thì trở lại màu như ban đầu
       this.clearTint();
     });
-    this.backButton.on('pointerup', () => gameScene.scene.start('startGame')); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
+    this.backButton.on('pointerup', () => this.scene.start('startGame'), this); //Khi nhấn chuột vào nút BACK thì quay trở lại màn hình bắt đầu (StartScene)
 
     this.title = this.add.text(this.textTitleX, module1Setting.textTitleY, this.textTitle, { //Thêm tiêu đề
       fontFamily: font,
@@ -141,11 +142,12 @@ class SceneRoot1 extends Phaser.Scene {
     this.next.visible = false;
   }
   addStateBar() {
+    this.ball = [];
     for (let i = 0; i < this.numberOfBallLeft; i++) {
-      this.add.image(conversionSceneSetting.ballLeftX[i], conversionSceneSetting.ballY, "ball");
+      this.ball.push(this.add.image(ballSetting.ballLeftX[i], ballSetting.ballY, "ball"));
     }
     for (let i = 0; i < this.numberOfBallRight; i++) {
-      this.add.image(conversionSceneSetting.ballRightX[i], conversionSceneSetting.ballY, "ball");
+      this.ball.push(this.add.image(ballSetting.ballRightX[i], ballSetting.ballY, "ball"));
     }
   }
   addShapes() {}
@@ -302,7 +304,7 @@ class SceneRoot1 extends Phaser.Scene {
     });
   }
 
-  doneClick1(gameScene) {
+  doneClick1() {
     for (let i = 0; i < this.shapes.length; i++) {
       this.check(this.shapes[i]);
     }
@@ -312,7 +314,7 @@ class SceneRoot1 extends Phaser.Scene {
       for (let i = 0; i < this.shapes.length; i++) {
         this.deleteColor(this.shapes[i]);
       }
-    } else if (this.countFill > 0) { //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 3s thì ẩn thông báo
+    } else if (this.countFill > 0) { //Nếu có hình chưa tô thì đưa ra thông báo "Color all the shapes", sau 1.5s thì ẩn thông báo
       this.notification.visible = true;
       setTimeout(() => this.notification.visible = false, 1500);
     } else {
@@ -325,13 +327,12 @@ class SceneRoot1 extends Phaser.Scene {
         this.requireBrush[i].image.visible = false;
         this.requireBrush[i].text.visible = false;
       }
-      this.next.visible = true;
       this.displayExtraImage();
-      this.next.setInteractive().on('pointerup', () => gameScene.scene.start(gameScene.conversionScene));
+      this.addNextButton();
     }
   }
 
-  doneClick2(gameScene) {
+  doneClick2() {
     if (this.complete === false) {
       for (let i = 0; i < this.shapes.length; i++) {
         this.check(this.shapes[i]);
@@ -374,7 +375,6 @@ class SceneRoot1 extends Phaser.Scene {
       this.setBrushInteractive(this, this.extraBrush, false);
       if (this.count === 2) {
         this.done.visible = false;
-        this.next.visible = true;
         this.erase.visible = false;
         this.eraseRectangle.visible = false;
         this.eraseText.visible = false;
@@ -383,13 +383,13 @@ class SceneRoot1 extends Phaser.Scene {
           this.extraBrush[i].colorRect.visible = false;
         }
         this.displayExtraImage();
-        this.next.setInteractive().on('pointerup', () => gameScene.scene.start(gameScene.conversionScene));
+        this.addNextButton();
       }
     }
 
   }
 
-  doneClick3(gameScene) {
+  doneClick3() {
     if (this.countColor > 0) {
       this.done.visible = false;
       this.erase.visible = false;
@@ -399,10 +399,35 @@ class SceneRoot1 extends Phaser.Scene {
         this.requireBrush[i].image.visible = false;
         this.requireBrush[i].colorRect.visible = false;
       }
-      this.next.visible = true;
       this.displayExtraImage();
-      this.next.setInteractive().on('pointerup', () => gameScene.scene.start(gameScene.conversionScene));
+      this.addNextButton();
     }
+  }
+
+  addNextButton() {
+    this.next.visible = true;
+    this.next.setInteractive()
+      .on('pointerover', () => this.next.setTint(tintColorNextButton), this)
+      .on('pointerout', () => this.next.clearTint(), this)
+      .on('pointerup', () => this.winGame(), this);
+  }
+
+  winGame() {
+    this.add.image(config.width / 2, config.height / 2, "blank");
+    this.backButton.visible = false;
+    // di chuyển bóng và chuyển Scene
+    this.tweens.add({
+      targets: this.ball[this.numberOfBallLeft - 1],
+      ease: "Linear",
+      x: ballSetting.ballRightX[this.numberOfBallRight],
+      duration: 2000,
+
+      completeDelay: 600,
+      onComplete: function() {
+        this.scene.start(this.nextScene);
+      },
+      onCompleteScope: this,
+    }, this);
   }
 
 }
