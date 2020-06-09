@@ -303,7 +303,7 @@ class SceneRoot2 extends Phaser.Scene {
       ]
     });
   }
-  addShapesInBoard() {};
+  addShapesInBoard() {}
   requireSetUp(amount, gameScene) {
     this.textLeft = this.add.text(config.width / 2 - 10, config.height / 2, 'I eat ' + this.shapeLeftName, {
       fontFamily: "Roboto Condensed",
