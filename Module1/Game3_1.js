@@ -43,7 +43,6 @@ class Game3_1 extends SceneRoot1 {
   }
 
   addExtraBrush() {
-    var extraBrushX = [245, 445, 645, 845];
     this.extraBrush.push({
       hexColor: 0xFBC02D,
       tintColor: 0xFFD600,

@@ -199,10 +199,11 @@ class SceneRoot1 extends Phaser.Scene {
   }
   setBrushInteractive(gameScene, arr, isRequiredBrush) {
     for (let i = 0; i < arr.length; i++) {
+      var button;
       if (isRequiredBrush === true && this.type !== 3) {
-        var button = new Phaser.Geom.Rectangle(0, 0, 200, 55);
+        button = new Phaser.Geom.Rectangle(0, 0, 200, 55);
       } else {
-        var button = new Phaser.Geom.Rectangle(0, 0, 60, 55);
+        button = new Phaser.Geom.Rectangle(0, 0, 60, 55);
       }
       arr[i].image.setInteractive(button, Phaser.Geom.Rectangle.Contains);
       arr[i].image.on('pointerover', function() {
@@ -271,14 +272,12 @@ class SceneRoot1 extends Phaser.Scene {
   isTrueColor(shape) {
     for (let i = 0; i < this.requireBrush.length; i++) {
       if (shape instanceof this.requireBrush[i].typeShape) {
-        if (shape.fillColor === this.requireBrush[i].hexColor) return true;
-        else return false;
+        return (shape.fillColor === this.requireBrush[i].hexColor);
       }
     }
     for (let i = 0; i < this.extraTypeShape.length; i++) {
       if (shape instanceof this.extraTypeShape[i]) {
-        if (shape.fillColor === 0xffffff) return true;
-        else return false;
+        return (shape.fillColor === 0xffffff);
       }
     }
   }
