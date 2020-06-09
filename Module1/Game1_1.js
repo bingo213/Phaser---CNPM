@@ -22,7 +22,7 @@ class Game1_1 extends SceneRoot1 {
       typeShape: Rect,
       colorRect: new Rect(this, module1Setting.brushX1[0] + 85, module1Setting.brushY, 220, 60),
       image: this.add.image(module1Setting.brushX1[0], module1Setting.brushY, "green"),
-      text: this.add.text(module1Setting.brushX1[0] + 35, module1Setting.brushY - 20, "Rectangle", {
+      text: this.add.text(module1Setting.brushX1[0] + 35, module1Setting.brushY - 20, "Rectangles", {
         fontFamily: font,
         fontSize: textNextToBrush.fontSize,
         color: textNextToBrush.color

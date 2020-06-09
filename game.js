@@ -2,6 +2,7 @@ var config = {
   type: Phaser.AUTO,
   width: 1440,
   height: 800,
+  parent: 'game-field',
   backgroundColor: 0xffffff,
   scene: [StartScene, RateScene,
     Game1_1, Game1_2, Game1_3, Game2_1, Game2_2, Game3_1, Game3_2,
