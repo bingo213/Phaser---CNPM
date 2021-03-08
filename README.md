@@ -1,6 +1,11 @@
 # Phaser---CNPM
+Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội
 
-Bài tập nhóm môn Công nghệ phần mềm (Học kì 2 - 2019-2020) - Nhóm 28
+Môn Công nghệ phần mềm (Học kì 2 - 2019-2020)
+
+Giảng viên: Trương Anh Hoàng
+
+Nhóm 28
 
 Thành viên:
 1. Trần Thị Hoa Hiên
